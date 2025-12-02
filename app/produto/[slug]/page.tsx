@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { ChevronLeft, Check, MessageCircle } from "lucide-react";
 import { products } from "../../../data/products"; 
 import { Metadata } from "next";
+import ShareButton from "@/components/shop/ShareButton";
 
 interface ProductPageProps {
   params: Promise<{
@@ -137,6 +138,22 @@ export default async function ProductPage({ params }: ProductPageProps) {
               <MessageCircle size={22} />
               Comprar pelo WhatsApp
             </a>
+            {/* BOTÃO WHATSAPP */}
+            <a 
+              href={whatsappUrl}
+              // ... (atributos do botão verde) ...
+            >
+              <MessageCircle size={22} />
+              Comprar pelo WhatsApp
+            </a>
+
+            {/* NOVO: Botão de Compartilhar logo abaixo */}
+            <div className="mt-4">
+               <ShareButton 
+                 productName={product.name} 
+                 productDescription={product.description} 
+               />
+            </div>
           </div>
         </div>
       </div>
