@@ -11,7 +11,7 @@ export default function Hero() {
       {/* No celular, ela ocupa a tela inteira. No PC, ocupa a metade esquerda. */}
       <div className="relative h-full w-full bg-hooke-100">
         <Image
-          src="/hero-verde.webp"
+          src="/hero-verde.avif"
           alt="Homem Hooke com regata texturizada"
           fill
           // No celular, foca no centro. No PC, foca no topo.
@@ -27,7 +27,7 @@ export default function Hero() {
       {/* A classe `hidden lg:block` faz ela sumir no celular */}
       <div className="relative hidden lg:block h-full w-full bg-hooke-800 border-l border-white/10">
         <Image
-          src="/hero-preta.webp"
+          src="/hero-preta.avifS"
           alt="Detalhe camiseta Hooke Fusca"
           fill
           className="object-cover object-center opacity-95 transition-transform duration-[2s] hover:scale-105"
