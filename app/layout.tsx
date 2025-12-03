@@ -18,6 +18,13 @@ export const metadata: Metadata = {
   },
   description: "Vista a sua essência. Moda masculina minimalista com corte premium e tecidos nobres.",
   keywords: ["moda masculina", "camiseta minimalista", "roupa masculina", "hooke", "algodão egípcio"],
+
+  // --- NOVO FAVICON ---
+  icons: {
+    icon: '/icon.svg', // Aponta para o arquivo SVG que você criou na pasta public
+  },
+  // --------------------
+
   openGraph: {
     title: "Hooke | Moda Masculina",
     description: "Menos excesso, mais essência. Conheça a nova coleção.",
