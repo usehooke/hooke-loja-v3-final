@@ -2,7 +2,11 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+// Importações para Análise de Dados
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from '@vercel/analytics/react';
+import { GoogleAnalytics } from '@next/third-parties/google';
+
 import Footer from "@/components/layout/Footer";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
@@ -10,21 +14,20 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 // URL OFICIAL DO SEU SITE (Crucial para o Google não se perder)
 const baseUrl = "https://www.usehooke.com.br";
 
+// SEU ID DO GOOGLE ANALYTICS 4
+const GA_MEASUREMENT_ID = "G-XXXXXXXXXX"; // <--- SUBSTITUA PELO SEU ID REAL
+
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
     default: "Hooke | Moda Masculina Minimalista",
-    template: "%s | Hooke", // Isso faz as páginas ficarem "Produto X | Hooke"
+    template: "%s | Hooke",
   },
   description: "Vista a sua essência. Moda masculina minimalista com corte premium e tecidos nobres.",
   keywords: ["moda masculina", "camiseta minimalista", "roupa masculina", "hooke", "algodão egípcio"],
-
-  // --- NOVO FAVICON ---
   icons: {
-    icon: '/icon.svg', // Aponta para o arquivo SVG que você criou na pasta public
+    icon: '/icon.svg',
   },
-  // --------------------
-
   openGraph: {
     title: "Hooke | Moda Masculina",
     description: "Menos excesso, mais essência. Conheça a nova coleção.",
@@ -34,7 +37,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/banner-home.jpg", // Sua foto de capa vai aparecer no WhatsApp
+        url: "/banner-home.jpg",
         width: 1200,
         height: 630,
         alt: "Hooke Moda Masculina",
@@ -59,7 +62,13 @@ export default function RootLayout({
           {children}
         </div>
         <Footer />
+        
+        {/* --- FERRAMENTAS DE ANÁLISE --- */}
         <SpeedInsights />
+        <Analytics />
+        {GA_MEASUREMENT_ID && <GoogleAnalytics gaId={GA_MEASUREMENT_ID} />}
+        {/* ------------------------------ */}
+        
       </body>
     </html>
   );
