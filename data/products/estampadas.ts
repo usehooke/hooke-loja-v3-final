@@ -7,7 +7,8 @@ export const camisetasEstampadas: Product[] = [
     description: 'Estampa clássica automotiva em algodão egípcio. Corte slim fit.',
     price: 159.90,
     category: 'camisetas-estampadas',
-    imageUrl: '/produtos/hero-preta.avif', // Usando a foto nova do close
+    secondaryImageUrl: '/produtos/regata-marrom-lisa.jpg',
+    imageUrl: '/produtos/camiseta-preta-fusca.jpg', // Usando a foto nova do close
     sizes: ['P', 'M', 'G', 'GG'],
     slug: 'camiseta-vintage-beetle',
     isNew: true

@@ -2,7 +2,6 @@
 "use client"; // Habilita interatividade (Filtros)
 
 import { useState } from "react";
-import Navbar from "@/components/layout/Navbar";
 import ProductCard from "@/components/shop/ProductCard";
 import { products } from "../../data/products";
 import { SlidersHorizontal } from "lucide-react";
@@ -21,7 +20,7 @@ export default function CamisetasPage() {
 
   return (
     <main className="min-h-screen bg-white pb-20">
-      <Navbar />
+
 
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
         

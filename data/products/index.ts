@@ -1,17 +1,16 @@
+// src/data/products/index.ts
 import { Product } from "@/types";
 
-// 1. Importamos os pequenos grupos
+// 1. Importamos os grupos de produtos dos arquivos corretos
 import { camisetasEstampadas } from "./estampadas";
-import { camisetasLisas } from "./lisas";
+// ATENÇÃO: Mudamos de "./lisas" para "./regata" e o nome da importação
+import { camisetasRegata } from "./regata";
 
-// 2. Juntamos tudo em um array principal (usando o Spread Operator "...")
-// Esse é o array que o resto do site vai usar.
+// 2. Juntamos tudo em um array principal
 export const products: Product[] = [
   ...camisetasEstampadas,
-  ...camisetasLisas,
+  ...camisetasRegata, // Usamos a nova variável aqui
 ];
 
-// BÔNUS MODERNO:
-// Você também pode exportar os grupos individualmente se quiser usar só eles em alguma página.
-// Exemplo: na página de categoria "Lisas", você poderia importar só as lisas.
-export { camisetasEstampadas, camisetasLisas };
+// BÔNUS: Exportamos os grupos individualmente também
+export { camisetasEstampadas, camisetasRegata };

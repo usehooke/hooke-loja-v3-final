@@ -1,7 +1,7 @@
 // src/components/layout/Navbar.tsx
 "use client"; // Necessário para interatividade
 
-import Link from "next/link";
+import { Link } from 'next-view-transitions';
 import { ShoppingBag, Menu, Link2 } from "lucide-react"; // Importamos o ícone Link2
 import { useState } from "react";
 

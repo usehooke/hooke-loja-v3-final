@@ -1,6 +1,6 @@
 // src/components/layout/Hero.tsx
 import Image from 'next/image';
-import Link from 'next/link';
+import { Link } from 'next-view-transitions';
 import { ArrowRight } from 'lucide-react';
 
 export default function Hero() {

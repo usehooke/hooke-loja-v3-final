@@ -5,6 +5,7 @@ export interface Product {
   name: string;
   description: string;
   price: number;
+  secondaryImageUrl?: string;
   category: 'camisetas-lisas' | 'camisetas-estampadas' | 'acessorios';
   imageUrl: string; // URL da foto
   sizes: string[]; // ['P', 'M', 'G', 'GG']
