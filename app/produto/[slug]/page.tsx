@@ -64,6 +64,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
             </div>
             {/* 👆👆👆 FIM DO TESTE 👆👆👆 */}
 
+
             <div className="prose prose-hooke">
               <h3 className="text-sm font-bold uppercase tracking-wider text-hooke-900 mb-2">Detalhes</h3>
               <p className="text-hooke-600 leading-relaxed">{product.description}</p>
