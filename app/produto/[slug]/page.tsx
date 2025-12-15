@@ -1,5 +1,5 @@
 // src/app/produto/[slug]/page.tsx
-// VERSÃO DE DEBUG - COM TEXTO VERMELHO
+// VERSÃO DE DEBUG CORRIGIDA - COM TEXTO VERMELHO
 import { products } from "@/data/products";
 import { notFound } from "next/navigation";
 import Image from "next/image";
@@ -30,7 +30,8 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
   });
 
   return (
-    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20 bg-red-50 border-4 border-red-500"> {/* Mudei o fundo para vermelho claro */}
+    // Mudei o fundo para vermelho claro para destacar a mudança
+    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20 bg-red-50 border-4 border-red-500 mb-20">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 items-start">
         <div className="relative aspect-[4/5] w-full rounded-sm overflow-hidden bg-hooke-100 shadow-sm">
           <Image
@@ -51,9 +52,10 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
               {formatter.format(product.price)}
             </p>
 
-            {/* 👇👇👇 AQUI ESTÁ O TESTE 👇👇👇 */}
+            {/* 👇👇👇 AQUI ESTÁ O TESTE CORRIGIDO 👇👇👇 */}
             <div className="mb-8 p-4 bg-red-200 border-2 border-red-600">
-                <p className="text-red-700 font-bold text-xl mb-2">>>> TESTE VISUAL <<<</p>
+                {/* Troquei os >>> por --- para não dar erro */}
+                <p className="text-red-700 font-bold text-xl mb-2">--- TESTE VISUAL ---</p>
                 <p className="text-sm mb-4">Se você está vendo isso, o botão ABAIXO também tem que aparecer.</p>
               <ShareButton
                 productName={product.name}
