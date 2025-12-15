@@ -1,160 +1,113 @@
 // src/app/produto/[slug]/page.tsx
-import Image from "next/image";
-import Link from "next/link";
+import { products } from "@/data/products";
 import { notFound } from "next/navigation";
-import { ChevronLeft, Check, MessageCircle } from "lucide-react";
-import { products } from "../../../data/products"; 
-import { Metadata } from "next";
+import Image from "next/image";
+// 👇👇👇 1. IMPORTAMOS O BOTÃO DE COMPARTILHAR AQUI 👇👇👇
 import ShareButton from "@/components/shop/ShareButton";
 
-interface ProductPageProps {
-  params: Promise<{
-    slug: string;
-  }>;
+// Função necessária para gerar as páginas estáticas no build
+export async function generateStaticParams() {
+  return products.map((product) => ({
+    slug: product.slug,
+  }));
 }
 
-// 1. GERAÇÃO DINÂMICA DE SEO (O Título da aba muda para o nome do produto)
-export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
-  const resolvedParams = await params;
-  const product = products.find((p) => p.slug === resolvedParams.slug);
-
-  if (!product) {
-    return { title: "Produto não encontrado" };
-  }
-
+// Função para gerar o título da página (SEO)
+export async function generateMetadata({ params }: { params: { slug: string } }) {
+  const product = products.find((p) => p.slug === params.slug);
+  if (!product) return { title: 'Produto não encontrado' };
+  
   return {
     title: `${product.name} | Hooke`,
     description: product.description,
-    openGraph: {
-      images: [product.imageUrl], // A foto do produto aparece no zap
-    },
   };
 }
 
-export default async function ProductPage({ params }: ProductPageProps) {
-  const resolvedParams = await params;
-  const product = products.find((p) => p.slug === resolvedParams.slug);
+// O Componente da Página Principal
+export default function ProductPage({ params }: { params: { slug: string } }) {
+  // Encontra o produto correto baseado na URL (slug)
+  const product = products.find((p) => p.slug === params.slug);
 
+  // Se o produto não existir (ex: digitou URL errada), mostra página 404
   if (!product) {
     notFound();
   }
 
-  // DADOS PARA O GOOGLE (JSON-LD) - A Arma Secreta
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Product',
-    name: product.name,
-    image: `https://www.usehooke.com.br${product.imageUrl}`,
-    description: product.description,
-    brand: {
-      '@type': 'Brand',
-      name: 'Hooke',
-    },
-    offers: {
-      '@type': 'Offer',
-      url: `https://www.usehooke.com.br/produto/${product.slug}`,
-      priceCurrency: 'BRL',
-      price: product.price,
-      availability: 'https://schema.org/InStock',
-    },
-  };
-
-  const whatsappNumber = "5511999999999"; 
-  const message = `Olá! Vi o produto *${product.name}* no site da Hooke e fiquei interessado.`;
-  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+  // Formatador de preço (R$)
+  const formatter = new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+  });
 
   return (
-    <main className="min-h-screen bg-white pb-20">
-      {/* Injeção dos dados invisíveis para o Google */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 items-start">
+        
+        {/* --- COLUNA DA ESQUERDA: IMAGEM --- */}
+        <div className="relative aspect-[4/5] w-full rounded-sm overflow-hidden bg-hooke-100 shadow-sm">
+          <Image
+            src={product.imageUrl}
+            alt={product.name}
+            fill
+            className="object-cover object-center"
+            priority // Carrega essa imagem com prioridade máxima
+            sizes="(max-width: 768px) 100vw, 50vw"
+          />
+        </div>
 
-      <nav className="border-b border-hooke-100 py-4 px-6 mb-8">
-        <Link href="/" className="flex items-center text-sm font-medium text-hooke-500 hover:text-hooke-900 transition-colors">
-          <ChevronLeft size={16} className="mr-1" />
-          Voltar para a Loja
-        </Link>
-      </nav>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
-          
-          <div className="relative aspect-[4/5] bg-hooke-50 rounded-sm overflow-hidden shadow-sm">
-            <Image
-              src={product.imageUrl}
-              alt={product.name}
-              fill
-              className="object-cover"
-              priority 
-            />
-          </div>
-
-          <div className="flex flex-col h-full pt-4">
-            <span className="text-sm text-hooke-500 uppercase tracking-widest font-semibold mb-2">
-              Hooke | Moda Masculina
-            </span>
-            <h1 className="text-4xl font-bold text-hooke-900 tracking-tight mb-4">
+        {/* --- COLUNA DA DIREITA: DETALHES --- */}
+        <div className="flex flex-col gap-8">
+          <div>
+            {/* Título e Preço */}
+            <h1 className="text-3xl md:text-4xl font-bold text-hooke-900 uppercase tracking-wider mb-4">
               {product.name}
             </h1>
-            <div className="text-2xl font-medium text-hooke-900 mb-8">
-              {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(product.price)}
-            </div>
-            <div className="prose prose-sm text-hooke-500 mb-8">
-              <p>{product.description}</p>
-            </div>
+            <p className="text-2xl text-hooke-600 font-medium mb-6">
+              {formatter.format(product.price)}
+            </p>
 
+            {/* 👇👇👇 2. O BOTÃO DE COMPARTILHAR ENTRA AQUI 👇👇👇 */}
+            {/* Passamos o nome e descrição do produto atual para ele */}
             <div className="mb-8">
-              <span className="text-sm font-medium text-hooke-900 block mb-2">Tamanhos Disponíveis</span>
-              <div className="flex gap-3">
-                {product.sizes.map((size) => (
-                  <div key={size} className="w-12 h-12 flex items-center justify-center border border-hooke-200 text-hooke-500 rounded-sm font-medium cursor-default">
-                    {size}
-                  </div>
-                ))}
-              </div>
+              <ShareButton 
+                productName={product.name} 
+                productDescription={product.description}
+              />
             </div>
-
-            <div className="border-t border-hooke-100 my-6"></div>
-
-            <ul className="space-y-3 mb-8">
-              <li className="flex items-center text-sm text-hooke-600">
-                <Check size={18} className="text-green-600 mr-2" />
-                Atendimento via WhatsApp
-              </li>
-              <li className="flex items-center text-sm text-hooke-600">
-                <Check size={18} className="text-green-600 mr-2" />
-                Envio imediato
-              </li>
-            </ul>
-
-            <a 
-              href={whatsappUrl}
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="w-full bg-[#25D366] hover:bg-[#128C7E] text-white py-4 px-8 rounded-sm font-bold uppercase tracking-widest transition-colors flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
-            >
-              <MessageCircle size={22} />
-              Comprar pelo WhatsApp
-            </a>
-            {/* BOTÃO WHATSAPP */}
-            <a 
-              href={whatsappUrl}
-              // ... (atributos do botão verde) ...
-            >
-              <MessageCircle size={22} />
-              Comprar pelo WhatsApp
-            </a>
-
-            {/* NOVO: Botão de Compartilhar logo abaixo */}
-            <div className="mt-4">
-               <ShareButton 
-                 productName={product.name} 
-                 productDescription={product.description} 
-               />
+            
+            {/* Descrição */}
+            <div className="prose prose-hooke">
+              <h3 className="text-sm font-bold uppercase tracking-wider text-hooke-900 mb-2">
+                Detalhes
+              </h3>
+              <p className="text-hooke-600 leading-relaxed">
+                {product.description}
+              </p>
             </div>
           </div>
+
+          {/* Seleção de Tamanhos */}
+          <div>
+            <h3 className="text-sm font-bold uppercase tracking-wider text-hooke-900 mb-4">
+              Tamanhos Disponíveis
+            </h3>
+            <div className="flex flex-wrap gap-3">
+              {product.sizes.map((size) => (
+                <div
+                  key={size}
+                  className="w-12 h-12 flex items-center justify-center border-2 border-hooke-200 rounded-sm text-hooke-600 font-bold hover:border-hooke-900 hover:text-hooke-900 transition-all cursor-pointer"
+                >
+                  {size}
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          {/* Botão de Compra (Futuro) */}
+          <button className="w-full bg-hooke-900 text-white font-bold uppercase tracking-widest py-4 px-8 rounded-sm hover:bg-hooke-800 transition-all transform active:scale-[0.99] mt-4 opacity-50 cursor-not-allowed">
+            Em breve
+          </button>
+
         </div>
       </div>
     </main>
