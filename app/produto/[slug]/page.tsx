@@ -103,6 +103,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
             </div>
           </div>
           
+          
           {/* Botão de Compra (Futuro) */}
           <button className="w-full bg-hooke-900 text-white font-bold uppercase tracking-widest py-4 px-8 rounded-sm hover:bg-hooke-800 transition-all transform active:scale-[0.99] mt-4 opacity-50 cursor-not-allowed">
             Em breve
