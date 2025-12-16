@@ -1,11 +1,15 @@
-// src/app/produto/[slug]/page.tsx
-// VERSÃO DE DEBUG CORRIGIDA - COM TEXTO VERMELHO
 import { products } from "@/data/products";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import ShareButton from "@/components/shop/ShareButton";
 
 export async function generateStaticParams() {
+  // Se a lista de produtos estiver vazia ou com problema, isso pode ser a causa.
+  // Vamos garantir que ela existe.
+  if (!products || products.length === 0) {
+    console.error("ERRO CRÍTICO: A lista de 'products' está vazia ou indefinida!");
+    return [];
+  }
   return products.map((product) => ({
     slug: product.slug,
   }));
@@ -22,6 +26,9 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 
 export default function ProductPage({ params }: { params: { slug: string } }) {
   const product = products.find((p) => p.slug === params.slug);
+  
+  // Se o produto não for encontrado, vai para a página 404.
+  // Isso é o comportamento correto.
   if (!product) notFound();
 
   const formatter = new Intl.NumberFormat('pt-BR', {
@@ -30,8 +37,15 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
   });
 
   return (
-    // Mudei o fundo para vermelho claro para destacar a mudança
-    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20 bg-red-50 border-4 border-red-500 mb-20">
+    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+      
+      {/* 👇👇👇 O TESTE DO ULTIMATO 👇👇👇 */}
+      {/* Esta caixa roxa TEM que aparecer, não importa o que aconteça */}
+      <div className="w-full bg-purple-600 text-white text-center p-8 text-4xl font-bold border-8 border-yellow-400 mb-10 animate-pulse">
+        SE VOCÊ ESTÁ LENDO ISSO, O CÓDIGO NOVO ESTÁ FUNCIONANDO!
+      </div>
+      {/* 👆👆👆 FIM DO TESTE 👆👆👆 */}
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 items-start">
         <div className="relative aspect-[4/5] w-full rounded-sm overflow-hidden bg-hooke-100 shadow-sm">
           <Image
@@ -46,24 +60,18 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
         <div className="flex flex-col gap-8">
           <div>
             <h1 className="text-3xl md:text-4xl font-bold text-hooke-900 uppercase tracking-wider mb-4">
-              {product.name} - VERSÃO DEBUG
+              {product.name}
             </h1>
             <p className="text-2xl text-hooke-600 font-medium mb-6">
               {formatter.format(product.price)}
             </p>
 
-            {/* 👇👇👇 AQUI ESTÁ O TESTE CORRIGIDO 👇👇👇 */}
-            <div className="mb-8 p-4 bg-red-200 border-2 border-red-600">
-                {/* Troquei os >>> por --- para não dar erro */}
-                <p className="text-red-700 font-bold text-xl mb-2">--- TESTE VISUAL ---</p>
-                <p className="text-sm mb-4">Se você está vendo isso, o botão ABAIXO também tem que aparecer.</p>
+            <div className="mb-8">
               <ShareButton
                 productName={product.name}
                 productDescription={product.description}
               />
             </div>
-            {/* 👆👆👆 FIM DO TESTE 👆👆👆 */}
-
 
             <div className="prose prose-hooke">
               <h3 className="text-sm font-bold uppercase tracking-wider text-hooke-900 mb-2">Detalhes</h3>
