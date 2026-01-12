@@ -38,14 +38,6 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
 
   return (
     <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
-      
-      {/* 👇👇👇 O TESTE DO ULTIMATO 👇👇👇 */}
-      {/* Esta caixa roxa TEM que aparecer, não importa o que aconteça */}
-      <div className="w-full bg-purple-600 text-white text-center p-8 text-4xl font-bold border-8 border-yellow-400 mb-10 animate-pulse">
-        SE VOCÊ ESTÁ LENDO ISSO, O CÓDIGO NOVO ESTÁ FUNCIONANDO!
-      </div>
-      {/* 👆👆👆 FIM DO TESTE 👆👆👆 */}
-
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 items-start">
         <div className="relative aspect-[4/5] w-full rounded-sm overflow-hidden bg-hooke-100 shadow-sm">
           <Image
