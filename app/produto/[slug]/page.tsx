@@ -1,7 +1,7 @@
 import { products } from "@/data/products";
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import ShareButton from "@/components/shop/ShareButton";
+//import ShareButton from "@/components/shop/ShareButton";
 
 export async function generateStaticParams() {
   // Se a lista de produtos estiver vazia ou com problema, isso pode ser a causa.
@@ -58,12 +58,12 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
               {formatter.format(product.price)}
             </p>
 
-            <div className="mb-8">
+            {/*<div className="mb-8">
               <ShareButton
                 productName={product.name}
                 productDescription={product.description}
               />
-            </div>
+            </div>*/}
 
             <div className="prose prose-hooke">
               <h3 className="text-sm font-bold uppercase tracking-wider text-hooke-900 mb-2">Detalhes</h3>
