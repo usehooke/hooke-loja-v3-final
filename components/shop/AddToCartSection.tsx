@@ -1,10 +1,12 @@
-// src/components/shop/AddToCartSection.tsx
-"use client"; // ESTE É O SEGREDO: Transforma este arquivo em um Client Component
+// components/shop/AddToCartSection.tsx
+"use client";
 
 import { useState } from "react";
 import { Product } from "@/types";
 import { useCartStore } from "@/store/cart-store";
 import { ShoppingBag, Check } from "lucide-react";
+// Importação do Modal de Medidas
+import SizeGuideModal from "./SizeGuideModal";
 
 interface AddToCartSectionProps {
   product: Product;
@@ -26,9 +28,7 @@ export default function AddToCartSection({ product }: AddToCartSectionProps) {
       return;
     }
 
-    // 2. Adiciona ao carrinho (O store já sabe lidar se o produto já existe lá)
-    // Nota: Por enquanto, nosso store simples não diferencia tamanhos do mesmo produto.
-    // Para um MVP, isso é aceitável, mas no futuro evoluiremos o store para lidar com variações.
+    // 2. Adiciona ao carrinho
     addItem(product);
 
     // 3. Feedback visual de sucesso
@@ -36,7 +36,7 @@ export default function AddToCartSection({ product }: AddToCartSectionProps) {
     // Volta o botão ao normal depois de 2 segundos
     setTimeout(() => {
         setIsAdded(false);
-        setSelectedSize(null); // Reseta o tamanho selecionado (opcional)
+        // setSelectedSize(null); // Opcional: Se quiser resetar o tamanho
     }, 2000);
   };
 
@@ -44,14 +44,13 @@ export default function AddToCartSection({ product }: AddToCartSectionProps) {
     <div className="flex flex-col gap-8 animate-in fade-in duration-700 delay-300">
       {/* SELEÇÃO DE TAMANHOS */}
       <div>
-        <div className="flex justify-between items-center mb-4">
+        <div className="flex justify-between items-end mb-4">
             <h3 className="text-sm font-bold uppercase tracking-wider text-hooke-900">
             Tamanhos Disponíveis
             </h3>
-            {/* Link para tabela de medidas (futuro) */}
-             <button className="text-xs text-hooke-500 underline hover:text-hooke-900">
-                 Tabela de Medidas
-             </button>
+            
+            {/* Modal de Medidas */}
+            <SizeGuideModal />
         </div>
 
         <div className="flex flex-wrap gap-3">
@@ -88,7 +87,7 @@ export default function AddToCartSection({ product }: AddToCartSectionProps) {
           ${isAdded
              ? "bg-green-600 text-white cursor-default" // Estilo de Sucesso
              : !selectedSize
-                 ? "bg-hooke-200 text-hooke-400 cursor-not-allowed" // Estilo Desabilitado
+                 ? "bg-hooke-200 text-hooke-400 cursor-not-allowed" // Estilo Desabilitado (AQUI ESTAVA O ERRO)
                  : "bg-hooke-900 text-white hover:bg-hooke-800 hover:shadow-lg active:scale-[0.98]" // Estilo Ativo
            }
         `}
@@ -105,11 +104,6 @@ export default function AddToCartSection({ product }: AddToCartSectionProps) {
           </>
         )}
       </button>
-
-       {/* Componente do ShareButton antigo (podemos reativar no futuro ou remover) */}
-       {/* <div className="mt-4 p-4 bg-gray-50 rounded text-gray-500 text-sm text-center border border-dashed border-hooke-200">
-          (Botão de compartilhar desativado temporariamente)
-       </div> */}
     </div>
   );
 }
