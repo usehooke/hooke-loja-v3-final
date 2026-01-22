@@ -10,7 +10,7 @@ export default function BentoHero() {
         {/* 1. BLOCO PRINCIPAL (Destaque Visual) - Ocupa 2 colunas x 2 linhas */}
         <div className="md:col-span-2 md:row-span-2 relative group overflow-hidden rounded-sm bg-hooke-900 min-h-[400px]">
            {/* Fundo: Se tiver um vídeo depois, colocamos aqui. Por enquanto vai a imagem do banner */}
-           <div className="absolute inset-0 bg-[url(C:\Users\Nando\Documents\Hooke_site\hooke-store\public\hero-preta.avif')] bg-cover bg-center opacity-80 group-hover:scale-105 transition-transform duration-700" />
+           <div className="absolute inset-0 bg-[url(c://produtos/camiseta-vintage-beetle.jpg)] bg-cover bg-center opacity-80 group-hover:scale-105 transition-transform duration-700" />
            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
            
            <div className="absolute bottom-8 left-8 text-white z-10">
@@ -34,8 +34,7 @@ export default function BentoHero() {
            <div className="relative z-10 flex flex-col items-start">
              <div className="bg-hooke-900 text-white text-[10px] font-bold px-2 py-1 uppercase tracking-widest mb-3">Best Seller</div>
              <h3 className="text-2xl font-bold text-hooke-900 mb-2">Vintage Beetle</h3>
-             <p className="text-hooke-500 text-sm mb-6 max-w-[200px]">Em malha de algodão, Modelagem regular, Manga curta, Decote redondo 
-Menos água na produção.</p>
+             <p className="text-hooke-500 text-sm mb-6 max-w-[200px]">Em malha de algodão, Modelagem regular, Manga curta, Decote redondo </p>
              <Link href="/produto/camiseta-vintage-beetle" className="text-hooke-900 border-b-2 border-hooke-900 pb-1 text-sm font-bold uppercase tracking-wider hover:text-hooke-600 hover:border-hooke-600 transition-colors">
                Comprar Agora
              </Link>
