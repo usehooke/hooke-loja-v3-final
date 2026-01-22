@@ -13,7 +13,7 @@ export default function BentoHero() {
            {/* --- CORREÇÃO AQUI --- */}
            {/* 1. Certifique-se que a imagem está na pasta 'public/products' do projeto */}
            {/* 2. O caminho começa com '/', que significa a pasta public */}
-           <div className="absolute inset-0 bg-[url('/products/camiseta-vintage-beetle.jpg')] bg-cover bg-center opacity-80 group-hover:scale-105 transition-transform duration-700" />
+           <div className="absolute inset-0 bg-[url('/produtos/camiseta-vintage-beetle.jpg')] bg-cover bg-center opacity-80 group-hover:scale-105 transition-transform duration-700" />
            {/* --------------------- */}
 
            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
