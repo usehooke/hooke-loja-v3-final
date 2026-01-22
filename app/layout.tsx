@@ -29,8 +29,7 @@ const inter = Inter({
 const baseUrl = "https://www.usehooke.com.br"; // URL OFICIAL DO SITE
 
 // ⚠️ ATENÇÃO: Substitua pelo seu ID real do Google Analytics 4 quando o tiver.
-// Se não tiver ainda, deixe como está ou com uma string vazia "".
-const GA_MEASUREMENT_ID = "G-XXXXXXXXXX";
+const GA_MEASUREMENT_ID = "G-XXXXXXXXXX"; 
 
 // --- METADADOS GLOBAIS (SEO) ---
 export const metadata: Metadata = {
@@ -41,6 +40,14 @@ export const metadata: Metadata = {
   },
   description: "Vista a sua essência. Moda masculina minimalista com corte premium e tecidos nobres. Algodão egípcio e design atemporal.",
   keywords: ["moda masculina", "camiseta minimalista", "roupa masculina premium", "hooke", "algodão egípcio", "slow fashion brasil"],
+  
+  // --- AQUI ESTAVA O ERRO (Corrigido) ---
+  // Colocamos apenas o código, sem <meta> e sem aspas extras
+  verification: {
+    google: "F1l-lLTgz0IA50BtjKavSlVt3WTmh3DANMB5gr2bmnk",
+  },
+  // --------------------------------------
+
   icons: {
     icon: '/icon.svg', // Favicon moderno (SVG é preferível)
     shortcut: '/favicon.ico', // Fallback para navegadores antigos
