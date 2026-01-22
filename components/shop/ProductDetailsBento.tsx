@@ -11,15 +11,15 @@ export default function ProductDetailsBento() {
           <Feather className="text-hooke-900 w-5 h-5" />
         </div>
         <div>
-          <h4 className="font-bold text-hooke-900 uppercase tracking-wider text-sm">Algodão Egípcio</h4>
-          <p className="text-xs text-hooke-500 mt-1">Fibras longas, toque gelado e não forma bolinhas.</p>
+          <h4 className="font-bold text-hooke-900 uppercase tracking-wider text-sm">Meia Malha Penteada Premium 100% Algodao </h4>
+          <p className="text-xs text-hooke-500 mt-1">Produzida com algodão certificado BCI, unindo estilo, conforto e qualidade.</p>
         </div>
       </div>
 
       {/* 2. MODELAGEM */}
       <div className="col-span-1 bg-white rounded-sm p-4 flex flex-col justify-center items-center text-center border border-hooke-100 hover:border-hooke-900 transition-colors">
         <Maximize2 className="text-hooke-400 w-6 h-6 mb-2" />
-        <h4 className="font-bold text-xs uppercase">Slim Comfort</h4>
+        <h4 className="font-bold text-xs uppercase">Regular, mais reta e solta ao corpo.</h4>
         <p className="text-[10px] text-hooke-400 mt-1">Ajuste perfeito</p>
       </div>
 
