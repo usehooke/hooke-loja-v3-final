@@ -5,38 +5,49 @@ import { useState } from "react";
 import { Product } from "@/types";
 import { useCartStore } from "@/store/cart-store";
 import { ShoppingBag, Check } from "lucide-react";
-// Importação do Modal de Medidas
 import SizeGuideModal from "./SizeGuideModal";
+import { toast } from "sonner"; // Usando o Sonner para alertas bonitos
 
 interface AddToCartSectionProps {
   product: Product;
 }
 
 export default function AddToCartSection({ product }: AddToCartSectionProps) {
-  // Estado para guardar qual tamanho o usuário clicou
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
-  // Estado para um feedback visual rápido no botão após clicar
   const [isAdded, setIsAdded] = useState(false);
-
-  // Pegamos a função de adicionar do nosso "cérebro" (store)
+  
+  // Pegamos a função de adicionar da store
   const addItem = useCartStore((state) => state.addItem);
 
   const handleAddToCart = () => {
-    // 1. Validação: Obriga a selecionar um tamanho
+    // 1. Validação: Obriga a escolher tamanho
     if (!selectedSize) {
-      alert("Por favor, selecione um tamanho.");
+      toast.error("Ops! Escolha um tamanho.", {
+        description: "Precisamos saber se serve em você! 😉",
+        duration: 3000,
+      });
       return;
     }
 
-    // 2. Adiciona ao carrinho
-    addItem(product);
+    // 2. Adiciona ao carrinho (Passando Produto E Tamanho)
+    addItem(product, selectedSize);
 
-    // 3. Feedback visual de sucesso
+    // 3. Feedback Visual e Notificação
     setIsAdded(true);
-    // Volta o botão ao normal depois de 2 segundos
+    
+    toast.success("Adicionado à sacola!", {
+        description: `${product.name} (Tam: ${selectedSize})`,
+        duration: 4000,
+        action: {
+            label: "Ver Sacola",
+            // Se clicar no botão do aviso, abre a gaveta
+            onClick: () => useCartStore.getState().openCart(), 
+        },
+    });
+
+    // Reseta o estado do botão depois de 2 segundos
     setTimeout(() => {
         setIsAdded(false);
-        // setSelectedSize(null); // Opcional: Se quiser resetar o tamanho
     }, 2000);
   };
 
@@ -46,10 +57,8 @@ export default function AddToCartSection({ product }: AddToCartSectionProps) {
       <div>
         <div className="flex justify-between items-end mb-4">
             <h3 className="text-sm font-bold uppercase tracking-wider text-hooke-900">
-            Tamanhos Disponíveis
+            Tamanhos
             </h3>
-            
-            {/* Modal de Medidas */}
             <SizeGuideModal />
         </div>
 
@@ -63,8 +72,8 @@ export default function AddToCartSection({ product }: AddToCartSectionProps) {
                 className={`
                   w-12 h-12 flex items-center justify-center rounded-sm font-bold transition-all duration-200
                   ${isSelected
-                    ? "bg-hooke-900 text-white border-2 border-hooke-900 scale-105 shadow-md" // Estilo Selecionado
-                    : "bg-white text-hooke-600 border-2 border-hooke-200 hover:border-hooke-400 hover:text-hooke-900" // Estilo Normal
+                    ? "bg-hooke-900 text-white border-2 border-hooke-900 scale-105 shadow-md"
+                    : "bg-white text-hooke-600 border-2 border-hooke-200 hover:border-hooke-400 hover:text-hooke-900"
                   }
                 `}
               >
@@ -73,29 +82,26 @@ export default function AddToCartSection({ product }: AddToCartSectionProps) {
             );
           })}
         </div>
-         {!selectedSize && (
-            <p className="text-xs text-hooke-400 mt-2">Selecione um tamanho para continuar.</p>
-         )}
       </div>
 
-      {/* BOTÃO DE ADICIONAR À SACOLA */}
+      {/* BOTÃO DE AÇÃO */}
       <button
         onClick={handleAddToCart}
-        disabled={!selectedSize || isAdded} // Desabilita se não escolheu tamanho ou se acabou de adicionar
+        disabled={!selectedSize || isAdded}
         className={`
           w-full flex items-center justify-center gap-3 px-6 py-5 rounded-sm text-base font-bold uppercase tracking-widest transition-all duration-300
           ${isAdded
-             ? "bg-green-600 text-white cursor-default" // Estilo de Sucesso
+             ? "bg-green-600 text-white cursor-default"
              : !selectedSize
-                 ? "bg-hooke-200 text-hooke-400 cursor-not-allowed" // Estilo Desabilitado (AQUI ESTAVA O ERRO)
-                 : "bg-hooke-900 text-white hover:bg-hooke-800 hover:shadow-lg active:scale-[0.98]" // Estilo Ativo
+                 ? "bg-hooke-100 text-hooke-400 cursor-not-allowed" // Desabilitado (Cinza Claro)
+                 : "bg-hooke-900 text-white hover:bg-hooke-800 hover:shadow-lg active:scale-[0.98]" // Habilitado (Preto)
            }
         `}
       >
         {isAdded ? (
           <>
             <Check size={20} />
-            Adicionado à Sacola!
+            Na Sacola!
           </>
         ) : (
           <>

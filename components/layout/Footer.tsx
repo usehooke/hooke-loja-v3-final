@@ -24,7 +24,7 @@ export default function Footer() {
                 <Instagram size={20} />
               </a>
               <a 
-                href="https://wa.me/5511999999999" // Troque pelo seu número
+                href="https://wa.me/5511975902528" // Troque pelo seu número
                 target="_blank" 
                 className="w-10 h-10 rounded-full bg-hooke-800 flex items-center justify-center hover:bg-[#25D366] hover:text-white transition-colors"
               >
