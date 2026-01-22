@@ -41,7 +41,7 @@ export default function BentoHero() {
              <div className="bg-hooke-900 text-white text-[10px] font-bold px-2 py-1 uppercase tracking-widest mb-2">Best Seller</div>
              <h3 className="text-xl md:text-2xl font-bold text-hooke-900 mb-1">Vintage Beetle</h3>
              <p className="text-hooke-500 text-xs md:text-sm mb-4 max-w-[150px] leading-tight hidden md:block">Algodão Egípcio Premium. O toque que vicia.</p>
-             <Link href="/produto/camiseta-vintage-beetle" className="text-hooke-900 border-b-2 border-hooke-900 pb-0.5 text-xs md:text-sm font-bold uppercase tracking-wider hover:text-hooke-600 hover:border-hooke-600 transition-colors">
+             <Link href="/products/5.jpg" className="text-hooke-900 border-b-2 border-hooke-900 pb-0.5 text-xs md:text-sm font-bold uppercase tracking-wider hover:text-hooke-600 hover:border-hooke-600 transition-colors">
                Comprar Agora
              </Link>
            </div>
@@ -56,7 +56,7 @@ export default function BentoHero() {
         {/* FIX MOBILE: Adicionado 'hidden md:flex' para sumir no celular e não atrapalhar o scroll */}
         <div className="hidden md:flex bg-hooke-100 rounded-sm relative overflow-hidden group min-h-[200px]">
            {/* Se não tiver a foto 'beetle-lifestyle.jpg' ainda, ele vai ficar cinza elegante */}
-           <div className="absolute inset-0 bg-[url('/products/beetle-lifestyle.jpg')] bg-cover bg-center opacity-90 group-hover:scale-110 transition-transform duration-700" />
+           <div className="absolute inset-0 bg-[url('/products/5.jpg')] bg-cover bg-center opacity-90 group-hover:scale-110 transition-transform duration-700" />
            <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors" />
            
            <div className="absolute bottom-4 left-4 z-10">
@@ -69,7 +69,7 @@ export default function BentoHero() {
         {/* 4. BLOCO TEXTURA/QUALIDADE (Baixo Direita) */}
         {/* FIX MOBILE: 'hidden md:flex' para sumir no celular. Transformado em FOTO DE TEXTURA */}
         <div className="hidden md:flex bg-hooke-900 rounded-sm p-6 flex-col justify-end text-white relative overflow-hidden group cursor-default min-h-[200px]">
-           <div className="absolute inset-0 bg-[url('/products/fabric-texture.jpg')] bg-cover bg-center opacity-60 group-hover:opacity-40 transition-opacity" />
+           <div className="absolute inset-0 bg-[url('/products/6.jpg')] bg-cover bg-center opacity-60 group-hover:opacity-40 transition-opacity" />
            
            <div className="relative z-10">
              <div className="flex items-center gap-2 mb-2 text-hooke-200">
