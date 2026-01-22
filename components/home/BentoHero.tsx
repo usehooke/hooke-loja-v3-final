@@ -13,7 +13,7 @@ export default function BentoHero() {
            
            {/* --- CORREÇÃO DO CAMINHO --- */}
            {/* Agora aponta para a pasta public do servidor, não para o seu C: */}
-           <div className="absolute inset-0 bg-[url('/products/camiseta-vintage-beetle.jpg')] bg-cover bg-center opacity-90 group-hover:scale-105 transition-transform duration-700" />
+           <div className="absolute inset-0 bg-[url('/products/5.jpg')] bg-cover bg-center opacity-90 group-hover:scale-105 transition-transform duration-700" />
            {/* --------------------------- */}
 
            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
