@@ -9,11 +9,13 @@ export const products: Product[] = [
     slug: "camiseta-vintage-fusca-preta",
     price: 159.90,
     description: "O clássico absoluto. Estampa do Fusca em silk screen de alta definição sobre algodão preto profundo. Modelagem que valoriza o peito e braços.",
+    // A capa é JPG
     imageUrl: "/products/camiseta-vintage-fusca-preta-1.jpg",
     images: [
       "/products/camiseta-vintage-fusca-preta-1.jpg",
-      "/products/camiseta-vintage-fusca-preta-2.jpg",
-      "/products/camiseta-vintage-fusca-preta-3.jpg",
+      // CORREÇÃO CRÍTICA: As fotos de galeria são PNG na sua pasta
+      "/products/camiseta-vintage-fusca-preta-2.png",
+      "/products/camiseta-vintage-fusca-preta-3.png",
     ],
     sizes: ["P", "M", "G", "GG", "XG"],
     category: "Vintage",
@@ -38,7 +40,10 @@ export const products: Product[] = [
     price: 159.90,
     description: "Um visual limpo e clássico. A cor off-white destaca a estampa do Beetle com suavidade. Perfeita para dias de sol.",
     imageUrl: "/products/camiseta-vintage-fusca-offwhite-1.jpg",
-    images: ["/products/camiseta-vintage-fusca-offwhite-1.jpg", "/products/camiseta-vintage-fusca-offwhite-4.jpg"],
+    images: [
+        "/products/camiseta-vintage-fusca-offwhite-1.jpg", 
+        "/products/camiseta-vintage-fusca-offwhite-4.jpg"
+    ],
     sizes: ["P", "M", "G", "GG"],
     category: "Vintage",
     details: { fabric: "Algodão Egípcio", model: "Regular Fit", wash: "Pré-Encolhida" }
@@ -51,11 +56,13 @@ export const products: Product[] = [
     slug: "regata-canelada-marrom",
     price: 99.90,
     description: "Textura que diferencia. Malha canelada que se ajusta ao corpo sem apertar. A cor marrom café é tendência absoluta.",
+    // Mantendo o nome original do arquivo "Regada"
     imageUrl: "/products/camiseta-Regada-canelada-marrom-1.jpg",
     images: [
       "/products/camiseta-Regada-canelada-marrom-1.jpg",
-      "/products/camiseta-Regada-canelada-marrom-2.jpg",
-      "/products/camiseta-Regada-canelada-marrom-3.jpg"
+      // Ajuste para usar as versões 'm-' que apareceram no seu print, caso as numéricas simples não existam
+      "/products/camiseta-Regada-canelada-marrom-m-2.jpg",
+      "/products/camiseta-Regada-canelada-marrom-m-3.jpg"
     ],
     sizes: ["P", "M", "G", "GG"],
     category: "Regatas",
@@ -99,6 +106,7 @@ export const products: Product[] = [
     slug: "camiseta-vintage-maverick-vermelha",
     price: 159.90,
     description: "Velocidade e história. Homenagem ao lendário V8. Cor vibrante com estampa desgastada propositalmente.",
+    // Mantendo o erro de digitação "maverik" pois é o nome real do arquivo
     imageUrl: "/products/camiseta-vintage-maverik-vermelha-1.jpg",
     images: ["/products/camiseta-vintage-maverik-vermelha-1.jpg"],
     sizes: ["M", "G", "GG"],

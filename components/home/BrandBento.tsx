@@ -13,18 +13,15 @@ export default function BrandBento() {
         </p>
       </div>
 
-      {/* O GRID MÁGICO (BENTO) */}
       <div className="grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-4 h-auto md:h-[500px]">
         
-        {/* ITEM 1: O Destaque (Algodão) - Ocupa 2 colunas */}
+        {/* ITEM 1: O Destaque */}
         <div className="group relative overflow-hidden rounded-sm bg-hooke-900 md:col-span-2 md:row-span-2 min-h-[300px] flex flex-col justify-end p-8 border border-hooke-200 transition-all hover:shadow-xl">
-          {/* Fundo decorativo */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10" />
           
-          {/* --- CORREÇÃO DE IMAGEM --- */}
-          {/* Usamos a foto de textura que você já tem na pasta! */}
-          <div className="absolute inset-0 bg-[url('/products/testura-canelada-marrom-1.jpg')] bg-cover bg-center transition-transform duration-700 group-hover:scale-105 opacity-60" />
-          {/* -------------------------- */}
+          {/* --- CORREÇÃO: USAR .WEBP --- */}
+          <div className="absolute inset-0 bg-[url('/products/testura-canelada-marrom-1.webp')] bg-cover bg-center transition-transform duration-700 group-hover:scale-105 opacity-60" />
+          {/* --------------------------- */}
           
           <div className="relative z-20 text-white">
             <div className="bg-white/10 backdrop-blur-md w-fit p-3 rounded-sm mb-4 border border-white/10">
@@ -37,7 +34,7 @@ export default function BrandBento() {
           </div>
         </div>
 
-        {/* ITEM 2: Corte (Superior Direito) */}
+        {/* Outros itens permanecem iguais... */}
         <div className="group rounded-sm bg-white p-6 border border-hooke-200 flex flex-col justify-between transition-all hover:border-hooke-900 hover:-translate-y-1">
           <div className="bg-hooke-50 w-fit p-3 rounded-full">
             <Ruler className="w-6 h-6 text-hooke-900" />
@@ -48,7 +45,6 @@ export default function BrandBento() {
           </div>
         </div>
 
-        {/* ITEM 3: Identidade (Inferior Direito) */}
         <div className="group rounded-sm bg-hooke-900 p-6 border border-hooke-900 flex flex-col justify-between text-white transition-all hover:shadow-xl hover:-translate-y-1">
           <div className="bg-white/10 w-fit p-3 rounded-full">
             <Fingerprint className="w-6 h-6 text-white" />

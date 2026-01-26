@@ -9,11 +9,8 @@ export default function BentoHero() {
         
         {/* 1. HERO PRINCIPAL */}
         <div className="md:col-span-2 md:row-span-2 relative group overflow-hidden rounded-sm bg-hooke-900 h-[500px] md:h-auto">
-           
-           {/* --- CORREÇÃO: NOME NOVO DO ARQUIVO --- */}
+           {/* Essa foto é JPG mesmo, está correta */}
            <div className="absolute inset-0 bg-[url('/products/camiseta-vintage-fusca-preta-1.jpg')] bg-cover bg-center opacity-90 group-hover:scale-105 transition-transform duration-700" />
-           {/* -------------------------------------- */}
-
            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
            
            <div className="absolute bottom-6 left-6 md:bottom-8 md:left-8 text-white z-10">
@@ -49,11 +46,11 @@ export default function BentoHero() {
            </div>
         </div>
 
-        {/* 3. LIFESTYLE (FOTO SECUNDÁRIA) */}
+        {/* 3. LIFESTYLE */}
         <div className="hidden md:flex bg-hooke-100 rounded-sm relative overflow-hidden group min-h-[200px]">
-           {/* --- CORREÇÃO: FOTO DO MODELO (EXISTE NO PRINT) --- */}
-           <div className="absolute inset-0 bg-[url('/products/camiseta-vintage-fusca-preta-3.jpg')] bg-cover bg-center opacity-90 group-hover:scale-110 transition-transform duration-700" />
-           {/* -------------------------------------------------- */}
+           {/* --- CORREÇÃO: ESSA FOTO É .PNG --- */}
+           <div className="absolute inset-0 bg-[url('/products/camiseta-vintage-fusca-preta-3.png')] bg-cover bg-center opacity-90 group-hover:scale-110 transition-transform duration-700" />
+           {/* ---------------------------------- */}
            <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors" />
            
            <div className="absolute bottom-4 left-4 z-10">
@@ -63,11 +60,11 @@ export default function BentoHero() {
            </div>
         </div>
 
-        {/* 4. TEXTURA (ZOOM) */}
+        {/* 4. TEXTURA */}
         <div className="hidden md:flex bg-hooke-900 rounded-sm p-6 flex-col justify-end text-white relative overflow-hidden group cursor-default min-h-[200px]">
-           {/* --- CORREÇÃO: FOTO DE TEXTURA (EXISTE NO PRINT) --- */}
-           <div className="absolute inset-0 bg-[url('/products/testura-canelada-marrom-1.jpg')] bg-cover bg-center opacity-60 group-hover:opacity-40 transition-opacity" />
-           {/* --------------------------------------------------- */}
+           {/* --- CORREÇÃO: ESSA FOTO É .WEBP --- */}
+           <div className="absolute inset-0 bg-[url('/products/testura-canelada-marrom-1.webp')] bg-cover bg-center opacity-60 group-hover:opacity-40 transition-opacity" />
+           {/* ----------------------------------- */}
            
            <div className="relative z-10">
              <div className="flex items-center gap-2 mb-2 text-hooke-200">
