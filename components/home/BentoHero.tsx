@@ -1,5 +1,6 @@
 // components/home/BentoHero.tsx
 import Link from "next/link";
+import Image from "next/image"; // Importando o componente Image
 import { ArrowRight, Sparkles, Shirt, ZoomIn } from "lucide-react";
 
 export default function BentoHero() {
@@ -9,18 +10,27 @@ export default function BentoHero() {
         
         {/* 1. HERO PRINCIPAL */}
         <div className="md:col-span-2 md:row-span-2 relative group overflow-hidden rounded-sm bg-hooke-900 h-[500px] md:h-auto">
-           {/* Essa foto é JPG mesmo, está correta */}
-           <div className="absolute inset-0 bg-[url('/products/camiseta-vintage-fusca-preta-1.jpg')] bg-cover bg-center opacity-90 group-hover:scale-105 transition-transform duration-700" />
-           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+           {/* Imagem Otimizada com Next/Image */}
+           <Image
+             src="/products/camiseta-vintage-fusca-preta-1.jpg"
+             alt="Modelo vestindo camiseta Vintage Beetle Preta"
+             fill
+             priority // Carrega instantaneamente (LCP Otimizado)
+             className="object-cover object-center opacity-90 group-hover:scale-105 transition-transform duration-700"
+             sizes="(max-width: 768px) 100vw, 50vw" // Ajuda o navegador a escolher o tamanho certo
+           />
            
-           <div className="absolute bottom-6 left-6 md:bottom-8 md:left-8 text-white z-10">
+           {/* Gradiente por cima da imagem para o texto aparecer */}
+           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent z-10" />
+           
+           <div className="absolute bottom-6 left-6 md:bottom-8 md:left-8 text-white z-20">
              <div className="bg-white/10 backdrop-blur-md border border-white/20 w-fit px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest mb-4 flex items-center gap-2">
                <Sparkles size={14} /> Nova Coleção
              </div>
-             <h1 className="text-4xl md:text-5xl font-bold mb-3 leading-tight">
+             <h1 className="text-4xl md:text-5xl font-bold mb-3 leading-tight drop-shadow-lg">
                VISTA SUA<br/>ESSÊNCIA.
              </h1>
-             <p className="text-gray-200 max-w-sm mb-6 text-sm md:text-base font-medium hidden md:block">
+             <p className="text-gray-200 max-w-sm mb-6 text-sm md:text-base font-medium hidden md:block drop-shadow-md">
                Nosso Clássico. Conforto e cortes precisos.<br/>A camiseta perfeita existe.
              </p>
              <Link href="#colecao" className="inline-flex items-center gap-2 bg-white text-hooke-900 px-6 py-3 rounded-sm font-bold uppercase tracking-widest hover:bg-gray-200 transition-colors shadow-lg">
@@ -48,13 +58,17 @@ export default function BentoHero() {
 
         {/* 3. LIFESTYLE */}
         <div className="hidden md:flex bg-hooke-100 rounded-sm relative overflow-hidden group min-h-[200px]">
-           {/* --- CORREÇÃO: ESSA FOTO É .PNG NO SEU PC --- */}
-           <div className="absolute inset-0 bg-[url('/products/camiseta-vintage-fusca-preta-3.png')] bg-cover bg-center opacity-90 group-hover:scale-110 transition-transform duration-700" />
-           {/* ---------------------------------- */}
-           <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors" />
+           <Image
+             src="/products/camiseta-vintage-fusca-preta-3.png" // Extensão .png correta
+             alt="Detalhe Lifestyle"
+             fill
+             className="object-cover object-center opacity-90 group-hover:scale-110 transition-transform duration-700"
+             sizes="(max-width: 768px) 100vw, 25vw"
+           />
+           <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors z-10" />
            
-           <div className="absolute bottom-4 left-4 z-10">
-             <p className="text-white text-xs font-bold uppercase tracking-widest border-l-2 border-white pl-2">
+           <div className="absolute bottom-4 left-4 z-20">
+             <p className="text-white text-xs font-bold uppercase tracking-widest border-l-2 border-white pl-2 drop-shadow-md">
                Lifestyle
              </p>
            </div>
@@ -62,16 +76,20 @@ export default function BentoHero() {
 
         {/* 4. TEXTURA */}
         <div className="hidden md:flex bg-hooke-900 rounded-sm p-6 flex-col justify-end text-white relative overflow-hidden group cursor-default min-h-[200px]">
-           {/* --- CORREÇÃO: ESSA FOTO É .WEBP NO SEU PC --- */}
-           <div className="absolute inset-0 bg-[url('/products/testura-canelada-marrom-1.webp')] bg-cover bg-center opacity-60 group-hover:opacity-40 transition-opacity" />
-           {/* ----------------------------------- */}
+           <Image
+             src="/products/testura-canelada-marrom-1.webp" // Extensão .webp correta
+             alt="Zoom na textura do tecido"
+             fill
+             className="object-cover object-center opacity-60 group-hover:opacity-40 transition-opacity"
+             sizes="(max-width: 768px) 100vw, 25vw"
+           />
            
            <div className="relative z-10">
              <div className="flex items-center gap-2 mb-2 text-hooke-200">
                 <ZoomIn size={16} />
                 <span className="text-[10px] uppercase tracking-widest font-bold">Zoom In</span>
              </div>
-             <p className="text-lg font-serif italic leading-tight">
+             <p className="text-lg font-serif italic leading-tight drop-shadow-md">
                "Detalhes que fazem<br/>a diferença."
              </p>
            </div>
