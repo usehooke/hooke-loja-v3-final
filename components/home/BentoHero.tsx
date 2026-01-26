@@ -48,7 +48,7 @@ export default function BentoHero() {
 
         {/* 3. LIFESTYLE */}
         <div className="hidden md:flex bg-hooke-100 rounded-sm relative overflow-hidden group min-h-[200px]">
-           {/* --- CORREÇÃO: ESSA FOTO É .PNG --- */}
+           {/* --- CORREÇÃO: ESSA FOTO É .PNG NO SEU PC --- */}
            <div className="absolute inset-0 bg-[url('/products/camiseta-vintage-fusca-preta-3.png')] bg-cover bg-center opacity-90 group-hover:scale-110 transition-transform duration-700" />
            {/* ---------------------------------- */}
            <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors" />
@@ -62,7 +62,7 @@ export default function BentoHero() {
 
         {/* 4. TEXTURA */}
         <div className="hidden md:flex bg-hooke-900 rounded-sm p-6 flex-col justify-end text-white relative overflow-hidden group cursor-default min-h-[200px]">
-           {/* --- CORREÇÃO: ESSA FOTO É .WEBP --- */}
+           {/* --- CORREÇÃO: ESSA FOTO É .WEBP NO SEU PC --- */}
            <div className="absolute inset-0 bg-[url('/products/testura-canelada-marrom-1.webp')] bg-cover bg-center opacity-60 group-hover:opacity-40 transition-opacity" />
            {/* ----------------------------------- */}
            

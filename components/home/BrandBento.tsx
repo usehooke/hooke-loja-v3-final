@@ -34,7 +34,7 @@ export default function BrandBento() {
           </div>
         </div>
 
-        {/* Outros itens permanecem iguais... */}
+        {/* ITEM 2: Corte */}
         <div className="group rounded-sm bg-white p-6 border border-hooke-200 flex flex-col justify-between transition-all hover:border-hooke-900 hover:-translate-y-1">
           <div className="bg-hooke-50 w-fit p-3 rounded-full">
             <Ruler className="w-6 h-6 text-hooke-900" />
@@ -45,6 +45,7 @@ export default function BrandBento() {
           </div>
         </div>
 
+        {/* ITEM 3: Exclusividade */}
         <div className="group rounded-sm bg-hooke-900 p-6 border border-hooke-900 flex flex-col justify-between text-white transition-all hover:shadow-xl hover:-translate-y-1">
           <div className="bg-white/10 w-fit p-3 rounded-full">
             <Fingerprint className="w-6 h-6 text-white" />
