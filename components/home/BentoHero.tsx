@@ -7,10 +7,13 @@ export default function BentoHero() {
     <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-8 animate-in fade-in duration-700">
       <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-4 h-auto md:h-[600px]">
         
-        {/* FOTO 1: HERO PRINCIPAL (Beetle em pé) */}
+        {/* 1. HERO PRINCIPAL */}
         <div className="md:col-span-2 md:row-span-2 relative group overflow-hidden rounded-sm bg-hooke-900 h-[500px] md:h-auto">
-           {/* CAMINHO CORRIGIDO */}
-           <div className="absolute inset-0 bg-[url('/products/camiseta-vintage-beetle.jpg')] bg-cover bg-center opacity-90 group-hover:scale-105 transition-transform duration-700" />
+           
+           {/* --- CORREÇÃO: NOME NOVO DO ARQUIVO --- */}
+           <div className="absolute inset-0 bg-[url('/products/camiseta-vintage-fusca-preta-1.jpg')] bg-cover bg-center opacity-90 group-hover:scale-105 transition-transform duration-700" />
+           {/* -------------------------------------- */}
+
            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
            
            <div className="absolute bottom-6 left-6 md:bottom-8 md:left-8 text-white z-10">
@@ -29,48 +32,49 @@ export default function BentoHero() {
            </div>
         </div>
 
-        {/* 2. BLOCO DE VENDA (Best Seller) */}
+        {/* 2. PRODUTO DESTAQUE (Best Seller) */}
         <div className="md:col-span-2 bg-white rounded-sm p-6 md:p-8 flex flex-row items-center justify-between relative overflow-hidden group hover:shadow-lg transition-all border border-hooke-200 h-[180px] md:h-auto">
            <div className="relative z-10 flex flex-col items-start justify-center h-full">
              <div className="bg-hooke-900 text-white text-[10px] font-bold px-2 py-1 uppercase tracking-widest mb-2">Best Seller</div>
              <h3 className="text-xl md:text-2xl font-bold text-hooke-900 mb-1">Vintage Beetle</h3>
              <p className="text-hooke-500 text-xs md:text-sm mb-4 max-w-[150px] leading-tight hidden md:block">Algodão Egípcio Premium. O toque que vicia.</p>
-             <Link href="/produto/camiseta-vintage-beetle" className="text-hooke-900 border-b-2 border-hooke-900 pb-0.5 text-xs md:text-sm font-bold uppercase tracking-wider hover:text-hooke-600 hover:border-hooke-600 transition-colors">
+             <Link href="/produto/camiseta-vintage-fusca-preta" className="text-hooke-900 border-b-2 border-hooke-900 pb-0.5 text-xs md:text-sm font-bold uppercase tracking-wider hover:text-hooke-600 hover:border-hooke-600 transition-colors">
                Comprar Agora
              </Link>
            </div>
+           
            <div className="relative">
              <div className="absolute inset-0 bg-hooke-100 rounded-full blur-2xl opacity-50" />
              <Shirt className="text-hooke-800 w-24 h-24 md:w-32 md:h-32 -rotate-12 group-hover:rotate-0 transition-transform duration-500" strokeWidth={1} />
            </div>
         </div>
 
-        {/* FOTO 2: LIFESTYLE (Modelo Sentado - 17.jpg) */}
-        {/* Escondido no celular (hidden) para não ficar longo demais, aparece no PC (md:flex) */}
+        {/* 3. LIFESTYLE (FOTO SECUNDÁRIA) */}
         <div className="hidden md:flex bg-hooke-100 rounded-sm relative overflow-hidden group min-h-[200px]">
-           {/* Usando a foto 17.jpg que vi na sua pasta */}
-           <div className="absolute inset-0 bg-[url('/products/17.jpg')] bg-cover bg-top opacity-90 group-hover:scale-110 transition-transform duration-700" />
+           {/* --- CORREÇÃO: FOTO DO MODELO (EXISTE NO PRINT) --- */}
+           <div className="absolute inset-0 bg-[url('/products/camiseta-vintage-fusca-preta-3.jpg')] bg-cover bg-center opacity-90 group-hover:scale-110 transition-transform duration-700" />
+           {/* -------------------------------------------------- */}
            <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors" />
            
            <div className="absolute bottom-4 left-4 z-10">
-             <p className="text-white text-xs font-bold uppercase tracking-widest border-l-2 border-white pl-2 drop-shadow-md">
+             <p className="text-white text-xs font-bold uppercase tracking-widest border-l-2 border-white pl-2">
                Lifestyle
              </p>
            </div>
         </div>
 
-        {/* FOTO 3: DETALHE (Outro ângulo - 18.jpg) */}
-        {/* Escondido no celular (hidden), aparece no PC (md:flex) */}
+        {/* 4. TEXTURA (ZOOM) */}
         <div className="hidden md:flex bg-hooke-900 rounded-sm p-6 flex-col justify-end text-white relative overflow-hidden group cursor-default min-h-[200px]">
-           {/* Usando a foto 18.jpg que vi na sua pasta */}
-           <div className="absolute inset-0 bg-[url('/products/18.jpg')] bg-cover bg-center opacity-70 group-hover:opacity-50 transition-opacity" />
+           {/* --- CORREÇÃO: FOTO DE TEXTURA (EXISTE NO PRINT) --- */}
+           <div className="absolute inset-0 bg-[url('/products/testura-canelada-marrom-1.jpg')] bg-cover bg-center opacity-60 group-hover:opacity-40 transition-opacity" />
+           {/* --------------------------------------------------- */}
            
            <div className="relative z-10">
              <div className="flex items-center gap-2 mb-2 text-hooke-200">
                 <ZoomIn size={16} />
                 <span className="text-[10px] uppercase tracking-widest font-bold">Zoom In</span>
              </div>
-             <p className="text-lg font-serif italic leading-tight drop-shadow-md">
+             <p className="text-lg font-serif italic leading-tight">
                "Detalhes que fazem<br/>a diferença."
              </p>
            </div>
