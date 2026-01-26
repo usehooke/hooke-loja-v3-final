@@ -54,7 +54,7 @@ export default async function ProductPage({
               {formatter.format(product.price)}
             </p>
 
-            {/* --- NOVA ÁREA DE DESCRIÇÃO (COM BENTO GRID) --- */}
+            {/* --- DESCRIÇÃO & BENTO GRID --- */}
             <div className="mb-8">
               <h3 className="text-sm font-bold uppercase tracking-wider text-hooke-900 mb-2">Sobre a Peça</h3>
               <p className="text-hooke-600 leading-relaxed text-sm mb-6">
@@ -65,10 +65,9 @@ export default async function ProductPage({
               <ProductDetailsBento />
               {/* ---------------------------------- */}
             </div>
-            {/* ----------------------------------------------- */}
           </div>
 
-          {/* Área de Seleção de Tamanho, Botão de Compra e Guia de Medidas */}
+          {/* Área de Seleção de Tamanho, Botão de Compra */}
           <AddToCartSection product={product} />
 
           {/* Barra de Diferenciais (Ícones de Segurança) */}

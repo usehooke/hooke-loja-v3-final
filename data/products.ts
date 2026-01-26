@@ -1,3 +1,4 @@
+// src/data/products.ts
 import { Product } from "@/types";
 
 export const products: Product[] = [
@@ -116,7 +117,7 @@ export const products: Product[] = [
     category: "Vintage",
     details: { fabric: "Algodão Egípcio", model: "Slim", wash: "Pré-Encolhida" }
   },
-   {
+  {
     id: "regata-lifestyle-bege",
     name: "Regata Lifestyle Bege",
     slug: "regata-lifestyle-bege",

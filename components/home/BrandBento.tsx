@@ -22,8 +22,8 @@ export default function BrandBento() {
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10" />
           
           {/* --- CORREÇÃO DE IMAGEM --- */}
-          {/* Usando a textura local em vez de link externo */}
-          <div className="absolute inset-0 bg-[url('/products/fabric-texture.jpg')] bg-cover bg-center transition-transform duration-700 group-hover:scale-105 opacity-60" />
+          {/* Usamos a foto de textura que você já tem na pasta! */}
+          <div className="absolute inset-0 bg-[url('/products/testura-canelada-marrom-1.jpg')] bg-cover bg-center transition-transform duration-700 group-hover:scale-105 opacity-60" />
           {/* -------------------------- */}
           
           <div className="relative z-20 text-white">
