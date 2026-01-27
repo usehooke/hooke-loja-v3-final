@@ -19,9 +19,9 @@ export default function BrandBento() {
         <div className="group relative overflow-hidden rounded-sm bg-hooke-900 md:col-span-2 md:row-span-2 min-h-[300px] flex flex-col justify-end p-8 border border-hooke-200 transition-all hover:shadow-xl">
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10" />
           
-          {/* --- CORREÇÃO: USAR .WEBP --- */}
-          <div className="absolute inset-0 bg-[url('/products/testura-canelada-marrom-1.webp')] bg-cover bg-center transition-transform duration-700 group-hover:scale-105 opacity-60" />
-          {/* --------------------------- */}
+          {/* --- Imagem de Textura de Fundo --- */}
+          <div className="absolute inset-0 bg-[url('/products/fabric-texture.jpg')] bg-cover bg-center transition-transform duration-700 group-hover:scale-105 opacity-60" />
+          {/* --------------------------------- */}
           
           <div className="relative z-20 text-white">
             <div className="bg-white/10 backdrop-blur-md w-fit p-3 rounded-sm mb-4 border border-white/10">
