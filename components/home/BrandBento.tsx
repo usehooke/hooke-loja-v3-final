@@ -21,7 +21,7 @@ export default function BrandBento() {
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-10" />
           
           {/* --- CORREÇÃO: Usando a textura .webp real da sua pasta --- */}
-          <div className="absolute inset-0 bg-[url('/products/testura-canelada-marrom-1.webp')] bg-cover bg-center transition-transform duration-700 group-hover:scale-105 opacity-50" />
+          <div className="absolute inset-0 bg-[url('/produtos/testura-canelada-marrom-1.webp')] bg-cover bg-center transition-transform duration-700 group-hover:scale-105 opacity-50" />
           {/* ---------------------------------------------------------- */}
           
           <div className="relative z-20 text-white">
