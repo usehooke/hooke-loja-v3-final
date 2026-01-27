@@ -5,12 +5,18 @@ export interface Product {
   name: string;
   description: string;
   price: number;
+  imageUrl: string;
   secondaryImageUrl?: string;
-  category: 'camisetas-lisas' | 'camisetas-estampadas' | 'acessorios';
-  imageUrl: string; // URL da foto
-  sizes: string[]; // ['P', 'M', 'G', 'GG']
-  isNew?: boolean; // Para destacar lançamentos
-  slug: string; // Para a URL (ex: camiseta-hooke-preta)
+  images?: string[]; // Adicionando URLs de imagens da galeria
+  sizes: string[];
+  category: 'Vintage' | 'Regatas' | 'Lifestyle' | 'camisetas-lisas' | 'camisetas-estampadas' | 'acessorios';
+  details?: {
+    fabric: string;
+    model: string;
+    wash: string;
+  };
+  isNew?: boolean;
+  slug: string;
 }
 
 export interface MenuItem {
