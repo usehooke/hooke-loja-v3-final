@@ -10,10 +10,8 @@ interface ProductGalleryProps {
 }
 
 export default function ProductGallery({ product }: ProductGalleryProps) {
-  const images = [
-    product.imageUrl,
-    ...(product.secondaryImageUrl ? [product.secondaryImageUrl] : []),
-  ];
+  // Garante que estamos usando a lista completa de imagens do produto, se disponível.
+  const images = product.images && product.images.length > 0 ? product.images : [product.imageUrl];
 
   const [selectedImage, setSelectedImage] = useState(images[0]);
 

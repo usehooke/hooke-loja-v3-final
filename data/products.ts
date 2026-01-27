@@ -56,8 +56,8 @@ export const products: Product[] = [
     imageUrl: "/products/camiseta-Regada-canelada-marrom-1.jpg",
     images: [
       "/products/camiseta-Regada-canelada-marrom-1.jpg",
-      "/products/camiseta-Regada-canelada-marrom-m-2.jpg",
-      "/products/camiseta-Regada-canelada-marrom-m-3.jpg"
+      "/products/camiseta-Regada-canelada-marrom-2.jpg",
+      "/products/camiseta-Regada-canelada-marrom-3.jpg"
     ],
     sizes: ["P", "M", "G", "GG"],
     category: "Regatas",
