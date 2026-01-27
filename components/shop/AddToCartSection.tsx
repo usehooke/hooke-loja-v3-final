@@ -6,7 +6,7 @@ import { Product } from "@/types";
 import { useCartStore } from "@/store/cart-store";
 import { ShoppingBag, Check } from "lucide-react";
 import SizeGuideModal from "./SizeGuideModal";
-import toast from "react-hot-toast"; // Usando o react-hot-toast para alertas bonitos
+import toast from "react-hot-toast"; // CORRIGIDO: Agora está em inglês correto
 
 interface AddToCartSectionProps {
   product: Product;
