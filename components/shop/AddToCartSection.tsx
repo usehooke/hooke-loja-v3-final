@@ -6,7 +6,7 @@ import { Product } from "@/types";
 import { useCartStore } from "@/store/cart-store";
 import { ShoppingBag, Check } from "lucide-react";
 import SizeGuideModal from "./SizeGuideModal";
-import { toast } from "sonner"; // Usando o Sonner para alertas bonitos
+import toast from "react-hot-toast"; // Usando o react-hot-toast para alertas bonitos
 
 interface AddToCartSectionProps {
   product: Product;
@@ -22,10 +22,18 @@ export default function AddToCartSection({ product }: AddToCartSectionProps) {
   const handleAddToCart = () => {
     // 1. Validação: Obriga a escolher tamanho
     if (!selectedSize) {
-      toast.error("Ops! Escolha um tamanho.", {
-        description: "Precisamos saber se serve em você! 😉",
-        duration: 3000,
-      });
+      toast.error(
+        (t) => (
+          <div style={{ textAlign: 'center' }}>
+            <b>Ops! Escolha um tamanho.</b>
+            <br />
+            <span>Precisamos saber se serve em você! 😉</span>
+          </div>
+        ),
+        {
+          duration: 3000,
+        }
+      );
       return;
     }
 
@@ -35,15 +43,28 @@ export default function AddToCartSection({ product }: AddToCartSectionProps) {
     // 3. Feedback Visual e Notificação
     setIsAdded(true);
     
-    toast.success("Adicionado à sacola!", {
-        description: `${product.name} (Tam: ${selectedSize})`,
+    toast.success(
+      (t) => (
+        <div className="flex flex-col items-center gap-2 text-center">
+          <div>
+            <b className="font-bold">Adicionado à sacola!</b>
+            <p className="text-sm">{`${product.name} (Tam: ${selectedSize})`}</p>
+          </div>
+          <button
+            onClick={() => {
+              useCartStore.getState().openCart();
+              toast.dismiss(t.id);
+            }}
+            className="mt-2 px-4 py-2 w-full text-center text-sm font-semibold text-white bg-slate-800 rounded-md shadow-md"
+          >
+            Ver Sacola
+          </button>
+        </div>
+      ),
+      {
         duration: 4000,
-        action: {
-            label: "Ver Sacola",
-            // Se clicar no botão do aviso, abre a gaveta
-            onClick: () => useCartStore.getState().openCart(), 
-        },
-    });
+      }
+    );
 
     // Reseta o estado do botão depois de 2 segundos
     setTimeout(() => {

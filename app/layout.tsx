@@ -16,7 +16,7 @@ import TopBar from "@/components/layout/TopBar";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
-import { Toaster } from "@/components/ui/sonner";
+import { Toaster } from "react-hot-toast";
 
 // IMPORTAÇÃO NOVA: O Carrinho Lateral
 import CartSidebar from "@/components/shop/CartSidebar";
@@ -94,7 +94,7 @@ export default function RootLayout({
           <WhatsAppButton />
           <Footer />
           
-          <Toaster richColors position="top-center" closeButton />
+          <Toaster position="top-center" />
           
         </ViewTransitions>
 
