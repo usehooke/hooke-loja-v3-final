@@ -58,6 +58,6 @@ export default function BrandBento() {
         </div>
 
       </div>
-    </section>
+    </section>/*// Atualizacao Forcada Hooke
   );
 }
