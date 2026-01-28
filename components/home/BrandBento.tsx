@@ -1,9 +1,10 @@
 // components/home/BrandBento.tsx
-import { Shirt, Sprout, Ruler, Fingerprint } from "lucide-react";
+import { Sprout, Ruler, Fingerprint } from "lucide-react";
 
 export default function BrandBento() {
   return (
     <section className="py-20 px-4 max-w-7xl mx-auto">
+      {/* Título */}
       <div className="text-center mb-12 animate-in slide-in-from-bottom-4 duration-700">
         <h2 className="text-3xl font-bold text-hooke-900 uppercase tracking-wider mb-3">
           O Padrão Hooke
@@ -13,17 +14,13 @@ export default function BrandBento() {
         </p>
       </div>
 
+      {/* Grid Bento */}
       <div className="grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-4 h-auto md:h-[500px]">
-        
-        {/* ITEM 1: O Destaque (Algodão) - Ocupa 2 colunas */}
-        <div className="group relative overflow-hidden rounded-sm bg-hooke-900 md:col-span-2 md:row-span-2 min-h-[300px] flex flex-col justify-end p-8 border border-hooke-200 transition-all hover:shadow-xl">
-          {/* Gradiente para leitura do texto */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-10" />
-          
-          {/* --- CORREÇÃO: Usando a textura .webp real da sua pasta --- */}
-          <div className="absolute inset-0 bg-[url('/produtos/testura-canelada-marrom-1.webp')] bg-cover bg-center transition-transform duration-700 group-hover:scale-105 opacity-50" />
-          {/* ---------------------------------------------------------- */}
-          
+
+        {/* ITEM 1: Algodão */}
+        <div className="group relative overflow-hidden rounded-sm md:col-span-2 md:row-span-2 flex flex-col justify-end p-8 border border-hooke-200 transition-all hover:shadow-xl">
+          <div className="absolute inset-0 bg-[url('/produtos/algodao-egipcio.webp')] bg-cover bg-center transition-transform duration-700 group-hover:scale-105 opacity-70" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
           <div className="relative z-20 text-white">
             <div className="bg-white/10 backdrop-blur-md w-fit p-3 rounded-sm mb-4 border border-white/10">
               <Sprout className="w-6 h-6 text-white" />
@@ -35,25 +32,33 @@ export default function BrandBento() {
           </div>
         </div>
 
-        {/* ITEM 2: Corte (Superior Direito) */}
-        <div className="group rounded-sm bg-white p-6 border border-hooke-200 flex flex-col justify-between transition-all hover:border-hooke-900 hover:-translate-y-1">
-          <div className="bg-hooke-50 w-fit p-3 rounded-full">
-            <Ruler className="w-6 h-6 text-hooke-900" />
-          </div>
-          <div>
-            <h4 className="text-lg font-bold text-hooke-900 mt-4">Modelagem Slim Comfort</h4>
-            <p className="text-sm text-hooke-500 mt-1">Ajustada no peito e braços, solta na cintura. Esconde o que precisa.</p>
+        {/* ITEM 2: Corte */}
+        <div className="group relative overflow-hidden rounded-sm p-6 border border-hooke-200 flex flex-col justify-end transition-all hover:shadow-xl">
+          <div className="absolute inset-0 bg-[url('/produtos/corte-slim.webp')] bg-cover bg-center transition-transform duration-700 group-hover:scale-105 opacity-70" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+          <div className="relative z-20 text-white">
+            <div className="bg-white/10 w-fit p-3 rounded-full mb-4">
+              <Ruler className="w-6 h-6 text-white" />
+            </div>
+            <h4 className="text-lg font-bold">Modelagem Slim Comfort</h4>
+            <p className="text-sm text-gray-200 mt-1">
+              Ajustada no peito e braços, solta na cintura. Esconde o que precisa.
+            </p>
           </div>
         </div>
 
-        {/* ITEM 3: Exclusividade (Inferior Direito) */}
-        <div className="group rounded-sm bg-hooke-900 p-6 border border-hooke-900 flex flex-col justify-between text-white transition-all hover:shadow-xl hover:-translate-y-1">
-          <div className="bg-white/10 w-fit p-3 rounded-full">
-            <Fingerprint className="w-6 h-6 text-white" />
-          </div>
-          <div>
-            <h4 className="text-lg font-bold mt-4">Exclusividade</h4>
-            <p className="text-sm text-gray-400 mt-1">Produção limitada. Quem tem Hooke, sabe que está vestindo algo único.</p>
+        {/* ITEM 3: Exclusividade */}
+        <div className="group relative overflow-hidden rounded-sm p-6 border border-hooke-900 flex flex-col justify-end transition-all hover:shadow-xl">
+          <div className="absolute inset-0 bg-[url('/produtos/exclusividade.webp')] bg-cover bg-center transition-transform duration-700 group-hover:scale-105 opacity-70" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+          <div className="relative z-20 text-white">
+            <div className="bg-white/10 w-fit p-3 rounded-full mb-4">
+              <Fingerprint className="w-6 h-6 text-white" />
+            </div>
+            <h4 className="text-lg font-bold">Exclusividade</h4>
+            <p className="text-sm text-gray-200 mt-1">
+              Produção limitada. Quem tem Hooke, sabe que está vestindo algo único.
+            </p>
           </div>
         </div>
 
