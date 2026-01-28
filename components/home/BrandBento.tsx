@@ -19,8 +19,8 @@ export default function BrandBento() {
 
         {/* ITEM 1: Algodão (Caixa Grande) */}
         <div className="group relative overflow-hidden rounded-sm bg-hooke-900 md:col-span-2 md:row-span-2 min-h-[300px] flex flex-col justify-end p-8 border border-hooke-200 transition-all hover:shadow-xl">
-          {/* Imagem: Textura Marrom */}
-          <div className="absolute inset-0 bg-[url('/produtos/testura-canelada-marrom-1.webp')] bg-cover bg-center transition-transform duration-700 group-hover:scale-105 opacity-60" />
+          {/* Imagem: Textura Canelada Marrom */}
+          <div className="absolute inset-0 bg-[url('/images/produtos/camiseta-canelada-marrom-1.jpg')] bg-cover bg-center transition-transform duration-700 group-hover:scale-105 opacity-60" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
           
           <div className="relative z-20 text-white">
@@ -37,7 +37,7 @@ export default function BrandBento() {
         {/* ITEM 2: Corte (Caixa Pequena Superior) */}
         <div className="group relative overflow-hidden rounded-sm bg-white p-6 border border-hooke-200 flex flex-col justify-end transition-all hover:shadow-xl">
           {/* Imagem: Fusca Off-White */}
-          <div className="absolute inset-0 bg-[url('/produtos/camiseta-vintage-fusca-offwhite-1.jpg')] bg-cover bg-top transition-transform duration-700 group-hover:scale-105 opacity-80" />
+          <div className="absolute inset-0 bg-[url('/images/produtos/camiseta-vintage-fusca-offwhite-1.jpg')] bg-cover bg-top transition-transform duration-700 group-hover:scale-105 opacity-80" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
           
           <div className="relative z-20 text-white">
@@ -54,7 +54,7 @@ export default function BrandBento() {
         {/* ITEM 3: Exclusividade (Caixa Pequena Inferior) */}
         <div className="group relative overflow-hidden rounded-sm bg-hooke-900 p-6 border border-hooke-900 flex flex-col justify-end transition-all hover:shadow-xl">
           {/* Imagem: Maverick Vermelha */}
-          <div className="absolute inset-0 bg-[url('/produtos/camiseta-vintage-maverik-vermelha-1.jpg')] bg-cover bg-center transition-transform duration-700 group-hover:scale-105 opacity-70" />
+          <div className="absolute inset-0 bg-[url('/images/produtos/camiseta-vintage-maverik-vermelha-1.jpg')] bg-cover bg-center transition-transform duration-700 group-hover:scale-105 opacity-70" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
           
           <div className="relative z-20 text-white">
