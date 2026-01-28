@@ -17,10 +17,12 @@ export default function BrandBento() {
       {/* Grid Bento */}
       <div className="grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-4 h-auto md:h-[500px]">
 
-        {/* ITEM 1: Algodão */}
-        <div className="group relative overflow-hidden rounded-sm md:col-span-2 md:row-span-2 flex flex-col justify-end p-8 border border-hooke-200 transition-all hover:shadow-xl">
-          <div className="absolute inset-0 bg-[url('/produtos/algodao-egipcio.webp')] bg-cover bg-center transition-transform duration-700 group-hover:scale-105 opacity-70" />
+        {/* ITEM 1: Algodão (Caixa Grande) */}
+        <div className="group relative overflow-hidden rounded-sm bg-hooke-900 md:col-span-2 md:row-span-2 min-h-[300px] flex flex-col justify-end p-8 border border-hooke-200 transition-all hover:shadow-xl">
+          {/* Imagem: Textura Marrom */}
+          <div className="absolute inset-0 bg-[url('/produtos/testura-canelada-marrom-1.webp')] bg-cover bg-center transition-transform duration-700 group-hover:scale-105 opacity-60" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+          
           <div className="relative z-20 text-white">
             <div className="bg-white/10 backdrop-blur-md w-fit p-3 rounded-sm mb-4 border border-white/10">
               <Sprout className="w-6 h-6 text-white" />
@@ -32,32 +34,36 @@ export default function BrandBento() {
           </div>
         </div>
 
-        {/* ITEM 2: Corte */}
-        <div className="group relative overflow-hidden rounded-sm p-6 border border-hooke-200 flex flex-col justify-end transition-all hover:shadow-xl">
-          <div className="absolute inset-0 bg-[url('/produtos/corte-slim.webp')] bg-cover bg-center transition-transform duration-700 group-hover:scale-105 opacity-70" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+        {/* ITEM 2: Corte (Caixa Pequena Superior) */}
+        <div className="group relative overflow-hidden rounded-sm bg-white p-6 border border-hooke-200 flex flex-col justify-end transition-all hover:shadow-xl">
+          {/* Imagem: Fusca Off-White */}
+          <div className="absolute inset-0 bg-[url('/produtos/camiseta-vintage-fusca-offwhite-1.jpg')] bg-cover bg-top transition-transform duration-700 group-hover:scale-105 opacity-80" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+          
           <div className="relative z-20 text-white">
-            <div className="bg-white/10 w-fit p-3 rounded-full mb-4">
+            <div className="bg-white/20 backdrop-blur-sm w-fit p-3 rounded-full mb-4">
               <Ruler className="w-6 h-6 text-white" />
             </div>
             <h4 className="text-lg font-bold">Modelagem Slim Comfort</h4>
             <p className="text-sm text-gray-200 mt-1">
-              Ajustada no peito e braços, solta na cintura. Esconde o que precisa.
+              Ajustada no peito e braços, solta na cintura.
             </p>
           </div>
         </div>
 
-        {/* ITEM 3: Exclusividade */}
-        <div className="group relative overflow-hidden rounded-sm p-6 border border-hooke-900 flex flex-col justify-end transition-all hover:shadow-xl">
-          <div className="absolute inset-0 bg-[url('/produtos/exclusividade.webp')] bg-cover bg-center transition-transform duration-700 group-hover:scale-105 opacity-70" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+        {/* ITEM 3: Exclusividade (Caixa Pequena Inferior) */}
+        <div className="group relative overflow-hidden rounded-sm bg-hooke-900 p-6 border border-hooke-900 flex flex-col justify-end transition-all hover:shadow-xl">
+          {/* Imagem: Maverick Vermelha */}
+          <div className="absolute inset-0 bg-[url('/produtos/camiseta-vintage-maverik-vermelha-1.jpg')] bg-cover bg-center transition-transform duration-700 group-hover:scale-105 opacity-70" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+          
           <div className="relative z-20 text-white">
-            <div className="bg-white/10 w-fit p-3 rounded-full mb-4">
+            <div className="bg-white/20 backdrop-blur-sm w-fit p-3 rounded-full mb-4">
               <Fingerprint className="w-6 h-6 text-white" />
             </div>
             <h4 className="text-lg font-bold">Exclusividade</h4>
             <p className="text-sm text-gray-200 mt-1">
-              Produção limitada. Quem tem Hooke, sabe que está vestindo algo único.
+              Produção limitada. Peças únicas.
             </p>
           </div>
         </div>
