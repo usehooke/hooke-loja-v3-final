@@ -8,6 +8,7 @@ export const products: Product[] = [
     name: "Camiseta Vintage Beetle Black",
     slug: "camiseta-vintage-fusca-preta",
     price: 159.90,
+    featured: true, // PRODUTO EM DESTAQUE
     description: "O clássico absoluto. Estampa do Fusca em silk screen de alta definição sobre algodão preto profundo. Modelagem que valoriza o peito e braços.",
     // A capa é JPG (correto)
     imageUrl: "/produtos/camiseta-vintage-fusca-preta-1.jpg",
@@ -52,6 +53,7 @@ export const products: Product[] = [
     name: "Regata Canelada Coffee",
     slug: "regata-canelada-marrom",
     price: 99.90,
+    featured: true, // PRODUTO EM DESTAQUE
     description: "Textura que diferencia. Malha canelada que se ajusta ao corpo sem apertar. A cor marrom café é tendência absoluta.",
     imageUrl: "/produtos/camiseta-Regada-canelada-marrom-1.jpg",
     images: [

@@ -16,6 +16,7 @@ export interface Product {
     wash: string;
   };
   isNew?: boolean;
+  featured?: boolean; // Adicionado para produtos em destaque
   slug: string;
 }
 
