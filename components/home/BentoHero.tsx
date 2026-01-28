@@ -12,7 +12,7 @@ export default function BentoHero() {
         <div className="md:col-span-2 md:row-span-2 relative group overflow-hidden rounded-sm bg-hooke-900 h-[500px] md:h-auto">
            {/* Imagem Otimizada com Next/Image */}
            <Image
-             src="/products/camiseta-vintage-fusca-preta-1.jpg"
+             src="/produtos/camiseta-vintage-fusca-preta-1.jpg"
              alt="Modelo vestindo camiseta Vintage Beetle Preta"
              fill
              priority // Carrega instantaneamente (LCP Otimizado)
@@ -59,7 +59,7 @@ export default function BentoHero() {
         {/* 3. LIFESTYLE */}
         <div className="hidden md:flex bg-hooke-100 rounded-sm relative overflow-hidden group min-h-[200px]">
            <Image
-             src="/products/camiseta-vintage-fusca-preta-3.png" // Extensão .png correta
+             src="/produtos/camiseta-vintage-fusca-preta-3.png" // Extensão .png correta
              alt="Detalhe Lifestyle"
              fill
              className="object-cover object-center opacity-90 group-hover:scale-110 transition-transform duration-700"
@@ -77,7 +77,7 @@ export default function BentoHero() {
         {/* 4. TEXTURA */}
         <div className="hidden md:flex bg-hooke-900 rounded-sm p-6 flex-col justify-end text-white relative overflow-hidden group cursor-default min-h-[200px]">
            <Image
-             src="/products/testura-canelada-marrom-1.webp" // Extensão .webp correta
+             src="/produtos/testura-canelada-marrom-1.webp" // Extensão .webp correta
              alt="Zoom na textura do tecido"
              fill
              className="object-cover object-center opacity-60 group-hover:opacity-40 transition-opacity"
