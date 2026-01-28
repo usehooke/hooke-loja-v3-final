@@ -1,6 +1,6 @@
 // components/home/BrandBento.tsx
+import Image from 'next/image';
 import { Sprout, Ruler, Fingerprint } from "lucide-react";
-import Image from "next/image"; // <--- Importação vital
 
 export default function BrandBento() {
   return (
@@ -19,47 +19,35 @@ export default function BrandBento() {
       <div className="grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-4 h-auto md:h-[500px]">
 
         {/* ITEM 1: Algodão (Caixa Grande) */}
-        <div className="group relative overflow-hidden rounded-sm bg-hooke-900 md:col-span-2 md:row-span-2 min-h-[300px] flex flex-col justify-end p-8 border border-hooke-200 transition-all hover:shadow-xl">
-          
-          {/* IMAGEM: Usando o componente Next/Image para garantir o carregamento */}
-          <div className="absolute inset-0 w-full h-full group-hover:scale-105 transition-transform duration-700 opacity-60">
-             <Image 
-               src="/images/produtos/camiseta-canelada-marrom-1.jpg" 
-               alt="Textura Algodão"
-               fill
-               className="object-cover object-center"
-               sizes="(max-width: 768px) 100vw, 66vw"
-             />
-          </div>
-          
-          {/* Gradiente por cima da imagem */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-10" />
+        <div className="group relative overflow-hidden rounded-sm md:col-span-2 md:row-span-2 min-h-[300px] flex flex-col justify-end p-8 border border-hooke-200 transition-all hover:shadow-xl">
+          <Image
+            src="/produtos/camiseta-canelada-marrom-1.jpg"
+            alt="Textura de tecido canelado marrom"
+            fill
+            className="object-cover transition-transform duration-700 group-hover:scale-105 opacity-60"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
           
           <div className="relative z-20 text-white">
             <div className="bg-white/10 backdrop-blur-md w-fit p-3 rounded-sm mb-4 border border-white/10">
               <Sprout className="w-6 h-6 text-white" />
             </div>
-            <h3 className="text-2xl font-bold mb-2">Algodão Egípcio Certificado</h3>
+            <h3 className="text-2xl font-bold mb-2">Algodão Premium</h3>
             <p className="text-gray-200 max-w-md text-sm md:text-base">
-              Fibras 4x mais resistentes que o algodão comum. Toque gelado, não forma bolinhas e mantém a cor preta intensa por anos.
+              Fibras mais resistentes que o algodão comum. Toque macio, não forma bolinhas e mantém a cor intensa por mais tempo.
             </p>
           </div>
         </div>
 
         {/* ITEM 2: Corte (Caixa Pequena Superior) */}
-        <div className="group relative overflow-hidden rounded-sm bg-white p-6 border border-hooke-200 flex flex-col justify-end transition-all hover:shadow-xl">
-          
-          <div className="absolute inset-0 w-full h-full group-hover:scale-105 transition-transform duration-700 opacity-80">
-             <Image 
-               src="/images/produtos/camiseta-vintage-fusca-offwhite-1.jpg" 
-               alt="Modelagem Slim"
-               fill
-               className="object-cover object-top"
-               sizes="(max-width: 768px) 100vw, 33vw"
-             />
-          </div>
-          
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10" />
+        <div className="group relative overflow-hidden rounded-sm p-6 border border-hooke-200 flex flex-col justify-end transition-all hover:shadow-xl min-h-[242px]">
+          <Image
+            src="/produtos/camiseta-vintage-fusca-offwhite-1.jpg"
+            alt="Homem vestindo camiseta off-white com estampa de Fusca"
+            fill
+            className="object-cover object-top transition-transform duration-700 group-hover:scale-105 opacity-80"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
           
           <div className="relative z-20 text-white">
             <div className="bg-white/20 backdrop-blur-sm w-fit p-3 rounded-full mb-4">
@@ -73,19 +61,14 @@ export default function BrandBento() {
         </div>
 
         {/* ITEM 3: Exclusividade (Caixa Pequena Inferior) */}
-        <div className="group relative overflow-hidden rounded-sm bg-hooke-900 p-6 border border-hooke-900 flex flex-col justify-end transition-all hover:shadow-xl">
-          
-           <div className="absolute inset-0 w-full h-full group-hover:scale-105 transition-transform duration-700 opacity-70">
-             <Image 
-               src="/images/produtos/camiseta-vintage-maverik-vermelha-1.jpg" 
-               alt="Exclusividade"
-               fill
-               className="object-cover object-center"
-               sizes="(max-width: 768px) 100vw, 33vw"
-             />
-          </div>
-          
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-10" />
+        <div className="group relative overflow-hidden rounded-sm p-6 border border-hooke-900 flex flex-col justify-end transition-all hover:shadow-xl min-h-[242px]">
+          <Image
+            src="/produtos/camiseta-vintage-maverik-vermelha-1.jpg"
+            alt="Camiseta vermelha com estampa de Maverick"
+            fill
+            className="object-cover transition-transform duration-700 group-hover:scale-105 opacity-70"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
           
           <div className="relative z-20 text-white">
             <div className="bg-white/20 backdrop-blur-sm w-fit p-3 rounded-full mb-4">
