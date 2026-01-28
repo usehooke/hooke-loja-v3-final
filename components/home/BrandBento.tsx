@@ -1,5 +1,6 @@
 // components/home/BrandBento.tsx
 import { Sprout, Ruler, Fingerprint } from "lucide-react";
+import Image from "next/image"; // <--- Importação vital
 
 export default function BrandBento() {
   return (
@@ -19,9 +20,20 @@ export default function BrandBento() {
 
         {/* ITEM 1: Algodão (Caixa Grande) */}
         <div className="group relative overflow-hidden rounded-sm bg-hooke-900 md:col-span-2 md:row-span-2 min-h-[300px] flex flex-col justify-end p-8 border border-hooke-200 transition-all hover:shadow-xl">
-          {/* Imagem: Textura Canelada Marrom */}
-          <div className="absolute inset-0 bg-[url('/images/produtos/camiseta-canelada-marrom-1.jpg')] bg-cover bg-center transition-transform duration-700 group-hover:scale-105 opacity-60" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+          
+          {/* IMAGEM: Usando o componente Next/Image para garantir o carregamento */}
+          <div className="absolute inset-0 w-full h-full group-hover:scale-105 transition-transform duration-700 opacity-60">
+             <Image 
+               src="/images/produtos/camiseta-canelada-marrom-1.jpg" 
+               alt="Textura Algodão"
+               fill
+               className="object-cover object-center"
+               sizes="(max-width: 768px) 100vw, 66vw"
+             />
+          </div>
+          
+          {/* Gradiente por cima da imagem */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-10" />
           
           <div className="relative z-20 text-white">
             <div className="bg-white/10 backdrop-blur-md w-fit p-3 rounded-sm mb-4 border border-white/10">
@@ -36,9 +48,18 @@ export default function BrandBento() {
 
         {/* ITEM 2: Corte (Caixa Pequena Superior) */}
         <div className="group relative overflow-hidden rounded-sm bg-white p-6 border border-hooke-200 flex flex-col justify-end transition-all hover:shadow-xl">
-          {/* Imagem: Fusca Off-White */}
-          <div className="absolute inset-0 bg-[url('/images/produtos/camiseta-vintage-fusca-offwhite-1.jpg')] bg-cover bg-top transition-transform duration-700 group-hover:scale-105 opacity-80" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+          
+          <div className="absolute inset-0 w-full h-full group-hover:scale-105 transition-transform duration-700 opacity-80">
+             <Image 
+               src="/images/produtos/camiseta-vintage-fusca-offwhite-1.jpg" 
+               alt="Modelagem Slim"
+               fill
+               className="object-cover object-top"
+               sizes="(max-width: 768px) 100vw, 33vw"
+             />
+          </div>
+          
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10" />
           
           <div className="relative z-20 text-white">
             <div className="bg-white/20 backdrop-blur-sm w-fit p-3 rounded-full mb-4">
@@ -53,9 +74,18 @@ export default function BrandBento() {
 
         {/* ITEM 3: Exclusividade (Caixa Pequena Inferior) */}
         <div className="group relative overflow-hidden rounded-sm bg-hooke-900 p-6 border border-hooke-900 flex flex-col justify-end transition-all hover:shadow-xl">
-          {/* Imagem: Maverick Vermelha */}
-          <div className="absolute inset-0 bg-[url('/images/produtos/camiseta-vintage-maverik-vermelha-1.jpg')] bg-cover bg-center transition-transform duration-700 group-hover:scale-105 opacity-70" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+          
+           <div className="absolute inset-0 w-full h-full group-hover:scale-105 transition-transform duration-700 opacity-70">
+             <Image 
+               src="/images/produtos/camiseta-vintage-maverik-vermelha-1.jpg" 
+               alt="Exclusividade"
+               fill
+               className="object-cover object-center"
+               sizes="(max-width: 768px) 100vw, 33vw"
+             />
+          </div>
+          
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-10" />
           
           <div className="relative z-20 text-white">
             <div className="bg-white/20 backdrop-blur-sm w-fit p-3 rounded-full mb-4">
