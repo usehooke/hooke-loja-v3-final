@@ -1,7 +1,7 @@
 // components/shop/ProductCard.tsx
 import { Product } from "@/types";
 import Image from "next/image";
-import { Link } from 'next-view-transitions';
+import { Link } from 'next-view-transitions'; // Mantendo sua transição suave
 import QuickShareButton from "./QuickShareButton";
 import { ShoppingBag, Star, Heart } from "lucide-react";
 
@@ -10,7 +10,7 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
-  // Lógica de Parcelamento (Tech)
+  // Lógica Tech: Calcula a parcela automaticamente
   const parcelas = 3;
   const valorParcela = (product.price / parcelas).toFixed(2).replace('.', ',');
   const precoFormatado = product.price.toFixed(2).replace('.', ',');
@@ -53,11 +53,11 @@ export default function ProductCard({ product }: ProductCardProps) {
       {/* --- 2. BOTÕES DE AÇÃO SUPERIOR --- */}
       <div className="absolute top-3 right-3 z-30 flex flex-col gap-2">
          {/* Botão de Share (Original) */}
-        <div className="bg-white/10 backdrop-blur-md rounded-full p-1 text-white hover:bg-white hover:text-hooke-900 transition-colors">
+        <div className="bg-white/10 backdrop-blur-md rounded-full p-1 text-white hover:bg-white hover:text-hooke-900 transition-colors shadow-sm">
            <QuickShareButton slug={product.slug} />
         </div>
         {/* Botão Favorito (Visual) */}
-        <button className="p-2 rounded-full bg-white/10 backdrop-blur-md text-white hover:bg-white hover:text-red-500 transition-colors">
+        <button className="p-2 rounded-full bg-white/10 backdrop-blur-md text-white hover:bg-white hover:text-red-500 transition-colors shadow-sm">
           <Heart size={18} />
         </button>
       </div>
@@ -65,12 +65,12 @@ export default function ProductCard({ product }: ProductCardProps) {
       {/* Badge de Lançamento/Destaque */}
       <div className="absolute top-3 left-3 z-20 flex flex-col gap-1">
         {product.isNew && (
-            <span className="bg-hooke-900 text-white text-[10px] font-bold px-2 py-1 uppercase tracking-widest shadow-lg">
+            <span className="bg-hooke-900 text-white text-[10px] font-bold px-2 py-1 uppercase tracking-widest shadow-lg rounded-sm">
               Novo
             </span>
         )}
         {product.featured && (
-            <span className="bg-green-500 text-white text-[10px] font-bold px-2 py-1 uppercase tracking-widest shadow-lg animate-pulse">
+            <span className="bg-green-500 text-white text-[10px] font-bold px-2 py-1 uppercase tracking-widest shadow-lg animate-pulse rounded-sm">
               Destaque
             </span>
         )}
@@ -92,7 +92,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         </div>
 
         {/* Nome do Produto */}
-        <h3 className="text-white font-bold text-base leading-tight mb-1 drop-shadow-md truncate pr-4">
+        <h3 className="text-white font-bold text-base leading-tight mb-1 drop-shadow-md truncate pr-4 uppercase tracking-wide">
           {product.name}
         </h3>
 
