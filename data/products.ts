@@ -2,7 +2,52 @@
 import { Product } from "@/types";
 
 export const products: Product[] = [
-  // 1. [DESTAQUE HERO] Fusca Preto (Camiseta)
+  // --- 1. [DESTAQUE HERO] LANÇAMENTO: KIT 3 OVERSIZED ---
+  // Este aparece no Banner Gigante da Esquerda
+  {
+    id: "kit-3-oversized-premium",
+    name: "Kit 3 Camisetas Oversized Premium",
+    slug: "kit-3-camisetas-oversized-premium",
+    price: 135.00,
+    featured: true, // TRUE = Hero Principal
+    isNew: true,    // Tag "Lançamento"
+    description: "O melhor custo-benefício. Leve 3 peças da nossa modelagem Oversized exclusiva. Tecido encorpado, gola estruturada e caimento streetwear perfeito.",
+    // Capa: Preta
+    imageUrl: "/produtos/camiseta-oversized-preta-premium-hooke-1.avif",
+    images: [
+      "/produtos/camiseta-oversized-preta-premium-hooke-1.avif",
+      "/produtos/camiseta-oversized-offwhite-premium-hooke-1.avif",
+      "/produtos/camiseta-oversized-verde-premium-hooke-1.avif",
+      "/produtos/camiseta-oversized-azul-premium-hooke-1.avif"
+    ],
+    sizes: ["P", "M", "G", "GG", "XG"],
+    category: "Kits",
+    details: { fabric: "Algodão Premium Encorpado", model: "Oversized Streetwear", wash: "Amaciada com Silicone" }
+  },
+
+  // --- 2. [DESTAQUE HERO] Oversized Preta Avulsa ---
+  // Este aparece no bloco "Mais Vendido" (Direita Cima)
+  {
+    id: "oversized-preta",
+    name: "Camiseta Oversized Black",
+    slug: "camiseta-oversized-preta-premium",
+    price: 69.90,
+    featured: true,
+    isNew: true,
+    description: "A peça chave do estilo urbano. Modelagem ampla e estruturada. Caimento perfeito no corpo.",
+    // Usando a foto lifestyle (modelo de corpo inteiro/meio corpo) como capa
+    imageUrl: "/produtos/camiseta-oversized-preta-premium-hooke-3.avif",
+    images: [
+       "/produtos/camiseta-oversized-preta-premium-hooke-3.avif",
+       "/produtos/camiseta-oversized-preta-premium-hooke-1.avif"
+    ],
+    sizes: ["P", "M", "G", "GG", "XG"],
+    category: "Oversized",
+    details: { fabric: "Algodão Premium", model: "Oversized", wash: "Amaciada" }
+  },
+
+  // --- 3. [DESTAQUE HERO] O Clássico Fusca ---
+  // Este aparece no bloco "Clássico" (Direita Baixo)
   {
     id: "fusca-preta",
     name: "Camiseta Vintage Beetle Black",
@@ -21,13 +66,29 @@ export const products: Product[] = [
     details: { fabric: "Algodão Egípcio", model: "Slim Comfort", wash: "Pré-Encolhida" }
   },
 
-  // 2. [DESTAQUE HERO] Regata Marrom (Regata) -> MISTURADO
+  // --- 4. Oversized Off-White (Avulsa) ---
+  {
+    id: "oversized-offwhite",
+    name: "Camiseta Oversized Off-White",
+    slug: "camiseta-oversized-offwhite-premium",
+    price: 69.90,
+    featured: false,
+    isNew: true,
+    description: "Tonalidade natural que traz sofisticação para o streetwear.",
+    imageUrl: "/produtos/camiseta-oversized-offwhite-premium-hooke-1.avif",
+    images: ["/produtos/camiseta-oversized-offwhite-premium-hooke-1.avif"],
+    sizes: ["P", "M", "G", "GG", "XG"],
+    category: "Oversized",
+    details: { fabric: "Algodão Premium", model: "Oversized", wash: "Amaciada" }
+  },
+
+  // --- 5. Regata Marrom (Anteriormente destaque) ---
   {
     id: "regata-marrom",
     name: "Regata Canelada Coffee",
     slug: "regata-canelada-marrom",
     price: 99.90,
-    featured: true,
+    featured: false, // Tirei o destaque para dar espaço aos novos
     description: "Textura que diferencia. Malha canelada que se ajusta ao corpo sem apertar.",
     imageUrl: "/produtos/camiseta-Regada-canelada-marrom-1.jpg",
     images: [
@@ -40,13 +101,13 @@ export const products: Product[] = [
     details: { fabric: "Malha Canelada", model: "Machão", wash: "Stone Washed" }
   },
 
-  // 3. [DESTAQUE HERO] Maverick Vermelha (Camiseta) -> MISTURADO
+  // --- 6. Maverick Vermelha ---
   {
     id: "maverick-vermelha",
     name: "Camiseta Vintage Maverick Red",
     slug: "camiseta-vintage-maverick-vermelha",
     price: 159.90,
-    featured: true,
+    featured: false,
     description: "Velocidade e história. Homenagem ao lendário V8. Cor vibrante com estampa desgastada.",
     imageUrl: "/produtos/camiseta-vintage-maverik-vermelha-1.jpg",
     images: ["/produtos/camiseta-vintage-maverik-vermelha-1.jpg"],
@@ -55,7 +116,7 @@ export const products: Product[] = [
     details: { fabric: "Algodão Premium", model: "Regular", wash: "Amaciada" }
   },
 
-  // 4. Regata Verde (Regata) -> MISTURADO
+  // --- 7. Regata Verde ---
   {
     id: "regata-verde",
     name: "Regata Canelada Militar",
@@ -73,7 +134,7 @@ export const products: Product[] = [
     details: { fabric: "Malha Canelada", model: "Machão", wash: "Stone Washed" }
   },
 
-  // 5. Fusca Off-White (Camiseta) -> MISTURADO
+  // --- 8. Fusca Off-White ---
   {
     id: "fusca-offwhite",
     name: "Camiseta Vintage Beetle Off-White",
@@ -88,7 +149,7 @@ export const products: Product[] = [
     details: { fabric: "Algodão Egípcio", model: "Regular Fit", wash: "Pré-Encolhida" }
   },
 
-  // 6. Regata Lifestyle Bege (Lifestyle) -> MISTURADO
+  // --- 9. Regata Lifestyle Bege ---
   {
     id: "regata-lifestyle-bege",
     name: "Regata Lifestyle Bege",
@@ -103,7 +164,7 @@ export const products: Product[] = [
     details: { fabric: "Algodão BCI", model: "Oversized", wash: "Tingimento Ecológico" }
   },
 
-  // 7. Fusca Bordô (Camiseta) -> MISTURADO
+  // --- 10. Fusca Bordô ---
   {
     id: "fusca-bordo",
     name: "Camiseta Vintage Beetle Bordô",
@@ -118,7 +179,7 @@ export const products: Product[] = [
     details: { fabric: "Algodão Egípcio", model: "Slim Comfort", wash: "Amaciada" }
   },
 
-  // 8. Regata Areia (Regata) -> MISTURADO
+  // --- 11. Regata Areia ---
   {
     id: "regata-areia",
     name: "Regata Canelada Sand",
@@ -136,7 +197,7 @@ export const products: Product[] = [
     details: { fabric: "Malha Canelada", model: "Machão", wash: "Stone Washed" }
   },
 
-  // 9. Kombi (Camiseta)
+  // --- 12. Kombi ---
   {
     id: "kombi-offwhite",
     name: "Camiseta Vintage Kombi",
