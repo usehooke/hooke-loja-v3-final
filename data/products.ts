@@ -90,11 +90,11 @@ export const products: Product[] = [
     price: 99.90,
     featured: false, // Tirei o destaque para dar espaço aos novos
     description: "Textura que diferencia. Malha canelada que se ajusta ao corpo sem apertar.",
-    imageUrl: "/produtos/camiseta-Regada-canelada-marrom-1.jpg",
+    imageUrl: "/produtos/camiseta-Regata-canelada-marrom-1.jpg",
     images: [
-      "/produtos/camiseta-Regada-canelada-marrom-1.jpg",
-      "/produtos/camiseta-Regada-canelada-marrom-2.jpg",
-      "/produtos/camiseta-Regada-canelada-marrom-3.jpg"
+      "/produtos/camiseta-Regata-canelada-marrom-1.jpg",
+      "/produtos/camiseta-Regata-canelada-marrom-2.jpg",
+      "/produtos/camiseta-Regata-canelada-marrom-3.jpg"
     ],
     sizes: ["P", "M", "G", "GG"],
     category: "Regatas",
@@ -124,10 +124,10 @@ export const products: Product[] = [
     price: 99.90,
     featured: false,
     description: "Estilo militar urbano. Fresca, leve e com caimento impecável para o verão.",
-    imageUrl: "/produtos/camiseta-Regada-canelada-verde-1.jpg",
+    imageUrl: "/produtos/camiseta-Regata-canelada-verde-1.jpg",
     images: [
-      "/produtos/camiseta-Regada-canelada-verde-1.jpg",
-      "/produtos/camiseta-Regada-canelada-verde-2.jpg"
+      "/produtos/camiseta-Regata-canelada-verde-1.jpg",
+      "/produtos/camiseta-Regata-canelada-verde-2.jpg"
     ],
     sizes: ["P", "M", "G", "GG"],
     category: "Regatas",
@@ -187,10 +187,10 @@ export const products: Product[] = [
     price: 99.90,
     featured: false,
     description: "Tons terrosos são essenciais. Uma peça neutra que combina com bermudas de qualquer cor.",
-    imageUrl: "/produtos/camiseta-Regada-canelada-areia-1.jpg",
+    imageUrl: "/produtos/camiseta-Regata-canelada-areia-1.jpg",
     images: [
-      "/produtos/camiseta-Regada-canelada-areia-1.jpg",
-      "/produtos/camiseta-Regada-canelada-areia-2.jpg"
+      "/produtos/camiseta-Regata-canelada-areia-1.jpg",
+      "/produtos/camiseta-Regata-canelada-areia-2.jpg"
     ],
     sizes: ["P", "M", "G", "GG"],
     category: "Regatas",

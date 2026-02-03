@@ -9,7 +9,7 @@ export interface Product {
   secondaryImageUrl?: string;
   images?: string[]; // Adicionando URLs de imagens da galeria
   sizes: string[];
-  category: 'Vintage' | 'Regatas' | 'Lifestyle' | 'camisetas-lisas' | 'camisetas-estampadas' | 'acessorios';
+  category: 'Vintage' | 'Regatas' | 'Lifestyle' | 'camisetas-lisas' | 'camisetas-estampadas' | 'acessorios' | 'Kits' | 'Oversized';
   details?: {
     fabric: string;
     model: string;
