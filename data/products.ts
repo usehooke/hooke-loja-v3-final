@@ -13,7 +13,7 @@ export const products: Product[] = [
     isNew: true,    // Tag "Lançamento"
     description: "O melhor custo-benefício. Leve 3 peças da nossa modelagem Oversized exclusiva. Tecido encorpado, gola estruturada e caimento streetwear perfeito.",
     // Capa: Preta
-    imageUrl: "/produtos/camiseta-oversized-preta-premium-hooke-1.avif",
+    imageUrl: "/produtos/camiseta-oversized-preta-premium-hooke-3.avif",
     images: [
       "/produtos/camiseta-oversized-preta-premium-hooke-1.avif",
       "/produtos/camiseta-oversized-offwhite-premium-hooke-1.avif",
