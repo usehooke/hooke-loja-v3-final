@@ -1,7 +1,7 @@
 // components/shop/ProductCard.tsx
 import { Product } from "@/types";
 import Image from "next/image";
-import { Link } from 'next-view-transitions'; // Mantendo sua transição suave
+import Link from 'next/link';
 import QuickShareButton from "./QuickShareButton";
 import { ShoppingBag, Star, Heart } from "lucide-react";
 

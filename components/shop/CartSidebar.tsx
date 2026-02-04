@@ -5,8 +5,11 @@ import { useCartStore } from "@/store/cart-store";
 import { X, Trash2, ShoppingBag, MessageCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export default function CartSidebar() {
+  const [isMounted, setIsMounted] = useState(false);
+
   // Pegamos tudo que precisamos da Store de forma reativa
   const { items, removeItem, isOpen, closeCart } = useCartStore(state => ({
     items: state.items,
@@ -21,6 +24,11 @@ export default function CartSidebar() {
     style: "currency",
     currency: "BRL",
   });
+
+  // Efeito para garantir que o componente só renderize no cliente
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const handleCheckout = () => {
     const phoneNumber = "5511975902528"; // SEU NÚMERO AQUI
@@ -37,7 +45,9 @@ export default function CartSidebar() {
     window.open(link, "_blank");
   };
 
-  if (!isOpen) return null;
+  // Se não estiver montado ou se o carrinho estiver fechado, não renderiza nada.
+  // Isso evita o erro de hidratação.
+  if (!isMounted || !isOpen) return null;
 
   return (
     <div className="fixed inset-0 z-[999] flex justify-end">

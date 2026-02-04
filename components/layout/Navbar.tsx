@@ -1,7 +1,7 @@
 // components/layout/Navbar.tsx
 "use client";
 
-import { Link } from 'next-view-transitions';
+import Link from 'next/link';
 import { Menu, Link2, ShoppingBag, X } from "lucide-react";
 import { useState } from "react";
 import { useCartStore } from "@/store/cart-store";

@@ -8,9 +8,6 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from '@vercel/analytics/react';
 import { GoogleAnalytics } from '@next/third-parties/google';
 
-// Importação para Transições de Página Fluidas
-import { ViewTransitions } from 'next-view-transitions';
-
 // Importações dos Componentes de Layout Globais
 import TopBar from "@/components/layout/TopBar";
 import Navbar from "@/components/layout/Navbar";
@@ -78,7 +75,7 @@ export default function RootLayout({
     <html lang="pt-BR" className={inter.variable}>
       <body className="font-sans antialiased bg-hooke-50 text-hooke-900 flex flex-col min-h-screen">
 
-        <ViewTransitions>
+        
           <TopBar />
           <Navbar />
           
@@ -96,7 +93,7 @@ export default function RootLayout({
           
           <Toaster position="top-center" />
           
-        </ViewTransitions>
+        
 
         <SpeedInsights />
         <Analytics />
