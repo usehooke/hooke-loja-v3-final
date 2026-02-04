@@ -2,7 +2,6 @@
 import { Product } from "@/types";
 import Image from "next/image";
 import Link from 'next/link';
-import QuickShareButton from "./QuickShareButton";
 import { ShoppingBag, Star, Heart } from "lucide-react";
 
 interface ProductCardProps {
@@ -39,10 +38,6 @@ export default function ProductCard({ product }: ProductCardProps) {
 
       {/* --- 2. BOTÕES DE AÇÃO SUPERIOR --- */}
       <div className="absolute top-3 right-3 z-30 flex flex-col gap-2">
-         {/* Botão de Share (Original) */}
-        <div className="bg-white/10 backdrop-blur-md rounded-full p-1 text-white hover:bg-white hover:text-hooke-900 transition-colors shadow-sm">
-           <QuickShareButton slug={product.slug} />
-        </div>
         {/* Botão Favorito (Visual) */}
         <button className="p-2 rounded-full bg-white/10 backdrop-blur-md text-white hover:bg-white hover:text-red-500 transition-colors shadow-sm">
           <Heart size={18} />
