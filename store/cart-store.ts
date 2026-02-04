@@ -90,12 +90,10 @@ export const useCartStore = create<CartState>()(
 
       // TOTAIS
       getTotalItems: () => {
-        if (typeof window === 'undefined') return 0;
         return get().items.reduce((total, item) => total + item.quantity, 0);
       },
 
       getSubTotal: () => {
-         if (typeof window === 'undefined') return 0;
         return get().items.reduce(
           (total, item) => total + item.price * item.quantity,
           0
@@ -105,7 +103,6 @@ export const useCartStore = create<CartState>()(
     {
       name: 'hooke-cart-storage',
       storage: createJSONStorage(() => localStorage),
-      skipHydration: true,
     }
   )
 );

@@ -34,8 +34,8 @@ export default function AboutPage() {
 
             <div className="border-l-4 border-hooke-900 pl-6 py-2 mt-8">
               <p className="text-xl font-medium text-hooke-900 italic">
-                "Eu sou a cara da minha marca porque uso, testo e aprovo cada peça. 
-                A Hooke é a extensão do meu estilo de vida."
+                &quot;Eu sou a cara da minha marca porque uso, testo e aprovo cada peça. 
+                A Hooke é a extensão do meu estilo de vida.&quot;
               </p>
               <span className="block mt-4 text-sm font-bold uppercase tracking-widest text-hooke-500">
                 — Fundador, Hooke

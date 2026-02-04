@@ -4,17 +4,18 @@
 import { useCartStore } from "@/store/cart-store";
 import { X, Trash2, ShoppingBag, MessageCircle } from "lucide-react";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import Link from "next/link";
 
 export default function CartSidebar() {
-  // Pegamos tudo que precisamos da Store
-  const { items, removeItem, isOpen, closeCart, getSubTotal } = useCartStore();
-  const [mounted, setMounted] = useState(false);
+  // Pegamos tudo que precisamos da Store de forma reativa
+  const { items, removeItem, isOpen, closeCart } = useCartStore(state => ({
+    items: state.items,
+    removeItem: state.removeItem,
+    isOpen: state.isOpen,
+    closeCart: state.closeCart,
+  }));
 
-  useEffect(() => setMounted(true), []);
-  if (!mounted) return null;
-
-  const total = getSubTotal();
+  const total = items.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
   const formatter = new Intl.NumberFormat("pt-BR", {
     style: "currency",
@@ -22,7 +23,7 @@ export default function CartSidebar() {
   });
 
   const handleCheckout = () => {
-    const phoneNumber = "5511999999999"; // SEU NÚMERO AQUI
+    const phoneNumber = "5511975902528"; // SEU NÚMERO AQUI
     
     let message = "*NOVO PEDIDO HOOKE* 🛒\n\n";
     items.forEach((item) => {
@@ -69,9 +70,9 @@ export default function CartSidebar() {
             <div className="h-full flex flex-col items-center justify-center text-center text-hooke-400">
               <ShoppingBag className="w-16 h-16 mb-4 opacity-10" />
               <p className="font-medium">Sua sacola está vazia.</p>
-              <button onClick={closeCart} className="mt-4 text-hooke-900 font-bold underline text-sm hover:text-hooke-600">
+              <Link href="/" onClick={closeCart} className="mt-4 text-hooke-900 font-bold underline text-sm hover:text-hooke-600">
                 Ver Coleção
-              </button>
+              </Link>
             </div>
           ) : (
             items.map((item) => (
@@ -83,6 +84,7 @@ export default function CartSidebar() {
                      alt={item.name} 
                      fill 
                      className="object-cover"
+                     sizes="(max-width: 768px) 20vw, 80px"
                    />
                 </div>
                 

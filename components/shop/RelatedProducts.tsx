@@ -1,4 +1,5 @@
 // components/shop/RelatedProducts.tsx
+import Link from "next/link";
 import { products } from "@/data/products";
 import ProductCard from "./ProductCard";
 
@@ -22,9 +23,9 @@ export default function RelatedProducts({ currentSlug }: RelatedProductsProps) {
         <h2 className="text-xl md:text-2xl font-bold text-hooke-900 uppercase tracking-wider">
           Você também pode curtir
         </h2>
-        <a href="/" className="text-sm font-medium text-hooke-500 hover:text-hooke-900 underline-offset-4 hover:underline hidden sm:block">
+        <Link href="/" className="text-sm font-medium text-hooke-500 hover:text-hooke-900 underline-offset-4 hover:underline hidden sm:block">
           Ver tudo
-        </a>
+        </Link>
       </div>
 
       {/* Grid de Produtos Relacionados */}
@@ -36,9 +37,9 @@ export default function RelatedProducts({ currentSlug }: RelatedProductsProps) {
       
       {/* Botão ver tudo mobile */}
       <div className="mt-8 text-center sm:hidden">
-         <a href="/" className="inline-block px-6 py-3 border border-hooke-200 text-sm font-bold uppercase tracking-wider text-hooke-900 hover:bg-hooke-50 transition-colors">
+         <Link href="/" className="inline-block px-6 py-3 border border-hooke-200 text-sm font-bold uppercase tracking-wider text-hooke-900 hover:bg-hooke-50 transition-colors">
             Ver Coleção Completa
-         </a>
+         </Link>
       </div>
     </section>
   );
