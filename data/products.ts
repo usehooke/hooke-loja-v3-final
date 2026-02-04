@@ -32,7 +32,7 @@ export const products: Product[] = [
     name: "Camiseta Oversized Black",
     slug: "camiseta-oversized-preta-premium",
     price: 69.90,
-    featured: true,
+    featured: false,
     isNew: true,
     description: "A peça chave do estilo urbano. Modelagem ampla e estruturada. Caimento perfeito no corpo.",
     // Usando a foto lifestyle (modelo de corpo inteiro/meio corpo) como capa
@@ -122,7 +122,7 @@ export const products: Product[] = [
     name: "Regata Canelada Militar",
     slug: "regata-canelada-verde",
     price: 99.90,
-    featured: false,
+    featured: true,
     description: "Estilo militar urbano. Fresca, leve e com caimento impecável para o verão.",
     imageUrl: "/produtos/camiseta-Regata-canelada-verde-1.jpg",
     images: [
