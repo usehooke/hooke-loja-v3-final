@@ -29,22 +29,9 @@ export default function ProductCard({ product }: ProductCardProps) {
           fill
           // Mantendo a transição de visualização suave entre páginas
           style={{ viewTransitionName: `image-${product.slug}` } as React.CSSProperties}
-          className={`object-cover object-center transition-all duration-700 ${
-            product.secondaryImageUrl ? "group-hover:opacity-0" : "group-hover:scale-110"
-          }`}
+          className="object-cover object-center transition-all duration-700 group-hover:scale-110"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
-
-        {/* Imagem Secundária (se houver) */}
-        {product.secondaryImageUrl && (
-          <Image
-            src={product.secondaryImageUrl}
-            alt={`${product.name} vista secundária`}
-            fill
-            className="absolute inset-0 h-full w-full object-cover object-center opacity-0 transition-all duration-700 group-hover:opacity-100 group-hover:scale-110"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          />
-        )}
 
         {/* Gradiente Fundo para leitura do texto */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/10 to-transparent opacity-60 group-hover:opacity-80 transition-opacity" />
