@@ -23,7 +23,7 @@ export default function AddToCartSection({ product }: AddToCartSectionProps) {
     // 1. Validação: Obriga a escolher tamanho
     if (!selectedSize) {
       toast.error(
-        (t) => (
+        () => (
           <div style={{ textAlign: 'center' }}>
             <b>Ops! Escolha um tamanho.</b>
             <br />

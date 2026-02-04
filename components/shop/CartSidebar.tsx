@@ -27,6 +27,8 @@ export default function CartSidebar() {
 
   // Efeito para garantir que o componente só renderize no cliente
   useEffect(() => {
+    // A renderização em duas etapas é intencional para evitar o erro de hidratação (hydration mismatch)
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsMounted(true);
   }, []);
 

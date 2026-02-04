@@ -1,7 +1,7 @@
 // components/home/BentoHero.tsx
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Star, ShoppingBag, Zap, Percent } from "lucide-react";
+import { ArrowRight, Star, Zap, Percent } from "lucide-react";
 import { products } from "@/data/products";
 
 export default function BentoHero() {

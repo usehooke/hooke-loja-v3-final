@@ -1,5 +1,5 @@
 // src/components/ui/BrandMarquee.tsx
-import { Truck, CreditCard, RefreshCw, ShieldCheck } from "lucide-react";
+import { Truck, RefreshCw, ShieldCheck } from "lucide-react";
 
 export default function BrandMarquee() {
   const benefits = [

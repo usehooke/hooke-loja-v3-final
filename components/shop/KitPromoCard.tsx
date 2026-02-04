@@ -17,7 +17,6 @@ export default function KitPromoCard({ product }: KitPromoCardProps) {
   const totalSemDesconto = precoUnitario * qtdKit;
   const desconto = 0.15; // 15%
   const totalComDesconto = totalSemDesconto * (1 - desconto);
-  const economia = totalSemDesconto - totalComDesconto;
 
   return (
     <div className="mt-6 w-full rounded-sm border-2 border-green-600 bg-white overflow-hidden shadow-sm animate-in slide-in-from-bottom-2 duration-700">

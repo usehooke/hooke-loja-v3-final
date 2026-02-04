@@ -6,8 +6,6 @@ import Link from "next/link";
 import { Minus, Plus, ShoppingBag, Trash2, X } from "lucide-react";
 
 import {
-  Sheet,
-  SheetContent,
   SheetHeader,
   SheetTitle,
   SheetClose,

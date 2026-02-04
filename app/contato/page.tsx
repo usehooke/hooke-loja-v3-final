@@ -1,11 +1,10 @@
 // src/app/contato/page.tsx
 import Navbar from "@/components/layout/Navbar";
-import { Mail, MessageCircle, MapPin, Instagram, ArrowRight } from "lucide-react";
+import { MessageCircle, MapPin, Instagram, ArrowRight } from "lucide-react";
 
 export default function ContactPage() {
   
   const whatsappNumber = "5511999999999"; 
-  const email = "contato@usehooke.com.br";
   const instagram = "@use.hooke";
 
   return (

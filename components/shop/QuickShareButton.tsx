@@ -33,7 +33,7 @@ export default function QuickShareButton({ slug }: QuickShareButtonProps) {
     if (navigator.share) {
       try {
         await navigator.share(shareData);
-      } catch (err) {
+      } catch {
         console.log("Compartilhamento cancelado");
       }
     } else {

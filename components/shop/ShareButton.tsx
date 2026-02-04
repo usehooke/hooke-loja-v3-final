@@ -23,7 +23,7 @@ export default function ShareButton({ productName, productDescription }: ShareBu
     if (navigator.share) {
       try {
         await navigator.share(shareData);
-      } catch (err) {
+      } catch {
         console.log("Compartilhamento cancelado pelo usuário");
       }
     } else {
