@@ -25,25 +25,22 @@ export const products: Product[] = [
     details: { fabric: "Algodão Premium Encorpado", model: "Oversized Streetwear", wash: "Amaciada com Silicone" }
   },
 
-  // --- 2. [DESTAQUE HERO] Oversized Preta Avulsa ---
-  // Este aparece no bloco "Mais Vendido" (Direita Cima)
+  // --- 2. [DESTAQUE HERO] Regata Verde (OFERTA) ---
   {
-    id: "oversized-preta",
-    name: "Camiseta Oversized Black",
-    slug: "camiseta-oversized-preta-premium",
-    price: 69.90,
-    featured: false,
-    isNew: true,
-    description: "A peça chave do estilo urbano. Modelagem ampla e estruturada. Caimento perfeito no corpo.",
-    // Usando a foto lifestyle (modelo de corpo inteiro/meio corpo) como capa
-    imageUrl: "/produtos/camiseta-oversized-preta-premium-hooke-3.avif",
+    id: "regata-verde",
+    name: "Regata Canelada Militar",
+    slug: "regata-canelada-verde",
+    price: 99.90,
+    featured: true,
+    description: "Estilo militar urbano. Fresca, leve e com caimento impecável para o verão.",
+    imageUrl: "/produtos/camiseta-Regata-canelada-verde-1.jpg",
     images: [
-       "/produtos/camiseta-oversized-preta-premium-hooke-3.avif",
-       "/produtos/camiseta-oversized-preta-premium-hooke-1.avif"
+      "/produtos/camiseta-Regata-canelada-verde-1.jpg",
+      "/produtos/camiseta-Regata-canelada-verde-2.jpg"
     ],
-    sizes: ["P", "M", "G", "GG", "XG"],
-    category: "Oversized",
-    details: { fabric: "Algodão Premium", model: "Oversized", wash: "Amaciada" }
+    sizes: ["P", "M", "G", "GG"],
+    category: "Regatas",
+    details: { fabric: "Malha Canelada", model: "Machão", wash: "Stone Washed" }
   },
 
   // --- 3. [DESTAQUE HERO] O Clássico Fusca ---
@@ -66,7 +63,25 @@ export const products: Product[] = [
     details: { fabric: "Algodão Egípcio", model: "Slim Comfort", wash: "Pré-Encolhida" }
   },
 
-  // --- 4. Oversized Off-White (Avulsa) ---
+  // --- PRODUTOS REGULARES ---
+
+  {
+    id: "oversized-preta",
+    name: "Camiseta Oversized Black",
+    slug: "camiseta-oversized-preta-premium",
+    price: 69.90,
+    featured: false,
+    isNew: true,
+    description: "A peça chave do estilo urbano. Modelagem ampla e estruturada. Caimento perfeito no corpo.",
+    imageUrl: "/produtos/camiseta-oversized-preta-premium-hooke-3.avif",
+    images: [
+       "/produtos/camiseta-oversized-preta-premium-hooke-3.avif",
+       "/produtos/camiseta-oversized-preta-premium-hooke-1.avif"
+    ],
+    sizes: ["P", "M", "G", "GG", "XG"],
+    category: "Oversized",
+    details: { fabric: "Algodão Premium", model: "Oversized", wash: "Amaciada" }
+  },
   {
     id: "oversized-offwhite",
     name: "Camiseta Oversized Off-White",
@@ -81,14 +96,12 @@ export const products: Product[] = [
     category: "Oversized",
     details: { fabric: "Algodão Premium", model: "Oversized", wash: "Amaciada" }
   },
-
-  // --- 5. Regata Marrom (Anteriormente destaque) ---
   {
     id: "regata-marrom",
     name: "Regata Canelada Coffee",
     slug: "regata-canelada-marrom",
     price: 99.90,
-    featured: false, // Tirei o destaque para dar espaço aos novos
+    featured: false,
     description: "Textura que diferencia. Malha canelada que se ajusta ao corpo sem apertar.",
     imageUrl: "/produtos/camiseta-Regata-canelada-marrom-1.jpg",
     images: [
@@ -100,8 +113,6 @@ export const products: Product[] = [
     category: "Regatas",
     details: { fabric: "Malha Canelada", model: "Machão", wash: "Stone Washed" }
   },
-
-  // --- 6. Maverick Vermelha ---
   {
     id: "maverick-vermelha",
     name: "Camiseta Vintage Maverick Red",
@@ -115,26 +126,6 @@ export const products: Product[] = [
     category: "Vintage",
     details: { fabric: "Algodão Premium", model: "Regular", wash: "Amaciada" }
   },
-
-  // --- 7. Regata Verde ---
-  {
-    id: "regata-verde",
-    name: "Regata Canelada Militar",
-    slug: "regata-canelada-verde",
-    price: 99.90,
-    featured: true,
-    description: "Estilo militar urbano. Fresca, leve e com caimento impecável para o verão.",
-    imageUrl: "/produtos/camiseta-Regata-canelada-verde-1.jpg",
-    images: [
-      "/produtos/camiseta-Regata-canelada-verde-1.jpg",
-      "/produtos/camiseta-Regata-canelada-verde-2.jpg"
-    ],
-    sizes: ["P", "M", "G", "GG"],
-    category: "Regatas",
-    details: { fabric: "Malha Canelada", model: "Machão", wash: "Stone Washed" }
-  },
-
-  // --- 8. Fusca Off-White ---
   {
     id: "fusca-offwhite",
     name: "Camiseta Vintage Beetle Off-White",
@@ -148,8 +139,6 @@ export const products: Product[] = [
     category: "Vintage",
     details: { fabric: "Algodão Egípcio", model: "Regular Fit", wash: "Pré-Encolhida" }
   },
-
-  // --- 9. Regata Lifestyle Bege ---
   {
     id: "regata-lifestyle-bege",
     name: "Regata Lifestyle Bege",
@@ -163,8 +152,6 @@ export const products: Product[] = [
     category: "Lifestyle",
     details: { fabric: "Algodão BCI", model: "Oversized", wash: "Tingimento Ecológico" }
   },
-
-  // --- 10. Fusca Bordô ---
   {
     id: "fusca-bordo",
     name: "Camiseta Vintage Beetle Bordô",
@@ -178,8 +165,6 @@ export const products: Product[] = [
     category: "Vintage",
     details: { fabric: "Algodão Egípcio", model: "Slim Comfort", wash: "Amaciada" }
   },
-
-  // --- 11. Regata Areia ---
   {
     id: "regata-areia",
     name: "Regata Canelada Sand",
@@ -196,8 +181,6 @@ export const products: Product[] = [
     category: "Regatas",
     details: { fabric: "Malha Canelada", model: "Machão", wash: "Stone Washed" }
   },
-
-  // --- 12. Kombi ---
   {
     id: "kombi-offwhite",
     name: "Camiseta Vintage Kombi",
