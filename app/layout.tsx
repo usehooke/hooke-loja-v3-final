@@ -15,8 +15,8 @@ import Footer from "@/components/layout/Footer";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
 import { Toaster } from "react-hot-toast";
 
-// IMPORTAÇÃO NOVA: O Carrinho Lateral
-import CartSidebar from "@/components/shop/CartSidebar";
+// IMPORTAÇÃO NOVA: O Carrinho Lateral (dinâmico)
+import DynamicCart from "@/components/layout/DynamicCart";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -81,7 +81,7 @@ export default function RootLayout({
           
           {/* --- AQUI FICA O CARRINHO LATERAL --- */}
           {/* Ele é fixo, então pode ficar em qualquer lugar, mas aqui é organizado */}
-          <CartSidebar />
+          <DynamicCart />
           {/* ------------------------------------ */}
 
           <main className="flex-grow w-full">

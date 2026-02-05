@@ -10,13 +10,13 @@ import { useEffect, useState } from "react";
 export default function CartSidebar() {
   const [isMounted, setIsMounted] = useState(false);
 
-  // Pegamos tudo que precisamos da Store de forma reativa
-  const { items, removeItem, isOpen, closeCart } = useCartStore(state => ({
-    items: state.items,
-    removeItem: state.removeItem,
-    isOpen: state.isOpen,
-    closeCart: state.closeCart,
-  }));
+  // --- CORREÇÃO DO BUG DE LOOP INFINITO ---
+  // Pegamos cada item separadamente para garantir estabilidade no React
+  const items = useCartStore((state) => state.items);
+  const removeItem = useCartStore((state) => state.removeItem);
+  const isOpen = useCartStore((state) => state.isOpen);
+  const closeCart = useCartStore((state) => state.closeCart);
+  // ----------------------------------------
 
   const total = items.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
@@ -27,7 +27,7 @@ export default function CartSidebar() {
 
   // Efeito para garantir que o componente só renderize no cliente
   useEffect(() => {
-    // A renderização em duas etapas é intencional para evitar o erro de hidratação (hydration mismatch)
+    // A renderização em duas etapas é intencional para evitar o erro de hidratação
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsMounted(true);
   }, []);
@@ -48,7 +48,6 @@ export default function CartSidebar() {
   };
 
   // Se não estiver montado ou se o carrinho estiver fechado, não renderiza nada.
-  // Isso evita o erro de hidratação.
   if (!isMounted || !isOpen) return null;
 
   return (
