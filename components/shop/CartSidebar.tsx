@@ -5,7 +5,7 @@ import { useCartStore } from "@/store/cart-store";
 import { X, Trash2, ShoppingBag, MessageCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 
 // Formatter criado FORA do componente para evitar recalcular a cada render
 const formatter = new Intl.NumberFormat("pt-BR", {
@@ -16,40 +16,41 @@ const formatter = new Intl.NumberFormat("pt-BR", {
 export default function CartSidebar() {
   const [isMounted, setIsMounted] = useState(false);
 
-  // --- CORREÇÃO DO BUG DE LOOP INFINITO ---
-  // Pegamos cada item separadamente para garantir estabilidade no React
+  // Pegar o estado do Zustand (sem dependencies que causam loops)
   const items = useCartStore((state) => state.items);
   const removeItem = useCartStore((state) => state.removeItem);
   const isOpen = useCartStore((state) => state.isOpen);
   const closeCart = useCartStore((state) => state.closeCart);
   const getSubTotal = useCartStore((state) => state.getSubTotal);
-  // ----------------------------------------
-
-  // Calcular total de forma eficiente
-  const total = getSubTotal();
 
   // Efeito para garantir que o componente só renderize no cliente (hidratação)
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
-  const handleCheckout = useCallback(() => {
+  // Função de checkout - não usar em dependencies para evitar loops
+  const handleCheckout = () => {
     const phoneNumber = "5511975902528"; // SEU NÚMERO AQUI
+    const currentItems = useCartStore.getState().items; // Pegar estado atual diretamente
+    const currentTotal = useCartStore.getState().getSubTotal();
     
     let message = "*NOVO PEDIDO HOOKE* 🛒\n\n";
-    items.forEach((item) => {
+    currentItems.forEach((item) => {
       message += `▪️ ${item.quantity}x ${item.name} | Tam: ${item.selectedSize}\n`;
       message += `   Ref: R$ ${item.price} cada\n`;
     });
-    message += `\n*TOTAL DO PEDIDO: ${formatter.format(total)}*`;
+    message += `\n*TOTAL DO PEDIDO: ${formatter.format(currentTotal)}*`;
     message += `\n\nOlá! Gostaria de finalizar a compra e combinar o pagamento/entrega.`;
 
     const link = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(link, "_blank");
-  }, [items, total]);
+  };
 
-  // Se não estiver montado ou se o carrinho estiver fechado, não renderiza nada.
-  if (!isMounted || !isOpen) return null;
+  // Não renderizar no servidor, apenas no cliente
+  if (!isMounted) return null;
+
+  // Se o carrinho não está aberto, renderizer portal invisível (evita hidratação)
+  if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 z-[999] flex justify-end">
@@ -132,7 +133,7 @@ export default function CartSidebar() {
           <div className="p-6 bg-hooke-50 border-t border-hooke-100">
             <div className="flex justify-between mb-4 text-hooke-900">
               <span className="text-sm uppercase tracking-wider font-medium">Subtotal</span>
-              <span className="text-xl font-bold">{formatter.format(total)}</span>
+              <span className="text-xl font-bold">{formatter.format(getSubTotal())}</span>
             </div>
             
             <button 
