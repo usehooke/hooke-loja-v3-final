@@ -29,6 +29,20 @@ interface CartState {
   getSubTotal: () => number;
 }
 
+// Criar storage com validação para evitar corrupção
+const cartStorage = createJSONStorage(() => {
+  // Apenas cliente, nunca servidor
+  if (typeof window === 'undefined') {
+    return {
+      getItem: () => null,
+      setItem: () => {},
+      removeItem: () => {},
+    };
+  }
+  
+  return localStorage;
+});
+
 export const useCartStore = create<CartState>()(
   persist(
     (set, get) => ({
@@ -86,7 +100,7 @@ export const useCartStore = create<CartState>()(
       },
 
       // LIMPAR TUDO
-      clearCart: () => set({ items: [] }),
+      clearCart: () => set({ items: [], isOpen: false }),
 
       // TOTAIS
       getTotalItems: () => {
@@ -102,7 +116,20 @@ export const useCartStore = create<CartState>()(
     }),
     {
       name: 'hooke-cart-storage',
-      storage: createJSONStorage(() => localStorage),
+      storage: cartStorage,
+      // Validar dados ao reidratar do storage
+      onRehydrateStorage: () => (state) => {
+        if (state) {
+          // Garantir que items é sempre um array
+          if (!Array.isArray(state.items)) {
+            state.items = [];
+          }
+          // Garantir que isOpen é sempre um booleano
+          if (typeof state.isOpen !== 'boolean') {
+            state.isOpen = false;
+          }
+        }
+      },
     }
   )
 );

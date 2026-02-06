@@ -5,7 +5,13 @@ import { useCartStore } from "@/store/cart-store";
 import { X, Trash2, ShoppingBag, MessageCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
+
+// Formatter criado FORA do componente para evitar recalcular a cada render
+const formatter = new Intl.NumberFormat("pt-BR", {
+  style: "currency",
+  currency: "BRL",
+});
 
 export default function CartSidebar() {
   const [isMounted, setIsMounted] = useState(false);
@@ -16,23 +22,18 @@ export default function CartSidebar() {
   const removeItem = useCartStore((state) => state.removeItem);
   const isOpen = useCartStore((state) => state.isOpen);
   const closeCart = useCartStore((state) => state.closeCart);
+  const getSubTotal = useCartStore((state) => state.getSubTotal);
   // ----------------------------------------
 
-  const total = items.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  // Calcular total de forma eficiente
+  const total = getSubTotal();
 
-  const formatter = new Intl.NumberFormat("pt-BR", {
-    style: "currency",
-    currency: "BRL",
-  });
-
-  // Efeito para garantir que o componente só renderize no cliente
+  // Efeito para garantir que o componente só renderize no cliente (hidratação)
   useEffect(() => {
-    // A renderização em duas etapas é intencional para evitar o erro de hidratação
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsMounted(true);
   }, []);
 
-  const handleCheckout = () => {
+  const handleCheckout = useCallback(() => {
     const phoneNumber = "5511975902528"; // SEU NÚMERO AQUI
     
     let message = "*NOVO PEDIDO HOOKE* 🛒\n\n";
@@ -45,7 +46,7 @@ export default function CartSidebar() {
 
     const link = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(link, "_blank");
-  };
+  }, [items, total]);
 
   // Se não estiver montado ou se o carrinho estiver fechado, não renderiza nada.
   if (!isMounted || !isOpen) return null;
