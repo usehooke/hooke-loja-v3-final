@@ -42,7 +42,6 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: '/icon.svg',
-    shortcut: '/favicon.ico',
   },
   openGraph: {
     title: "Hooke | Camisetas Premium e Moda Masculina",
