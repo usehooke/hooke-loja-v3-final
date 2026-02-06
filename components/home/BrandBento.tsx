@@ -21,8 +21,8 @@ export default function BrandBento() {
         {/* ITEM 1: Algodão (Caixa Grande) */}
         <div className="group relative overflow-hidden rounded-sm md:col-span-2 md:row-span-2 min-h-[300px] flex flex-col justify-end p-8 border border-hooke-200 transition-all hover:shadow-xl">
           <Image
-            src="/produtos/camiseta-canelada-marrom-1.jpg"
-            alt="Textura de tecido canelado marrom"
+            src="/produtos/camiseta-oversized-preta-premium-hooke-1.avif"
+            alt="Textura de tecido premium preta"
             fill
             className="object-cover transition-transform duration-700 group-hover:scale-105 opacity-60"
           />
@@ -42,8 +42,8 @@ export default function BrandBento() {
         {/* ITEM 2: Corte (Caixa Pequena Superior) */}
         <div className="group relative overflow-hidden rounded-sm p-6 border border-hooke-200 flex flex-col justify-end transition-all hover:shadow-xl min-h-[242px]">
           <Image
-            src="/produtos/camiseta-vintage-fusca-offwhite-1.jpg"
-            alt="Homem vestindo camiseta off-white com estampa de Fusca"
+            src="/produtos/camiseta-oversized-offwhite-premium-hooke-1.avif"
+            alt="Homem vestindo camiseta off-white com corte premium"
             fill
             className="object-cover object-top transition-transform duration-700 group-hover:scale-105 opacity-80"
           />
@@ -63,8 +63,8 @@ export default function BrandBento() {
         {/* ITEM 3: Exclusividade (Caixa Pequena Inferior) */}
         <div className="group relative overflow-hidden rounded-sm p-6 border border-hooke-900 flex flex-col justify-end transition-all hover:shadow-xl min-h-[242px]">
           <Image
-            src="/produtos/camiseta-vintage-maverik-vermelha-1.jpg"
-            alt="Camiseta vermelha com estampa de Maverick"
+            src="/produtos/camiseta-oversized-verde-premium-hooke-1.avif"
+            alt="Camiseta verde premium com exclusividade"
             fill
             className="object-cover transition-transform duration-700 group-hover:scale-105 opacity-70"
           />
