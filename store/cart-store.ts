@@ -2,51 +2,39 @@ import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import { Product } from '@/types';
 
-// Definimos o item do carrinho: Produto + Quantidade + Tamanho + ID Único
+// Definimos o item do carrinho
 export interface CartItem extends Product {
   quantity: number;
-  selectedSize: string; // O tamanho escolhido (P, M, G...)
-  cartItemId: string;   // ID único (Ex: "123-M") para diferenciar tamanhos diferentes do mesmo produto
+  selectedSize: string;
+  cartItemId: string;
 }
 
 interface CartState {
   items: CartItem[];
-  isOpen: boolean; // Estado para saber se a gaveta está aberta ou fechada
-
+  isOpen: boolean;
+  
   // Ações
-  addItem: (product: Product, size: string) => void; // Agora exige o tamanho!
+  addItem: (product: Product, size: string) => void;
   removeItem: (cartItemId: string) => void;
   updateQuantity: (cartItemId: string, quantity: number) => void;
   clearCart: () => void;
-  
-  // Controle da Gaveta
   openCart: () => void;
   closeCart: () => void;
   
-  // Getters
-  getTotalItems: () => number;
-  getSubTotal: () => number;
+  // Getters (Removi do store para evitar complexidade, usamos seletores diretos)
 }
-
-// Evitar SSR - só usar localStorage no cliente
-const isBrowser = typeof window !== 'undefined';
 
 export const useCartStore = create<CartState>()(
   persist(
     (set, get) => ({
       items: [],
-      isOpen: false, // Começa fechado
+      isOpen: false,
 
-      // ABRIR E FECHAR GAVETA
       openCart: () => set({ isOpen: true }),
       closeCart: () => set({ isOpen: false }),
 
-      // ADICIONAR ITEM (COM TAMANHO)
       addItem: (product: Product, size: string) => {
         const currentItems = get().items;
-        
-        // Criamos um ID único combinando o ID do produto e o tamanho
-        // Assim, Camiseta (M) é diferente de Camiseta (G)
         const uniqueId = `${product.id}-${size}`;
 
         const existingItemIndex = currentItems.findIndex(
@@ -54,30 +42,28 @@ export const useCartStore = create<CartState>()(
         );
 
         if (existingItemIndex > -1) {
-          // Se já existe esse produto COM ESSE TAMANHO, aumenta a quantidade
           const newItems = [...currentItems];
           newItems[existingItemIndex].quantity += 1;
-          set({ items: newItems, isOpen: true }); // Abre o carrinho ao adicionar
+          // Abre o carrinho ao adicionar
+          set({ items: newItems, isOpen: true });
         } else {
-          // Se é novo, adiciona à lista
           const newItem: CartItem = {
             ...product,
             quantity: 1,
             selectedSize: size,
             cartItemId: uniqueId,
           };
-          set({ items: [...currentItems, newItem], isOpen: true }); // Abre o carrinho ao adicionar
+          // Abre o carrinho ao adicionar
+          set({ items: [...currentItems, newItem], isOpen: true });
         }
       },
 
-      // REMOVER ITEM (Pelo ID Único)
       removeItem: (cartItemId: string) => {
         set({
           items: get().items.filter((item) => item.cartItemId !== cartItemId),
         });
       },
 
-      // ATUALIZAR QUANTIDADE
       updateQuantity: (cartItemId: string, quantity: number) => {
         if (quantity < 1) return;
         const currentItems = get().items;
@@ -87,47 +73,38 @@ export const useCartStore = create<CartState>()(
         set({ items: newItems });
       },
 
-      // LIMPAR TUDO
       clearCart: () => set({ items: [], isOpen: false }),
-
-      // TOTAIS
-      getTotalItems: () => {
-        return get().items.reduce((total, item) => total + item.quantity, 0);
-      },
-
-      getSubTotal: () => {
-        return get().items.reduce(
-          (total, item) => total + item.price * item.quantity,
-          0
-        );
-      },
     }),
     {
       name: 'hooke-cart-storage',
-      storage: isBrowser ? createJSONStorage(() => localStorage) : undefined,
-      skipHydration: false,
-      version: 1,
       
-      // Validar e migrar dados ao reidratar
-      migrate: (persistedState: any, version: number) => {
-        if (version === 0 || !persistedState) {
-          return {
-            items: [],
-            isOpen: false,
-          };
+      // Configuração segura para Next.js (evita erro no servidor)
+      storage: createJSONStorage(() => {
+        if (typeof window !== 'undefined') {
+            return localStorage;
         }
-        
-        // Versão 1: validação de tipo
         return {
-          items: Array.isArray(persistedState.items) ? persistedState.items : [],
-          isOpen: typeof persistedState.isOpen === 'boolean' ? persistedState.isOpen : false,
+            getItem: () => null,
+            setItem: () => {},
+            removeItem: () => {},
         };
-      },
+      }),
+      
+      skipHydration: true, // IMPORTANTE: Evita conflito inicial de hidratação
+
+      // A MÁGICA ESTÁ AQUI:
+      // Dizemos ao Zustand para salvar APENAS a lista de 'items'.
+      // Ignoramos 'isOpen' para que o carrinho sempre comece fechado.
+      partialize: (state) => ({ items: state.items }),
     }
   )
 );
 
-// Seletor memoizado para o Navbar - evita re-renders desnecessários
+// SELETORES (Use estes nos seus componentes)
 export const selectCartTotalItems = (state: CartState) => {
   return state.items.reduce((total, item) => total + item.quantity, 0);
+};
+
+export const selectCartSubTotal = (state: CartState) => {
+  return state.items.reduce((total, item) => total + item.price * item.quantity, 0);
 };
