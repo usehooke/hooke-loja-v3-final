@@ -47,10 +47,10 @@ export default function CartSidebar() {
   };
 
   // Não renderizar no servidor, apenas no cliente
-  if (!isMounted) return null;
-
-  // Se o carrinho não está aberto, renderizer portal invisível (evita hidratação)
-  if (!isOpen) return null;
+  // Usar displaynone ao invés de retornar null para evitar problemas de hidratação
+  if (!isMounted || !isOpen) {
+    return <div className="hidden" />; // Renderiza um div vazio ao invés de null
+  }
 
   return (
     <div className="fixed inset-0 z-[999] flex justify-end">

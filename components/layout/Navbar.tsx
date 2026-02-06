@@ -3,7 +3,7 @@
 
 import Link from 'next/link';
 import { Menu, Link2, ShoppingBag, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useCartStore } from "@/store/cart-store";
 
 export default function Navbar() {
@@ -11,8 +11,10 @@ export default function Navbar() {
 
   // Select state and actions from the store reactively
   const openCart = useCartStore((state) => state.openCart);
-  const items = useCartStore((state) => state.items);
-  const totalItems = items.reduce((total, item) => total + item.quantity, 0);
+  const getTotalItems = useCartStore((state) => state.getTotalItems);
+  
+  // Memoizar o cálculo do total para evitar re-renders desnecessários
+  const totalItems = useMemo(() => getTotalItems(), [getTotalItems]);
 
   return (
     <nav className="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-hooke-100">
