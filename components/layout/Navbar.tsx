@@ -3,16 +3,24 @@
 
 import Link from 'next/link';
 import { Menu, Link2, ShoppingBag, X } from "lucide-react";
-import { useState } from "react";
-import { useCartStore, selectCartTotalItems } from "@/store/cart-store";
+import { useState, useEffect } from "react"; // Adicionei useEffect
+import { useCartStore } from "@/store/cart-store"; // Simplifiquei a importação
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false); // Estado para controlar a montagem
 
-  // Select state and actions from the store
+  // Seletores
   const openCart = useCartStore((state) => state.openCart);
-  // Usar seletor memoizado - só re-renderiza se o total realmente mudar
-  const totalItems = useCartStore(selectCartTotalItems);
+  const items = useCartStore((state) => state.items);
+
+  // Efeito para confirmar que estamos no navegador
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Calculamos o total de forma segura
+  const totalItems = items.reduce((acc, item) => acc + item.quantity, 0);
 
   return (
     <nav className="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-hooke-100">
@@ -61,8 +69,8 @@ export default function Navbar() {
             >
               <ShoppingBag size={24} className="group-hover:scale-105 transition-transform" />
               
-              {/* Bolinha com número de itens */}
-              {totalItems > 0 && (
+              {/* Bolinha com número de itens (Só renderiza se montado) */}
+              {mounted && totalItems > 0 && (
                 <span className="absolute -top-1 -right-1 bg-hooke-900 text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full font-bold animate-in zoom-in border-2 border-white">
                   {totalItems}
                 </span>
