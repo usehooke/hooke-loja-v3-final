@@ -6,6 +6,7 @@ import { X, Trash2, ShoppingBag, MessageCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 
 // Formatter criado FORA do componente para evitar recalcular a cada render
 const formatter = new Intl.NumberFormat("pt-BR", {
@@ -14,24 +15,23 @@ const formatter = new Intl.NumberFormat("pt-BR", {
 });
 
 export default function CartSidebar() {
-  const [isMounted, setIsMounted] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
-  // Pegar o estado do Zustand (sem dependencies que causam loops)
+  // Pegar o estado do Zustand
   const items = useCartStore((state) => state.items);
   const removeItem = useCartStore((state) => state.removeItem);
   const isOpen = useCartStore((state) => state.isOpen);
   const closeCart = useCartStore((state) => state.closeCart);
   const getSubTotal = useCartStore((state) => state.getSubTotal);
 
-  // Efeito para garantir que o componente só renderize no cliente (hidratação)
+  // Só renderizar no cliente
   useEffect(() => {
-    setIsMounted(true);
+    setMounted(true);
   }, []);
 
-  // Função de checkout - não usar em dependencies para evitar loops
   const handleCheckout = () => {
-    const phoneNumber = "5511975902528"; // SEU NÚMERO AQUI
-    const currentItems = useCartStore.getState().items; // Pegar estado atual diretamente
+    const phoneNumber = "5511975902528";
+    const currentItems = useCartStore.getState().items;
     const currentTotal = useCartStore.getState().getSubTotal();
     
     let message = "*NOVO PEDIDO HOOKE* 🛒\n\n";
@@ -46,22 +46,28 @@ export default function CartSidebar() {
     window.open(link, "_blank");
   };
 
-  // Não renderizar no servidor, apenas no cliente
-  // Usar displaynone ao invés de retornar null para evitar problemas de hidratação
-  if (!isMounted || !isOpen) {
-    return <div className="hidden" />; // Renderiza um div vazio ao invés de null
-  }
+  // Só renderizar no cliente
+  if (!mounted) return null;
 
-  return (
-    <div className="fixed inset-0 z-[999] flex justify-end">
-      {/* Fundo Escuro (Clica fora para fechar) */}
+  // Renderizar um portal invisível que só fica visível quando isOpen é true
+  return createPortal(
+    <div 
+      className={`fixed inset-0 z-[999] flex justify-end transition-opacity duration-300 pointer-events-none ${
+        isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+      }`}
+    >
+      {/* Fundo Escuro */}
       <div 
-        className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-in fade-in duration-300 cursor-pointer"
+        className={`absolute inset-0 bg-black/60 backdrop-blur-sm cursor-pointer ${
+          isOpen ? "animate-in fade-in" : "animate-out fade-out"
+        }`}
         onClick={closeCart}
       />
 
       {/* A Gaveta Lateral */}
-      <div className="relative w-full max-w-md bg-white h-full shadow-2xl flex flex-col animate-in slide-in-from-right duration-300">
+      <div className={`relative w-full max-w-md bg-white h-full shadow-2xl flex flex-col ${
+        isOpen ? "animate-in slide-in-from-right" : "animate-out slide-out-to-right"
+      } duration-300`}>
         
         {/* Cabeçalho */}
         <div className="flex items-center justify-between p-6 border-b border-hooke-100 bg-white z-10">
@@ -149,6 +155,7 @@ export default function CartSidebar() {
           </div>
         )}
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
