@@ -1,4 +1,3 @@
-// store/cart-store.ts
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import { Product } from '@/types';
@@ -29,19 +28,8 @@ interface CartState {
   getSubTotal: () => number;
 }
 
-// Criar storage com validação para evitar corrupção
-const cartStorage = createJSONStorage(() => {
-  // Apenas cliente, nunca servidor
-  if (typeof window === 'undefined') {
-    return {
-      getItem: () => null,
-      setItem: () => {},
-      removeItem: () => {},
-    };
-  }
-  
-  return localStorage;
-});
+// Evitar SSR - só usar localStorage no cliente
+const isBrowser = typeof window !== 'undefined';
 
 export const useCartStore = create<CartState>()(
   persist(
@@ -116,19 +104,24 @@ export const useCartStore = create<CartState>()(
     }),
     {
       name: 'hooke-cart-storage',
-      storage: cartStorage,
-      // Validar dados ao reidratar do storage
-      onRehydrateStorage: () => (state) => {
-        if (state) {
-          // Garantir que items é sempre um array
-          if (!Array.isArray(state.items)) {
-            state.items = [];
-          }
-          // Garantir que isOpen é sempre um booleano
-          if (typeof state.isOpen !== 'boolean') {
-            state.isOpen = false;
-          }
+      storage: isBrowser ? createJSONStorage(() => localStorage) : undefined,
+      skipHydration: false,
+      version: 1,
+      
+      // Validar e migrar dados ao reidratar
+      migrate: (persistedState: any, version: number) => {
+        if (version === 0 || !persistedState) {
+          return {
+            items: [],
+            isOpen: false,
+          };
         }
+        
+        // Versão 1: validação de tipo
+        return {
+          items: Array.isArray(persistedState.items) ? persistedState.items : [],
+          isOpen: typeof persistedState.isOpen === 'boolean' ? persistedState.isOpen : false,
+        };
       },
     }
   )
