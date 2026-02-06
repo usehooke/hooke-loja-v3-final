@@ -1,7 +1,7 @@
 // components/shop/CartSidebar.tsx
 "use client";
 
-import { useCartStore } from "@/store/cart-store";
+import { useCartStore, selectCartSubTotal } from "@/store/cart-store";
 import { X, Trash2, ShoppingBag, MessageCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -22,7 +22,7 @@ export default function CartSidebar() {
   const removeItem = useCartStore((state) => state.removeItem);
   const isOpen = useCartStore((state) => state.isOpen);
   const closeCart = useCartStore((state) => state.closeCart);
-  const getSubTotal = useCartStore((state) => state.getSubTotal);
+  const subTotal = useCartStore(selectCartSubTotal);
 
   // Só renderizar no cliente
   useEffect(() => {
@@ -32,14 +32,14 @@ export default function CartSidebar() {
   const handleCheckout = () => {
     const phoneNumber = "5511975902528";
     const currentItems = useCartStore.getState().items;
-    const currentTotal = useCartStore.getState().getSubTotal();
+    const currentSubTotal = useCartStore.getState();
     
     let message = "*NOVO PEDIDO HOOKE* 🛒\n\n";
     currentItems.forEach((item) => {
       message += `▪️ ${item.quantity}x ${item.name} | Tam: ${item.selectedSize}\n`;
       message += `   Ref: R$ ${item.price} cada\n`;
     });
-    message += `\n*TOTAL DO PEDIDO: ${formatter.format(currentTotal)}*`;
+    message += `\n*TOTAL DO PEDIDO: ${formatter.format(subTotal)}*`;
     message += `\n\nOlá! Gostaria de finalizar a compra e combinar o pagamento/entrega.`;
 
     const link = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
@@ -139,7 +139,7 @@ export default function CartSidebar() {
           <div className="p-6 bg-hooke-50 border-t border-hooke-100">
             <div className="flex justify-between mb-4 text-hooke-900">
               <span className="text-sm uppercase tracking-wider font-medium">Subtotal</span>
-              <span className="text-xl font-bold">{formatter.format(getSubTotal())}</span>
+              <span className="text-xl font-bold">{formatter.format(subTotal)}</span>
             </div>
             
             <button 
