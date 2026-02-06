@@ -32,7 +32,6 @@ export default function CartSidebar() {
   const handleCheckout = () => {
     const phoneNumber = "5511975902528";
     const currentItems = useCartStore.getState().items;
-    const currentSubTotal = useCartStore.getState();
     
     let message = "*NOVO PEDIDO HOOKE* 🛒\n\n";
     currentItems.forEach((item) => {
