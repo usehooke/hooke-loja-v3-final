@@ -3,18 +3,16 @@
 
 import Link from 'next/link';
 import { Menu, Link2, ShoppingBag, X } from "lucide-react";
-import { useState, useMemo } from "react";
-import { useCartStore } from "@/store/cart-store";
+import { useState } from "react";
+import { useCartStore, selectCartTotalItems } from "@/store/cart-store";
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // Select state and actions from the store reactively
+  // Select state and actions from the store
   const openCart = useCartStore((state) => state.openCart);
-  const getTotalItems = useCartStore((state) => state.getTotalItems);
-  
-  // Memoizar o cálculo do total para evitar re-renders desnecessários
-  const totalItems = useMemo(() => getTotalItems(), [getTotalItems]);
+  // Usar seletor memoizado - só re-renderiza se o total realmente mudar
+  const totalItems = useCartStore(selectCartTotalItems);
 
   return (
     <nav className="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-hooke-100">

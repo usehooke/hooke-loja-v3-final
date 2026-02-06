@@ -133,3 +133,8 @@ export const useCartStore = create<CartState>()(
     }
   )
 );
+
+// Seletor memoizado para o Navbar - evita re-renders desnecessários
+export const selectCartTotalItems = (state: CartState) => {
+  return state.items.reduce((total, item) => total + item.quantity, 0);
+};
