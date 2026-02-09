@@ -1,4 +1,3 @@
-// tailwind.config.ts
 import type { Config } from "tailwindcss";
 import tailwindcssAnimate from "tailwindcss-animate";
 import typography from "@tailwindcss/typography";
@@ -6,14 +5,25 @@ import typography from "@tailwindcss/typography";
 const config: Config = {
     darkMode: ["class"],
     content: [
-        // CORREÇÃO: Removi o "src/" porque suas pastas estão na raiz
         "./pages/**/*.{js,ts,jsx,tsx,mdx}",
         "./components/**/*.{js,ts,jsx,tsx,mdx}",
         "./app/**/*.{js,ts,jsx,tsx,mdx}",
     ],
     theme: {
         extend: {
-            // Animação do Letreiro Infinito
+            // 1. Fontes Personalizadas
+            fontFamily: {
+                sans: ["var(--font-inter)", "sans-serif"],    // Texto padrão
+                heading: ["var(--font-playfair)", "serif"],   // Títulos elegantes
+            },
+            // 2. Bordas "Sharp" (Estilo Sunspel)
+            borderRadius: {
+                lg: "2px",
+                md: "2px",
+                sm: "1px",
+                DEFAULT: "2px", 
+            },
+            // 3. Animações
             animation: {
                 marquee: 'marquee 25s linear infinite',
             },
@@ -28,10 +38,14 @@ const config: Config = {
                     '50': '#f9fafb',
                     '100': '#f3f4f6',
                     '200': '#e5e7eb',
+                    '300': '#d1d5db',
+                    '400': '#9ca3af',
                     '500': '#6b7280',
+                    '600': '#4b5563',
+                    '700': '#374151',
                     '800': '#1f2937',
-                    '900': '#111827',
-                    DEFAULT: '#000000'
+                    '900': '#111827', // Preto Hooke (Chumbo Profundo)
+                    DEFAULT: '#111827'
                 },
                 background: 'hsl(var(--background))',
                 foreground: 'hsl(var(--foreground))',
@@ -74,6 +88,7 @@ const config: Config = {
                     '5': 'hsl(var(--chart-5))'
                 }
             },
+            // Mantendo a compatibilidade com variáveis CSS de Radius
             borderRadius: {
                 lg: 'var(--radius)',
                 md: 'calc(var(--radius) - 2px)',
