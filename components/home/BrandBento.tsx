@@ -1,84 +1,60 @@
-// components/home/BrandBento.tsx
 import Image from 'next/image';
 import { Sprout, Ruler, Fingerprint } from "lucide-react";
 
 export default function BrandBento() {
   return (
     <section className="py-20 px-4 max-w-7xl mx-auto">
-      {/* Título */}
-      <div className="text-center mb-12 animate-in slide-in-from-bottom-4 duration-700">
-        <h2 className="text-3xl font-bold text-hooke-900 uppercase tracking-wider mb-3">
+      
+      {/* Cabeçalho da Seção */}
+      <div className="text-center mb-16">
+        <span className="text-xs font-bold uppercase tracking-[0.2em] text-hooke-500 mb-2 block">
+          Filosofia
+        </span>
+        <h2 className="text-3xl md:text-4xl font-black text-hooke-900 uppercase tracking-tighter mb-4">
           O Padrão Hooke
         </h2>
-        <p className="text-hooke-500 max-w-2xl mx-auto">
-          Não é apenas sobre vestir. É sobre como você se sente dentro da roupa.
-        </p>
+        <div className="h-px w-24 bg-hooke-200 mx-auto"></div>
       </div>
 
       {/* Grid Bento */}
-      <div className="grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-4 h-auto md:h-[500px]">
+      <div className="grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-4 h-auto md:h-[600px]">
 
-        {/* ITEM 1: Algodão (Caixa Grande) */}
-        <div className="group relative overflow-hidden rounded-sm md:col-span-2 md:row-span-2 min-h-[300px] flex flex-col justify-end p-8 border border-hooke-200 transition-all hover:shadow-xl">
+        {/* ITEM 1: Algodão (Grande - Esquerda) */}
+        <div className="group relative overflow-hidden bg-black md:col-span-2 md:row-span-2 min-h-[300px] border border-gray-100">
+          {/* Usando uma imagem genérica de banner se a específica não existir */}
           <Image
-            src="/produtos/camiseta-oversized-preta-premium-hooke-1.avif"
-            alt="Textura de tecido premium preta"
+            src="/banner-home.jpg" 
+            alt="Tecido Premium"
             fill
-            className="object-cover transition-transform duration-700 group-hover:scale-105 opacity-60"
+            className="object-cover opacity-60 group-hover:scale-105 transition-transform duration-1000"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent" />
           
-          <div className="relative z-20 text-white">
-            <div className="bg-white/10 backdrop-blur-md w-fit p-3 rounded-sm mb-4 border border-white/10">
-              <Sprout className="w-6 h-6 text-white" />
-            </div>
-            <h3 className="text-2xl font-bold mb-2">Algodão Premium</h3>
-            <p className="text-gray-200 max-w-md text-sm md:text-base">
-              Fibras mais resistentes que o algodão comum. Toque macio, não forma bolinhas e mantém a cor intensa por mais tempo.
+          <div className="absolute bottom-0 left-0 p-8 md:p-10 text-white z-10">
+            <Sprout className="w-8 h-8 text-white mb-4" strokeWidth={1} />
+            <h3 className="text-2xl font-black uppercase tracking-tight mb-2">Algodão Egípcio</h3>
+            <p className="text-gray-300 max-w-md text-sm leading-relaxed">
+              Nossa fibra é 2x mais resistente que o algodão comum. Toque macio que não forma bolinhas e mantém a cor preta intensa lavagem após lavagem.
             </p>
           </div>
         </div>
 
-        {/* ITEM 2: Corte (Caixa Pequena Superior) */}
-        <div className="group relative overflow-hidden rounded-sm p-6 border border-hooke-200 flex flex-col justify-end transition-all hover:shadow-xl min-h-[242px]">
-          <Image
-            src="/produtos/camiseta-oversized-offwhite-premium-hooke-1.avif"
-            alt="Homem vestindo camiseta off-white com corte premium"
-            fill
-            className="object-cover object-top transition-transform duration-700 group-hover:scale-105 opacity-80"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-          
-          <div className="relative z-20 text-white">
-            <div className="bg-white/20 backdrop-blur-sm w-fit p-3 rounded-full mb-4">
-              <Ruler className="w-6 h-6 text-white" />
-            </div>
-            <h4 className="text-lg font-bold">Modelagem Slim Comfort</h4>
-            <p className="text-sm text-gray-200 mt-1">
-              Ajustada no peito e braços, solta na cintura.
-            </p>
-          </div>
+        {/* ITEM 2: Modelagem (Pequeno - Direita Cima) */}
+        <div className="group relative overflow-hidden bg-hooke-100 p-8 border border-gray-100 flex flex-col justify-center min-h-[200px]">
+           <Ruler className="w-6 h-6 text-hooke-900 mb-4" strokeWidth={1.5} />
+           <h4 className="text-lg font-bold uppercase tracking-tight text-hooke-900 mb-2">Modelagem Slim</h4>
+           <p className="text-xs text-hooke-500 leading-relaxed">
+             Ajustada no peito e braços, levemente solta na cintura. Valoriza o corpo sem apertar.
+           </p>
         </div>
 
-        {/* ITEM 3: Exclusividade (Caixa Pequena Inferior) */}
-        <div className="group relative overflow-hidden rounded-sm p-6 border border-hooke-900 flex flex-col justify-end transition-all hover:shadow-xl min-h-[242px]">
-          <Image
-            src="/produtos/camiseta-oversized-verde-premium-hooke-1.avif"
-            alt="Camiseta verde premium com exclusividade"
-            fill
-            className="object-cover transition-transform duration-700 group-hover:scale-105 opacity-70"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
-          
-          <div className="relative z-20 text-white">
-            <div className="bg-white/20 backdrop-blur-sm w-fit p-3 rounded-full mb-4">
-              <Fingerprint className="w-6 h-6 text-white" />
-            </div>
-            <h4 className="text-lg font-bold">Exclusividade</h4>
-            <p className="text-sm text-gray-200 mt-1">
-              Produção limitada. Peças únicas.
-            </p>
-          </div>
+        {/* ITEM 3: Exclusividade (Pequeno - Direita Baixo) */}
+        <div className="group relative overflow-hidden bg-hooke-900 p-8 border border-hooke-900 flex flex-col justify-center min-h-[200px] text-white">
+           <Fingerprint className="w-6 h-6 text-white mb-4" strokeWidth={1.5} />
+           <h4 className="text-lg font-bold uppercase tracking-tight text-white mb-2">Exclusividade</h4>
+           <p className="text-xs text-gray-400 leading-relaxed">
+             Produção familiar e controlada. Cada peça passa por uma revisão manual rigorosa.
+           </p>
         </div>
 
       </div>

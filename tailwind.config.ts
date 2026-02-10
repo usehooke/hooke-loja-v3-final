@@ -11,28 +11,12 @@ const config: Config = {
     ],
     theme: {
         extend: {
-            // 1. Fontes Personalizadas
+            // 1. Fontes Unificadas (Tudo Inter agora)
             fontFamily: {
-                sans: ["var(--font-inter)", "sans-serif"],    // Texto padrão
-                heading: ["var(--font-playfair)", "serif"],   // Títulos elegantes
+                sans: ["var(--font-inter)", "sans-serif"],    
+                heading: ["var(--font-inter)", "sans-serif"], // Títulos também usam Inter (Visual Limpo)
             },
-            // 2. Bordas "Sharp" (Estilo Sunspel)
-            borderRadius: {
-                lg: "2px",
-                md: "2px",
-                sm: "1px",
-                DEFAULT: "2px", 
-            },
-            // 3. Animações
-            animation: {
-                marquee: 'marquee 25s linear infinite',
-            },
-            keyframes: {
-                marquee: {
-                    '0%': { transform: 'translateX(0%)' },
-                    '100%': { transform: 'translateX(-100%)' },
-                },
-            },
+            // 2. Cores: Hooke 900 agora é PRETO PURO (#000)
             colors: {
                 hooke: {
                     '50': '#f9fafb',
@@ -44,8 +28,8 @@ const config: Config = {
                     '600': '#4b5563',
                     '700': '#374151',
                     '800': '#1f2937',
-                    '900': '#111827', // Preto Hooke (Chumbo Profundo)
-                    DEFAULT: '#111827'
+                    '900': '#000000', // MUDANÇA: Preto Puro para contraste máximo
+                    DEFAULT: '#000000'
                 },
                 background: 'hsl(var(--background))',
                 foreground: 'hsl(var(--foreground))',
@@ -88,12 +72,23 @@ const config: Config = {
                     '5': 'hsl(var(--chart-5))'
                 }
             },
-            // Mantendo a compatibilidade com variáveis CSS de Radius
+            // 3. Bordas Zero (Sharp / Brutalista)
             borderRadius: {
-                lg: 'var(--radius)',
-                md: 'calc(var(--radius) - 2px)',
-                sm: 'calc(var(--radius) - 4px)'
-            }
+                lg: '0px',
+                md: '0px',
+                sm: '0px',
+                DEFAULT: '0px', 
+            },
+            // 4. Animações
+            animation: {
+                marquee: 'marquee 25s linear infinite',
+            },
+            keyframes: {
+                marquee: {
+                    '0%': { transform: 'translateX(0%)' },
+                    '100%': { transform: 'translateX(-100%)' },
+                },
+            },
         }
     },
     plugins: [

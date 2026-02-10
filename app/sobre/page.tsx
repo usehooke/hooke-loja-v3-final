@@ -1,63 +1,88 @@
-// src/app/sobre/page.tsx
 import Image from "next/image";
-import Navbar from "@/components/layout/Navbar";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+
+export const metadata = {
+  title: "Sobre a Hooke | Nossa História",
+  description: "Conheça a origem da Hooke. Moda masculina feita no Brasil com padrões internacionais.",
+};
 
 export default function AboutPage() {
   return (
-    <main className="min-h-screen bg-white">
-      <Navbar />
+    <main className="w-full bg-white min-h-screen">
+      
+      {/* SEÇÃO 1: EDITORIAL SPLIT (Foto Esq / Texto Dir) */}
+      <div className="flex flex-col md:flex-row w-full min-h-screen">
+        
+        {/* Lado da Imagem (Fixo em Desktop - Metade da Tela) */}
+        <div className="w-full md:w-1/2 h-[60vh] md:h-screen relative bg-gray-100">
+          <Image
+            src="/sobre.jpg" // ⚠️ Certifique-se de ter essa imagem na pasta public
+            alt="Bastidores da Hooke"
+            fill
+            className="object-cover grayscale hover:grayscale-0 transition-all duration-[2s]"
+            priority
+          />
+          {/* Overlay sutil para dar profundidade */}
+          <div className="absolute inset-0 bg-black/10" />
+        </div>
 
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        {/* Lado do Texto (Scroll - Metade da Tela) */}
+        <div className="w-full md:w-1/2 flex flex-col justify-center px-8 md:px-24 py-20 bg-white">
           
-          {/* LADO ESQUERDO: Texto e História */}
-          <div className="space-y-8">
-            <h1 className="text-4xl md:text-5xl font-bold text-hooke-900 tracking-tight">
-              Mais do que roupa. <br />
-              <span className="text-hooke-500">Uma declaração de atitude.</span>
-            </h1>
+          <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400 mb-6 block font-sans">
+            Desde 2006
+          </span>
+          
+          <h1 className="text-4xl md:text-6xl font-black text-hooke-900 uppercase tracking-tighter leading-[0.9] mb-8 font-sans">
+            Não é apenas <br/> uma camiseta.
+          </h1>
+          
+          <div className="space-y-6 text-sm md:text-base text-gray-600 leading-relaxed font-sans">
+            <p>
+              A Hooke nasceu de uma frustração comum: encontrar uma camiseta básica que não parecesse velha após a terceira lavagem.
+            </p>
+            <p>
+              Somos filhos de nordestinos que vieram para São Paulo construir a vida na indústria têxtil. Cresci no meio das máquinas de costura, entendendo que <strong>qualidade não se apressa</strong>.
+            </p>
+            <p>
+              Hoje, nossa missão é simples: criar as melhores peças essenciais do guarda-roupa masculino brasileiro. Usamos Algodão Egípcio certificado, modelagem proprietária e um acabamento que você sente no toque.
+            </p>
             
-            <div className="prose prose-lg text-hooke-600 space-y-6">
-              <p>
-                A <strong>Hooke</strong> nasceu de uma inquietação: por que é tão difícil encontrar o básico bem feito?
-              </p>
-              <p>
-                Não acreditamos em logotipos gigantes ou tendências passageiras. 
-                Acreditamos no corte perfeito, no tecido que respira e na peça que te acompanha 
-                do escritório ao jantar sem perder a elegância.
-              </p>
-              <p>
-                Cada camiseta é projetada pensando no homem moderno que valoriza seu tempo e sua imagem. 
-                Minimalismo não é sobre ter pouco, é sobre ter apenas o essencial, e que esse essencial seja excelente.
-              </p>
-            </div>
+            {/* Citação do Fundador */}
+            <blockquote className="border-l-2 border-hooke-900 pl-6 py-2 my-8 italic text-hooke-900 font-medium">
+              "Eu sou a cara da minha marca porque uso, testo e aprovo cada peça. A Hooke é a extensão do meu estilo de vida."
+            </blockquote>
 
-            <div className="border-l-4 border-hooke-900 pl-6 py-2 mt-8">
-              <p className="text-xl font-medium text-hooke-900 italic">
-                &quot;Eu sou a cara da minha marca porque uso, testo e aprovo cada peça. 
-                A Hooke é a extensão do meu estilo de vida.&quot;
-              </p>
-              <span className="block mt-4 text-sm font-bold uppercase tracking-widest text-hooke-500">
-                — Fundador, Hooke
-              </span>
-            </div>
+            <p className="font-bold text-hooke-900">
+              Menos excesso. Mais essência. Isso é Hooke.
+            </p>
           </div>
 
-          {/* LADO DIREITO: Foto do Fundador */}
-          <div className="relative aspect-[3/4] bg-hooke-50 rounded-sm overflow-hidden shadow-2xl transform lg:rotate-2 hover:rotate-0 transition-transform duration-700">
-            <Image
-              src="/sobre.jpg" // Certifique-se de colocar essa foto na pasta public
-              alt="Fundador da Hooke"
-              fill
-              className="object-cover"
-              priority
-            />
-            {/* Efeito de moldura sutil */}
-            <div className="absolute inset-0 border border-black/5 rounded-sm"></div>
+          <div className="mt-12 pt-12 border-t border-gray-100">
+             <p className="text-xs font-bold uppercase tracking-widest text-hooke-900 font-sans">
+               Fernando Luiz Ferreira Jr.
+             </p>
+             <p className="text-[10px] text-gray-400 uppercase tracking-widest font-sans">
+               Fundador & CEO
+             </p>
           </div>
 
         </div>
+      </div>
+
+      {/* SEÇÃO 2: MANIFESTO (Faixa Preta) */}
+      <section className="w-full bg-hooke-900 text-white py-24 px-6 md:px-12 text-center">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter mb-8 font-sans">
+            "O detalhe é o que separa o comum do extraordinário."
+          </h2>
+          <Link href="/colecao" className="inline-flex items-center gap-3 border-b border-white pb-1 text-xs font-bold uppercase tracking-widest hover:text-gray-300 hover:border-gray-300 transition-all font-sans">
+             Ver a Coleção <ArrowRight size={14} />
+          </Link>
+        </div>
       </section>
+
     </main>
   );
 }

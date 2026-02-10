@@ -1,121 +1,128 @@
-// src/app/contato/page.tsx
-import Navbar from "@/components/layout/Navbar";
-import { MessageCircle, MapPin, Instagram, ArrowRight } from "lucide-react";
+import { MessageCircle, MapPin, Mail, Clock } from "lucide-react";
+import Link from "next/link";
+
+export const metadata = {
+  title: "Fale Conosco | Hooke",
+  description: "Entre em contato com a Hooke. Atendimento via WhatsApp, E-mail ou em nossa loja física no Brás.",
+};
 
 export default function ContactPage() {
-  
-  const whatsappNumber = "5511999999999"; 
-  const instagram = "@use.hooke";
-
   return (
-    <main className="min-h-screen bg-white">
-      <Navbar />
+    <main className="w-full bg-white min-h-screen">
+      
+      {/* 1. CABEÇALHO (Full Width) */}
+      <div className="w-full px-6 md:px-12 pt-20 pb-12 border-b border-gray-100">
+        <h1 className="text-4xl md:text-6xl font-black text-hooke-900 uppercase tracking-tighter leading-[0.9] mb-6">
+          Atendimento <br/> Premium
+        </h1>
+        <p className="font-sans text-sm text-gray-500 max-w-lg leading-relaxed">
+          Dúvidas sobre medidas, envios ou quer comprar em atacado? 
+          Nossa equipe responde em minutos.
+        </p>
+      </div>
 
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        
-        <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold text-hooke-900 tracking-tight mb-4">
-            Fale com a Hooke
-          </h1>
-          <p className="text-lg text-hooke-500 max-w-2xl mx-auto">
-            Nosso time está pronto para te ajudar online ou presencialmente em nossas lojas.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+      {/* 2. GRID DE CONTATO */}
+      <div className="w-full px-6 md:px-12 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 lg:gap-24">
           
-          {/* CARTÃO 1: WHATSAPP */}
-          <div className="bg-hooke-50 p-8 rounded-sm border border-hooke-100 flex flex-col items-center text-center hover:shadow-lg transition-shadow">
-            <div className="w-16 h-16 bg-[#25D366] rounded-full flex items-center justify-center text-white mb-6">
-              <MessageCircle size={32} />
-            </div>
-            <h3 className="text-xl font-bold text-hooke-900 mb-2">WhatsApp</h3>
-            <p className="text-hooke-500 mb-6 text-sm">
-              Atendimento ágil para compras e dúvidas.
-            </p>
-            <a 
-              href={`https://wa.me/${whatsappNumber}`}
-              target="_blank"
-              className="text-[#25D366] font-bold uppercase tracking-widest text-sm flex items-center hover:underline"
-            >
-              Iniciar Conversa <ArrowRight size={16} className="ml-2" />
-            </a>
-          </div>
-
-          {/* CARTÃO 2: LOJAS FÍSICAS (Novo Destaque) */}
-          <div className="bg-hooke-50 p-8 rounded-sm border border-hooke-100 flex flex-col items-center text-center hover:shadow-lg transition-shadow">
-            <div className="w-16 h-16 bg-hooke-900 rounded-full flex items-center justify-center text-white mb-6">
-              <MapPin size={32} />
-            </div>
-            <h3 className="text-xl font-bold text-hooke-900 mb-2">Nossas Lojas</h3>
-            <p className="text-hooke-500 mb-6 text-sm">
-              Venha sentir a qualidade do tecido pessoalmente.
-            </p>
-            <span className="text-hooke-900 font-bold uppercase tracking-widest text-sm flex items-center">
-              Ver endereços abaixo <ArrowRight size={16} className="ml-2" />
-            </span>
-          </div>
-
-          {/* CARTÃO 3: INSTAGRAM */}
-          <div className="bg-hooke-50 p-8 rounded-sm border border-hooke-100 flex flex-col items-center text-center hover:shadow-lg transition-shadow">
-            <div className="w-16 h-16 bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-500 rounded-full flex items-center justify-center text-white mb-6">
-              <Instagram size={32} />
-            </div>
-            <h3 className="text-xl font-bold text-hooke-900 mb-2">Instagram</h3>
-            <p className="text-hooke-500 mb-6 text-sm">
-              Acompanhe os lançamentos diários.
-            </p>
-            <a 
-              href={`https://instagram.com/${instagram.replace('@', '')}`}
-              target="_blank"
-              className="text-hooke-900 font-bold uppercase tracking-widest text-sm flex items-center hover:underline"
-            >
-              Seguir @use.hooke <ArrowRight size={16} className="ml-2" />
-            </a>
-          </div>
-        </div>
-
-        {/* SEÇÃO FAQ + ENDEREÇOS */}
-        <div className="mt-24 max-w-3xl mx-auto">
-          <h2 className="text-2xl font-bold text-hooke-900 mb-8 text-center">Dúvidas & Localização</h2>
-          
-          <div className="space-y-6">
+          {/* Lado Esquerdo: Canais Diretos */}
+          <div className="space-y-12">
             
-            {/* ONDE MUDOU: Endereços das Lojas */}
-            <div className="border border-hooke-200 bg-hooke-50 p-6 rounded-sm">
-              <h4 className="font-bold text-hooke-900 mb-4 flex items-center">
-                <MapPin size={20} className="mr-2" /> 
-                Onde ficam as lojas físicas?
-              </h4>
-              <div className="text-hooke-600 text-sm space-y-4">
-                <p>Sim! Temos duas unidades no Brás para você conhecer:</p>
-                
-                <div>
-                  <strong className="block text-hooke-900">Shopping Vautier Premium</strong>
-                  <span>Rua Thiers, 184 - Loja 142</span>
-                </div>
+            {/* Bloco WhatsApp (Destaque) */}
+            <div className="bg-hooke-50 p-8 border border-gray-100">
+              <div className="flex items-center gap-3 mb-4">
+                <MessageCircle size={24} className="text-green-600" />
+                <h3 className="text-lg font-black uppercase tracking-tight">WhatsApp</h3>
+              </div>
+              <p className="text-sm text-gray-600 mb-6">
+                O canal mais rápido. Resolvemos trocas, dúvidas de tamanho e vendas diretas por aqui.
+              </p>
+              <Link 
+                href="https://wa.me/5511975902528" 
+                target="_blank"
+                className="inline-flex w-full items-center justify-center gap-2 bg-green-600 text-white px-6 py-4 text-xs font-bold uppercase tracking-widest hover:bg-green-700 transition-colors shadow-sm"
+              >
+                Iniciar Conversa
+              </Link>
+            </div>
 
-                <div>
-                  <strong className="block text-hooke-900">Shopping Porto Brás</strong>
-                  <span>Rua Thiers, 282 - Loja 1598</span>
+            {/* Outros Canais */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+              <div>
+                <div className="flex items-center gap-2 mb-2 text-hooke-900">
+                  <Mail size={18} />
+                  <h4 className="text-xs font-bold uppercase tracking-widest">E-mail</h4>
                 </div>
+                <p className="text-sm text-gray-500">sac@usehooke.com.br</p>
+              </div>
+              <div>
+                <div className="flex items-center gap-2 mb-2 text-hooke-900">
+                  <Clock size={18} />
+                  <h4 className="text-xs font-bold uppercase tracking-widest">Horário</h4>
+                </div>
+                <p className="text-sm text-gray-500">Seg a Sex: 08h às 18h</p>
               </div>
             </div>
-            
-            <div className="border-b border-hooke-100 pb-4">
-              <h4 className="font-bold text-hooke-900 mb-2">Qual o prazo de entrega?</h4>
-              <p className="text-hooke-500 text-sm">Enviamos para todo o Brasil. O prazo varia de 2 a 7 dias úteis dependendo da sua região.</p>
-            </div>
-
-            <div className="border-b border-hooke-100 pb-4">
-              <h4 className="font-bold text-hooke-900 mb-2">Como funciona a troca?</h4>
-              <p className="text-hooke-500 text-sm">A primeira troca é por nossa conta. Você tem até 30 dias após o recebimento para solicitar.</p>
-            </div>
 
           </div>
-        </div>
 
-      </section>
+          {/* Lado Direito: Loja Física (Autoridade) */}
+          <div className="relative h-full min-h-[400px] bg-gray-100 border border-gray-200 p-8 flex flex-col justify-end">
+            {/* Se tiver foto da loja, use Image com fill aqui. Se não, use este bloco tipográfico */}
+            <div className="absolute inset-0 bg-hooke-900 overflow-hidden">
+               {/* Mapa ou Foto da Loja ficaria aqui. 
+                   Como placeholder, deixamos um fundo escuro elegante. */}
+               <div className="absolute inset-0 opacity-20 bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
+            </div>
+
+            <div className="relative z-10 text-white">
+              <div className="mb-6">
+                <MapPin size={32} strokeWidth={1} className="mb-4" />
+                <h3 className="text-2xl font-black uppercase tracking-tight mb-2">Loja Física</h3>
+                <p className="text-sm text-gray-300 leading-relaxed max-w-xs">
+                  Shopping Vautier Premium<br />
+                  Brás, São Paulo - SP
+                </p>
+              </div>
+              <Link 
+                href="https://maps.google.com/?q=Shopping+Vautier+Premium" 
+                target="_blank"
+                className="text-xs font-bold uppercase tracking-widest border-b border-white pb-1 inline-block hover:text-gray-300 hover:border-gray-300 transition-colors"
+              >
+                Ver no Mapa
+              </Link>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      {/* 3. FAQ RÁPIDO */}
+      <div className="w-full bg-hooke-50 px-6 md:px-12 py-20 border-t border-gray-100">
+        <h2 className="text-2xl font-black uppercase tracking-tight mb-12 text-center">Dúvidas Frequentes</h2>
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div className="bg-white p-8 border border-gray-100">
+            <h3 className="text-xs font-bold uppercase tracking-widest mb-3">Qual o prazo de entrega?</h3>
+            <p className="text-sm text-gray-500 leading-relaxed">
+              Enviamos em até 24h úteis após a confirmação. Para SP capital, chega no dia seguinte via Sedex.
+            </p>
+          </div>
+          <div className="bg-white p-8 border border-gray-100">
+            <h3 className="text-xs font-bold uppercase tracking-widest mb-3">Como funciona a troca?</h3>
+            <p className="text-sm text-gray-500 leading-relaxed">
+              A primeira troca é por nossa conta. Você tem 7 dias após o recebimento para solicitar.
+            </p>
+          </div>
+          <div className="bg-white p-8 border border-gray-100">
+            <h3 className="text-xs font-bold uppercase tracking-widest mb-3">Vendem no Atacado?</h3>
+            <p className="text-sm text-gray-500 leading-relaxed">
+              Sim! Temos condições especiais para lojistas a partir de 12 peças. Chame no WhatsApp.
+            </p>
+          </div>
+        </div>
+      </div>
+
     </main>
   );
 }

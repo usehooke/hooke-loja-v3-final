@@ -1,21 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
-  <!-- Ícone minimalista da marca Hooke -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect x="0" y="0" width="64" height="64" rx="8" fill="#000000"/>
   
-  <!-- Fundo branco -->
-  <rect width="192" height="192" fill="#ffffff" rx="44"/>
-  
-  <!-- Borda preta -->
-  <rect width="192" height="192" fill="none" stroke="#000000" stroke-width="2" rx="44"/>
-  
-  <!-- Forma H (de Hooke) em preto minimalista -->
-  <g stroke="#000000" stroke-width="12" stroke-linecap="round" fill="none">
-    <!-- Lado esquerdo da letra H -->
-    <line x1="48" y1="40" x2="48" y2="152"/>
-    
-    <!-- Lado direito da letra H -->
-    <line x1="144" y1="40" x2="144" y2="152"/>
-    
-    <!-- Meio da letra H -->
-    <line x1="48" y1="96" x2="144" y2="96"/>
-  </g>
+  <path d="M16 14V50H26V36H38V50H48V14H38V28H26V14H16Z" fill="#ffffff"/>
 </svg>
