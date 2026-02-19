@@ -1,7 +1,7 @@
 "use client";
 
 import Link from 'next/link';
-import { Menu, ShoppingBag, X, Search, User } from "lucide-react";
+import { Menu, ShoppingBag, X, Search, User, Zap } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useCartStore } from "@/store/cart-store";
 
@@ -22,6 +22,14 @@ export default function Navbar() {
 
   const totalItems = items.reduce((acc, item) => acc + item.quantity, 0);
 
+  // Lista de Links Centralizada (Para facilitar a manutenção)
+  const navLinks = [
+    { name: 'Shop', href: '/' },
+    { name: 'Coleção', href: '/colecao' },
+    { name: 'Lançamento', href: '/lancamento', highlight: true }, // Link Novo
+    { name: 'Sobre', href: '/sobre' },
+  ];
+
   return (
     <>
       <nav 
@@ -29,7 +37,6 @@ export default function Navbar() {
           isScrolled ? "border-b border-gray-100 shadow-sm" : "border-b border-transparent"
         }`}
       >
-        {/* MUDANÇA: w-full e padding lateral maior, sem max-width */}
         <div className="w-full px-6 md:px-12">
           <div className="flex justify-between items-center h-20">
             
@@ -44,13 +51,19 @@ export default function Navbar() {
               </button>
 
               <div className="hidden md:flex items-center gap-6 lg:gap-8">
-                {['Shop', 'Coleção', 'Sobre'].map((item) => (
+                {navLinks.map((item) => (
                    <Link 
-                     key={item}
-                     href={item === 'Shop' ? '/' : `/${item.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")}`}
-                     className="text-xs font-bold uppercase tracking-widest text-hooke-900 hover:text-gray-500 transition-colors font-sans"
+                     key={item.name}
+                     href={item.href}
+                     className={`text-xs font-bold uppercase tracking-widest transition-colors font-sans flex items-center gap-1 ${
+                       item.highlight 
+                         ? "text-hooke-900 border-b-2 border-hooke-900 pb-0.5" // Destaque Desktop
+                         : "text-hooke-900 hover:text-gray-500"
+                     }`}
                    >
-                     {item}
+                     {/* Ícone de Raio só no destaque */}
+                     {item.highlight && <Zap size={12} fill="currentColor" className="text-hooke-900" />}
+                     {item.name}
                    </Link>
                 ))}
               </div>
@@ -93,7 +106,7 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* MENU MOBILE (Mantido Igual) */}
+      {/* MENU MOBILE (Estrutura Original Mantida) */}
       <div className={`fixed inset-0 z-50 flex ${isMobileMenuOpen ? 'pointer-events-auto' : 'pointer-events-none'}`}>
         <div 
           className={`absolute inset-0 bg-black/40 backdrop-blur-sm transition-opacity duration-300 ${isMobileMenuOpen ? 'opacity-100' : 'opacity-0'}`}
@@ -107,9 +120,23 @@ export default function Navbar() {
             </button>
           </div>
           <div className="flex flex-col p-6 gap-6">
-            <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="text-sm font-bold uppercase tracking-widest text-hooke-900">Home</Link>
-            <Link href="/#colecao" onClick={() => setIsMobileMenuOpen(false)} className="text-sm font-bold uppercase tracking-widest text-hooke-900">Coleção</Link>
-            <Link href="/sobre" onClick={() => setIsMobileMenuOpen(false)} className="text-sm font-bold uppercase tracking-widest text-hooke-900">Sobre a Hooke</Link>
+            
+            {/* Links Mobile Gerados Automaticamente */}
+            {navLinks.map((item) => (
+              <Link 
+                key={item.name}
+                href={item.href} 
+                onClick={() => setIsMobileMenuOpen(false)} 
+                className={`text-sm font-bold uppercase tracking-widest flex items-center gap-2 ${
+                  item.highlight ? "text-hooke-900 bg-gray-50 p-2 -ml-2 pl-4 border-l-2 border-hooke-900" : "text-hooke-900"
+                }`}
+              >
+                {item.name}
+                {/* Badge NOVO no Mobile */}
+                {item.highlight && <span className="bg-hooke-900 text-white text-[9px] px-1.5 py-0.5 ml-2">NOVO</span>}
+              </Link>
+            ))}
+
             <Link href="/contato" onClick={() => setIsMobileMenuOpen(false)} className="text-sm font-bold uppercase tracking-widest text-hooke-900">Fale Conosco</Link>
             <div className="h-px bg-gray-100 my-2" />
             <Link href="/conta" className="flex items-center gap-3 text-sm font-medium text-gray-600"><User size={18} /> Minha Conta</Link>

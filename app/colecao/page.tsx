@@ -1,16 +1,17 @@
-import { products } from "@/data/products";
+import { PRODUTOS } from "@/data/catalogo"; // IMPORTAÇÃO CORRIGIDA (Novo Cérebro)
 import ProductCard from "@/components/shop/ProductCard";
 import Link from "next/link";
 import { ChevronRight, SlidersHorizontal } from "lucide-react";
+import { Metadata } from "next";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Coleção Completa | Hooke",
   description: "Descubra a coleção completa de camisetas oversized, regatas e kits premium.",
 };
 
 export default function CollectionPage() {
-  // Aqui pegamos todos os produtos.
-  const collectionProducts = products;
+  // Pega os dados do Hooke OS (Cérebro Central)
+  const collectionProducts = PRODUTOS;
 
   return (
     <div className="bg-white min-h-screen pb-20">
@@ -36,7 +37,7 @@ export default function CollectionPage() {
             
             {/* Descrição */}
             <p className="font-sans text-sm text-gray-500 leading-relaxed max-w-lg">
-              O básico elevado à perfeição. Camisetas desenvolvidas com algodão egípcio sustentável e modelagem que valoriza o corpo masculino sem esforço.
+              O básico elevado à perfeição. Camisetas desenvolvidas com Suedine 240g, Algodão Egípcio sustentável e modelagem que valoriza o corpo masculino sem esforço.
             </p>
           </div>
         </div>
@@ -50,7 +51,7 @@ export default function CollectionPage() {
             {collectionProducts.length} Produtos
           </span>
           
-          {/* Botão de Filtro (Quadrado/Sharp) */}
+          {/* Botão de Filtro (Visual apenas por enquanto, ou funcional se adicionar lógica) */}
           <button className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-hooke-900 hover:bg-gray-100 px-4 py-2 transition-colors border border-transparent hover:border-gray-200">
             <SlidersHorizontal size={14} />
             <span className="hidden sm:inline">Filtrar</span>
@@ -60,7 +61,7 @@ export default function CollectionPage() {
 
       {/* 3. GRADE DE PRODUTOS (Full Width) */}
       <div className="w-full px-6 md:px-12 py-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-16 animate-in fade-in duration-1000 slide-in-from-bottom-8">
           {collectionProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
@@ -70,7 +71,7 @@ export default function CollectionPage() {
       {/* 4. BANNER FINAL (Rodapé da Categoria) */}
       <div className="w-full px-6 md:px-12 mt-12">
         <div className="bg-hooke-50 border border-hooke-100 py-16 text-center">
-           <h3 className="text-xl font-bold uppercase tracking-tight mb-2">
+           <h3 className="text-xl font-bold uppercase tracking-tight mb-2 text-hooke-900">
              Qualidade Garantida
            </h3>
            <p className="text-gray-500 text-xs mb-0 uppercase tracking-widest">

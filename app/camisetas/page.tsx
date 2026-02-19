@@ -1,105 +1,111 @@
-// src/app/camisetas/page.tsx
 "use client"; // Habilita interatividade (Filtros)
 
 import { useState } from "react";
 import ProductCard from "@/components/shop/ProductCard";
-import { products } from "../../data/products";
+import { PRODUTOS } from "@/data/catalogo"; // IMPORTAÇÃO DO NOVO CÉREBRO
 import { SlidersHorizontal } from "lucide-react";
 
 export default function CamisetasPage() {
   // Estado para controlar o filtro ativo
-  const [filter, setFilter] = useState<'todos' | 'lisas' | 'estampadas'>('todos');
+  // Adaptado para as novas categorias do Hooke OS
+  const [filter, setFilter] = useState<'todos' | 'oversized' | 'vintage'>('todos');
 
-  // Lógica de filtragem
-  const filteredProducts = products.filter((product) => {
+  // Lógica de filtragem atualizada
+  const filteredProducts = PRODUTOS.filter((product) => {
+    // Primeiro, garantimos que só estamos olhando para "Camisetas" (ignorando Regatas e Kits por enquanto, ou ajustando conforme necessidade)
+    // Aqui estou assumindo que "Camisetas" engloba Oversized e Vintage.
+    const isCamiseta = product.category === 'Oversized' || product.category === 'Vintage';
+    
+    if (!isCamiseta) return false;
+
     if (filter === 'todos') return true;
-    if (filter === 'lisas') return product.category === 'camisetas-lisas';
-    if (filter === 'estampadas') return product.category === 'camisetas-estampadas';
+    if (filter === 'oversized') return product.category === 'Oversized'; // Equivalente a "Lisas/Básicas"
+    if (filter === 'vintage') return product.category === 'Vintage';     // Equivalente a "Estampadas"
+    
     return true;
   });
 
   return (
     <main className="min-h-screen bg-white pb-20">
 
-
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+      <section className="max-w-[1920px] mx-auto px-6 md:px-12 py-12 md:py-20">
         
         {/* CABEÇALHO DA COLEÇÃO */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 border-b border-gray-100 pb-12">
           <div>
-            <span className="text-sm font-bold tracking-widest text-hooke-500 uppercase mb-2 block">
-              Coleção 2025
+            <span className="text-xs font-bold tracking-[0.2em] text-hooke-500 uppercase mb-2 block font-sans">
+              Coleção 2026
             </span>
-            <h1 className="text-4xl md:text-5xl font-bold text-hooke-900 tracking-tight">
+            <h1 className="text-4xl md:text-6xl font-black text-hooke-900 uppercase tracking-tighter leading-none">
               Camisetas
             </h1>
           </div>
 
-          {/* CONTADOR DE PRODUTOS (UX: Status do Sistema) */}
-          <div className="text-hooke-500 text-sm font-medium">
+          {/* CONTADOR DE PRODUTOS */}
+          <div className="text-hooke-500 text-sm font-medium font-sans">
             Mostrando {filteredProducts.length} {filteredProducts.length === 1 ? 'peça' : 'peças'}
           </div>
         </div>
 
-        {/* BARRA DE FILTROS (UI: Pills Modernos) */}
+        {/* BARRA DE FILTROS */}
         <div className="flex flex-wrap items-center gap-3 mb-12 overflow-x-auto pb-4 md:pb-0 scrollbar-hide">
-          <div className="flex items-center text-hooke-400 mr-2">
+          <div className="flex items-center text-hooke-900 mr-2">
             <SlidersHorizontal size={18} />
           </div>
 
           {/* Botão TODOS */}
           <button
             onClick={() => setFilter('todos')}
-            className={`px-6 py-2 rounded-full text-sm font-bold transition-all duration-300 border ${
+            className={`px-6 py-3 rounded-none text-xs font-bold uppercase tracking-widest transition-all duration-300 border ${
               filter === 'todos'
-                ? 'bg-hooke-900 text-white border-hooke-900 shadow-md'
-                : 'bg-white text-hooke-500 border-hooke-200 hover:border-hooke-400'
+                ? 'bg-hooke-900 text-white border-hooke-900'
+                : 'bg-white text-gray-400 border-gray-200 hover:border-gray-900 hover:text-hooke-900'
             }`}
           >
             Todas
           </button>
 
-          {/* Botão LISAS */}
+          {/* Botão OVERSIZED (Lisas) */}
           <button
-            onClick={() => setFilter('lisas')}
-            className={`px-6 py-2 rounded-full text-sm font-bold transition-all duration-300 border ${
-              filter === 'lisas'
-                ? 'bg-hooke-900 text-white border-hooke-900 shadow-md'
-                : 'bg-white text-hooke-500 border-hooke-200 hover:border-hooke-400'
+            onClick={() => setFilter('oversized')}
+            className={`px-6 py-3 rounded-none text-xs font-bold uppercase tracking-widest transition-all duration-300 border ${
+              filter === 'oversized'
+                ? 'bg-hooke-900 text-white border-hooke-900'
+                : 'bg-white text-gray-400 border-gray-200 hover:border-gray-900 hover:text-hooke-900'
             }`}
           >
-            Básicas & Lisas
+            Oversized (Lisas)
           </button>
 
-          {/* Botão ESTAMPADAS */}
+          {/* Botão VINTAGE (Estampadas) */}
           <button
-            onClick={() => setFilter('estampadas')}
-            className={`px-6 py-2 rounded-full text-sm font-bold transition-all duration-300 border ${
-              filter === 'estampadas'
-                ? 'bg-hooke-900 text-white border-hooke-900 shadow-md'
-                : 'bg-white text-hooke-500 border-hooke-200 hover:border-hooke-400'
+            onClick={() => setFilter('vintage')}
+            className={`px-6 py-3 rounded-none text-xs font-bold uppercase tracking-widest transition-all duration-300 border ${
+              filter === 'vintage'
+                ? 'bg-hooke-900 text-white border-hooke-900'
+                : 'bg-white text-gray-400 border-gray-200 hover:border-gray-900 hover:text-hooke-900'
             }`}
           >
-            Estampadas
+            Vintage (Estampadas)
           </button>
         </div>
 
         {/* GRID DE PRODUTOS */}
         {filteredProducts.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12 animate-in fade-in duration-700 slide-in-from-bottom-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-12 animate-in fade-in duration-1000 slide-in-from-bottom-4">
             {filteredProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
         ) : (
-          /* EMPTY STATE (UX: Quando não há produtos) */
-          <div className="text-center py-20 bg-hooke-50 rounded-sm border border-dashed border-hooke-200">
-            <p className="text-hooke-500 text-lg">Nenhuma peça encontrada nesta categoria.</p>
+          /* EMPTY STATE */
+          <div className="text-center py-32 bg-gray-50 border border-dashed border-gray-200">
+            <p className="text-gray-400 text-sm uppercase tracking-widest mb-4">Nenhuma peça encontrada nesta categoria.</p>
             <button 
               onClick={() => setFilter('todos')}
-              className="mt-4 text-hooke-900 font-bold underline hover:text-hooke-600"
+              className="text-hooke-900 text-xs font-black uppercase underline hover:text-gray-600 underline-offset-4"
             >
-              Ver todas as peças
+              Limpar Filtros
             </button>
           </div>
         )}

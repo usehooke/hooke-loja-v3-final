@@ -1,7 +1,20 @@
-// components/shop/ProductDetailsBento.tsx
 import { Feather, Maximize2, Droplets, MapPin, ShieldCheck } from "lucide-react";
 
-export default function ProductDetailsBento() {
+// Agora recebe as "details" do produto como props
+interface BentoProps {
+  details?: {
+    fabric: string;
+    model: string;
+    wash: string;
+  }
+}
+
+export default function ProductDetailsBento({ details }: BentoProps) {
+  // Valores padrão caso não venha preenchido
+  const fabric = details?.fabric || "Algodão Premium";
+  const model = details?.model || "Regular Fit";
+  const wash = details?.wash || "Pré-Encolhida";
+
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
       
@@ -11,22 +24,22 @@ export default function ProductDetailsBento() {
           <Feather className="text-hooke-900 w-5 h-5" />
         </div>
         <div>
-          <h4 className="font-bold text-hooke-900 uppercase tracking-wider text-sm">Meia Malha Penteada Premium 100% Algodao </h4>
-          <p className="text-xs text-hooke-500 mt-1">Produzida com algodão certificado BCI, unindo estilo, conforto e qualidade.</p>
+          <h4 className="font-bold text-hooke-900 uppercase tracking-wider text-sm">{fabric}</h4>
+          <p className="text-xs text-hooke-500 mt-1">Toque macio, alta durabilidade e conforto térmico.</p>
         </div>
       </div>
 
       {/* 2. MODELAGEM */}
       <div className="col-span-1 bg-white rounded-sm p-4 flex flex-col justify-center items-center text-center border border-hooke-100 hover:border-hooke-900 transition-colors">
         <Maximize2 className="text-hooke-400 w-6 h-6 mb-2" />
-        <h4 className="font-bold text-xs uppercase">Regular, mais reta e solta ao corpo.</h4>
-        <p className="text-[10px] text-hooke-400 mt-1">Ajuste perfeito</p>
+        <h4 className="font-bold text-xs uppercase">{model}</h4>
+        <p className="text-[10px] text-hooke-400 mt-1">Caimento perfeito</p>
       </div>
 
       {/* 3. LAVAGEM */}
       <div className="col-span-1 bg-white rounded-sm p-4 flex flex-col justify-center items-center text-center border border-hooke-100 hover:border-hooke-900 transition-colors">
         <Droplets className="text-hooke-400 w-6 h-6 mb-2" />
-        <h4 className="font-bold text-xs uppercase">Pré-Encolhida</h4>
+        <h4 className="font-bold text-xs uppercase">{wash}</h4>
         <p className="text-[10px] text-hooke-400 mt-1">Não encolhe</p>
       </div>
 

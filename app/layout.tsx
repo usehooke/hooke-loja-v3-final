@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google"; 
-import "./globals.css";
+import { Inter } from "next/font/google";
+import "@/app/globals.css"; // Importação absoluta para garantir carregamento
 
 // Importações para Análise de Dados e Performance
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -23,7 +23,7 @@ const inter = Inter({
 });
 
 const baseUrl = "https://www.usehooke.com.br";
-const GA_MEASUREMENT_ID = "G-XXXXXXXXXX"; 
+const GA_MEASUREMENT_ID = "G-XXXXXXXXXX";
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
@@ -71,11 +71,11 @@ export default function RootLayout({
   return (
     // 2. Injetando apenas a variável da Inter
     <html lang="pt-BR" className={inter.variable}>
-      <body className="font-sans antialiased bg-white text-hooke-900 flex flex-col min-h-screen">
-        
+      <body className="font-sans antialiased bg-white text-hooke-900 flex flex-col min-h-screen" suppressHydrationWarning={true}>
+
         <TopBar />
         <Navbar />
-        
+
         {/* Carrinho Lateral */}
         <DynamicCart />
 
@@ -85,10 +85,10 @@ export default function RootLayout({
 
         <WhatsAppButton />
         <Footer />
-        
+
         {/* 3. Toaster Estilizado (Sharp & Black) */}
-        <Toaster 
-          position="bottom-right" 
+        <Toaster
+          position="bottom-right"
           toastOptions={{
             style: {
               background: '#000000', // Preto Puro
@@ -101,7 +101,7 @@ export default function RootLayout({
             }
           }}
         />
-        
+
         <SpeedInsights />
         <Analytics />
         {GA_MEASUREMENT_ID && <GoogleAnalytics gaId={GA_MEASUREMENT_ID} />}

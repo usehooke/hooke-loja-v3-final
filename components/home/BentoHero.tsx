@@ -1,25 +1,25 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Star, Zap } from "lucide-react";
-import { products } from "@/data/products";
+import { ArrowRight } from "lucide-react";
+import { PRODUTOS } from "@/data/catalogo"; // IMPORTAÇÃO DO NOVO CÉREBRO
 
 export default function BentoHero() {
-  const featuredProducts = products.filter((p) => p.featured).length > 0 
-    ? products.filter((p) => p.featured) 
-    : products.slice(0, 3);
+  // Filtra produtos em destaque
+  const featuredProducts = PRODUTOS.filter((p) => p.featured);
   
-  const mainProduct = featuredProducts[0];
-  const bestSeller = featuredProducts[1] || products[1]; 
-  const classicProduct = featuredProducts[2] || products[2];
+  // Pega os 3 principais para preencher o grid
+  // Se não tiver destaque suficiente, pega os primeiros da lista
+  const mainProduct = featuredProducts[0] || PRODUTOS[0];
+  const secondaryProduct = featuredProducts[1] || PRODUTOS[1]; 
+  const tertiaryProduct = featuredProducts[2] || PRODUTOS[2];
 
   if (!mainProduct) return null;
 
   return (
-    // MUDANÇA: w-full e sem padding lateral
     <section className="w-full animate-in fade-in duration-700 mb-1">
       <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-1 h-auto md:h-[85vh]">
         
-        {/* 1. HERO PRINCIPAL */}
+        {/* 1. HERO PRINCIPAL (Maior Destaque) */}
         <div className="md:col-span-2 md:row-span-2 relative group overflow-hidden bg-hooke-900 h-[600px] md:h-auto">
            <Image
              src={mainProduct.imageUrl}
@@ -51,12 +51,12 @@ export default function BentoHero() {
            </div>
         </div>
 
-        {/* 2. MAIS VENDIDO */}
-        {bestSeller && (
+        {/* 2. PRODUTO SECUNDÁRIO (Direita Cima) */}
+        {secondaryProduct && (
           <div className="md:col-span-2 md:row-span-1 relative overflow-hidden group bg-gray-50 h-[400px] md:h-auto">
             <Image 
-               src={bestSeller.imageUrl}
-               alt={bestSeller.name}
+               src={secondaryProduct.imageUrl}
+               alt={secondaryProduct.name}
                fill
                className="object-cover object-center group-hover:scale-105 transition-transform duration-[2s]"
                sizes="25vw"
@@ -67,33 +67,33 @@ export default function BentoHero() {
                <span className="text-hooke-900 text-[10px] font-bold uppercase tracking-[0.2em] mb-2 block">
                   Best Seller
                </span>
-               <h3 className="text-2xl font-bold text-hooke-900 mb-4 leading-none tracking-tight">
-                 Pack 4 Regatas
+               <h3 className="text-2xl font-bold text-hooke-900 mb-4 leading-none tracking-tight max-w-[200px]">
+                 {secondaryProduct.name}
                </h3>
-               <Link href={`/produto/${bestSeller.slug}`} className="inline-block bg-hooke-900 text-white px-6 py-3 text-[10px] font-bold uppercase tracking-widest hover:bg-hooke-700 transition-colors">
+               <Link href={`/produto/${secondaryProduct.slug}`} className="inline-block bg-hooke-900 text-white px-6 py-3 text-[10px] font-bold uppercase tracking-widest hover:bg-hooke-700 transition-colors">
                  Ver Oferta
                </Link>
             </div>
           </div>
         )}
 
-        {/* 3. O CLÁSSICO */}
-        {classicProduct && (
+        {/* 3. PRODUTO TERCIÁRIO (Direita Baixo) */}
+        {tertiaryProduct && (
           <div className="md:col-span-2 md:row-span-1 relative overflow-hidden group bg-black h-[400px] md:h-auto">
              <Image 
-                src={classicProduct.imageUrl}
-                alt={classicProduct.name}
+                src={tertiaryProduct.imageUrl}
+                alt={tertiaryProduct.name}
                 fill
                 className="object-cover object-center opacity-80 group-hover:opacity-100 transition-all duration-[2s]"
                 sizes="25vw"
-              />
+             />
              <div className="absolute inset-0 bg-black/20 z-10" />
 
              <div className="absolute bottom-8 left-8 md:bottom-12 md:left-12 z-20 text-white">
                 <h3 className="text-xl font-bold uppercase tracking-wide mb-2">
-                  Vintage Black
+                  {tertiaryProduct.name}
                 </h3>
-                <Link href={`/produto/${classicProduct.slug}`} className="text-[10px] font-bold uppercase tracking-widest border-b border-white/50 pb-0.5 hover:border-white transition-colors">
+                <Link href={`/produto/${tertiaryProduct.slug}`} className="text-[10px] font-bold uppercase tracking-widest border-b border-white/50 pb-0.5 hover:border-white transition-colors">
                   Descobrir
                 </Link>
              </div>

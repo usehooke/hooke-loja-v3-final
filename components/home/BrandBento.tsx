@@ -3,7 +3,7 @@ import { Sprout, Ruler, Fingerprint } from "lucide-react";
 
 export default function BrandBento() {
   return (
-    <section className="py-20 px-4 max-w-7xl mx-auto">
+    <section className="py-20 px-6 md:px-12 w-full">
       
       {/* Cabeçalho da Seção */}
       <div className="text-center mb-16">
@@ -21,7 +21,6 @@ export default function BrandBento() {
 
         {/* ITEM 1: Algodão (Grande - Esquerda) */}
         <div className="group relative overflow-hidden bg-black md:col-span-2 md:row-span-2 min-h-[300px] border border-gray-100">
-          {/* Usando uma imagem genérica de banner se a específica não existir */}
           <Image
             src="/banner-home.jpg" 
             alt="Tecido Premium"
@@ -32,9 +31,9 @@ export default function BrandBento() {
           
           <div className="absolute bottom-0 left-0 p-8 md:p-10 text-white z-10">
             <Sprout className="w-8 h-8 text-white mb-4" strokeWidth={1} />
-            <h3 className="text-2xl font-black uppercase tracking-tight mb-2">Algodão Egípcio</h3>
+            <h3 className="text-2xl font-black uppercase tracking-tight mb-2">Algodão Certificado BCI</h3>
             <p className="text-gray-300 max-w-md text-sm leading-relaxed">
-              Nossa fibra é 2x mais resistente que o algodão comum. Toque macio que não forma bolinhas e mantém a cor preta intensa lavagem após lavagem.
+              Fibra sustentável e 2x mais resistente que o algodão comum. Toque macio que não forma bolinhas e mantém a cor preta intensa lavagem após lavagem.
             </p>
           </div>
         </div>
@@ -42,9 +41,9 @@ export default function BrandBento() {
         {/* ITEM 2: Modelagem (Pequeno - Direita Cima) */}
         <div className="group relative overflow-hidden bg-hooke-100 p-8 border border-gray-100 flex flex-col justify-center min-h-[200px]">
            <Ruler className="w-6 h-6 text-hooke-900 mb-4" strokeWidth={1.5} />
-           <h4 className="text-lg font-bold uppercase tracking-tight text-hooke-900 mb-2">Modelagem Slim</h4>
+           <h4 className="text-lg font-bold uppercase tracking-tight text-hooke-900 mb-2">Modelagem Streetwear</h4>
            <p className="text-xs text-hooke-500 leading-relaxed">
-             Ajustada no peito e braços, levemente solta na cintura. Valoriza o corpo sem apertar.
+             Corte Oversized autêntico ou Regular Fit estruturado. Desenhado para valorizar o shape sem apertar.
            </p>
         </div>
 
@@ -53,7 +52,7 @@ export default function BrandBento() {
            <Fingerprint className="w-6 h-6 text-white mb-4" strokeWidth={1.5} />
            <h4 className="text-lg font-bold uppercase tracking-tight text-white mb-2">Exclusividade</h4>
            <p className="text-xs text-gray-400 leading-relaxed">
-             Produção familiar e controlada. Cada peça passa por uma revisão manual rigorosa.
+             Produção familiar e controlada. Cada peça passa por uma revisão manual rigorosa antes de chegar a você.
            </p>
         </div>
 

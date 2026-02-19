@@ -2,14 +2,14 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { Product } from "@/types";
+import { Product } from "@/data/catalogo"; // IMPORTAÇÃO CORRIGIDA
 
 interface ProductGalleryProps {
   product: Product;
 }
 
 export default function ProductGallery({ product }: ProductGalleryProps) {
-  // Se o produto não tiver array de imagens, usa a imageUrl padrão repetida para não quebrar
+  // Fallback seguro se não tiver galeria extra
   const images = product.images && product.images.length > 0 
     ? product.images 
     : [product.imageUrl, product.imageUrl, product.imageUrl, product.imageUrl];
@@ -19,8 +19,7 @@ export default function ProductGallery({ product }: ProductGalleryProps) {
   return (
     <div className="flex flex-col-reverse md:flex-row gap-4 w-full h-full">
       
-      {/* --- LISTA DE MINIATURAS (Thumbnails) --- */}
-      {/* Mobile: Scroll Horizontal / Desktop: Coluna Vertical Fixa */}
+      {/* THUMBNAILS */}
       <div className="flex md:flex-col gap-3 overflow-x-auto md:overflow-y-auto scrollbar-hide py-2 md:py-0 px-1 md:px-0 justify-start md:w-24 md:h-[80vh] sticky top-24">
         {images.map((img, index) => (
           <button
@@ -45,7 +44,7 @@ export default function ProductGallery({ product }: ProductGalleryProps) {
         ))}
       </div>
 
-      {/* --- IMAGEM PRINCIPAL GRANDE --- */}
+      {/* MAIN IMAGE */}
       <div className="relative flex-1 aspect-[4/5] md:aspect-auto md:h-[85vh] bg-gray-50 overflow-hidden group cursor-zoom-in">
         <Image
           src={selectedImage}
@@ -55,13 +54,6 @@ export default function ProductGallery({ product }: ProductGalleryProps) {
           className="object-cover object-center transition-all duration-500 group-hover:scale-105"
           sizes="(max-width: 768px) 100vw, 70vw"
         />
-        
-        {/* Badge de Lançamento (Minimalista) */}
-        {product.isNew && (
-            <div className="absolute top-0 left-0 bg-hooke-900 text-white text-[10px] font-bold uppercase tracking-widest px-4 py-2 z-10">
-              New Arrival
-            </div>
-        )}
       </div>
     </div>
   );

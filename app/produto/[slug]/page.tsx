@@ -1,13 +1,14 @@
-import { products } from "@/data/products";
+import { PRODUTOS } from "@/data/catalogo"; // IMPORTAÇÃO DO NOVO CÉREBRO
 import { notFound } from "next/navigation";
 import Image from "next/image"; 
 
-// Componentes da Loja
+// Componentes da Loja (Certifique-se que eles existem e não usam tipos antigos)
+// Se der erro de tipo neles, me avise que ajustamos os componentes também.
 import AddToCartSection from "@/components/shop/AddToCartSection";
 import ProductGallery from "@/components/shop/ProductGallery"; 
 import ProductFeatures from "@/components/shop/ProductFeatures";
-import RelatedProducts from "@/components/shop/RelatedProducts";
-import ProductDetailsBento from "@/components/shop/ProductDetailsBento";
+import RelatedProducts from "@/components/shop/RelatedProducts"; // Este precisará de ajuste leve
+import ProductDetailsBento from "@/components/shop/ProductDetailsBento"; // Este também
 import KitPromoCard from "@/components/shop/KitPromoCard";
 
 // Tipagem correta para Next.js 15+ (params como Promise)
@@ -17,7 +18,9 @@ interface ProductPageProps {
 
 export default async function ProductPage({ params }: ProductPageProps) {
   const { slug } = await params;
-  const product = products.find((p) => p.slug === slug);
+  
+  // BUSCA NO NOVO CÉREBRO (PRODUTOS)
+  const product = PRODUTOS.find((p) => p.slug === slug);
 
   if (!product) notFound();
 
@@ -42,7 +45,13 @@ export default async function ProductPage({ params }: ProductPageProps) {
           
           {/* Cabeçalho do Produto */}
           <div className="border-b border-gray-100 pb-6">
-            {/* Título ajustado: Elegante, forte, mas não gigante */}
+            {/* Tag de Novo (se houver) */}
+            {product.isNew && (
+              <span className="bg-black text-white text-[10px] font-bold uppercase tracking-widest px-2 py-1 mb-3 inline-block">
+                Novo Lançamento
+              </span>
+            )}
+            
             <h1 className="text-2xl md:text-3xl font-bold text-hooke-900 uppercase tracking-tight mb-3 leading-tight">
               {product.name}
             </h1>
@@ -55,13 +64,14 @@ export default async function ProductPage({ params }: ProductPageProps) {
             {/* Descrição */}
             <div>
               <h3 className="text-xs font-bold uppercase tracking-widest text-hooke-900 mb-2">Descrição</h3>
-              <p className="text-hooke-600 leading-relaxed text-sm">
+              <p className="text-gray-600 leading-relaxed text-sm">
                 {product.description}
               </p>
             </div>
             
             {/* Grid de Especificações Técnicas (Bento) */}
-            <ProductDetailsBento />
+            {/* Passando os detalhes do produto novo */}
+            <ProductDetailsBento details={product.details} />
           </div>
 
           {/* Seção de Escolha de Tamanho e Botão de Compra */}
@@ -81,9 +91,9 @@ export default async function ProductPage({ params }: ProductPageProps) {
       {/* Seção Inferior: Produtos Relacionados */}
       <div className="mt-24 border-t border-gray-100 pt-16">
          <h2 className="text-2xl font-bold uppercase tracking-tight mb-12 text-center md:text-left">
-            Você também pode gostar
+           Você também pode gostar
          </h2>
-         <RelatedProducts currentSlug={product.slug} />
+         <RelatedProducts currentSlug={product.slug} category={product.category} />
       </div>
 
     </main>
@@ -93,7 +103,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
 // --- GERAÇÃO DE METADADOS (SEO) ---
 export async function generateMetadata({ params }: ProductPageProps) {
   const { slug } = await params;
-  const product = products.find((p) => p.slug === slug);
+  const product = PRODUTOS.find((p) => p.slug === slug);
 
   if (!product) return { title: 'Produto não encontrado' };
   
@@ -111,10 +121,7 @@ export async function generateMetadata({ params }: ProductPageProps) {
 
 // --- GERAÇÃO ESTÁTICA (Performance) ---
 export async function generateStaticParams() {
-  if (!products || products.length === 0) {
-    return [];
-  }
-  return products.map((product) => ({
+  return PRODUTOS.map((product) => ({
     slug: product.slug,
   }));
 }

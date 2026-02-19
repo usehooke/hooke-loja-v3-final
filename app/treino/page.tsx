@@ -1,12 +1,12 @@
-// app/treino/page.tsx
 "use client";
 import { Standard } from "@typebot.io/react";
 
 export default function PersonalHookePage() {
   return (
-    <div className="fixed inset-0 z-[9999] bg-hooke-50 w-full h-[100dvh]">
+    // 'h-[100dvh]' garante que o chat ocupe a altura real da tela do celular
+    <div className="w-full h-[100dvh] bg-hooke-50 flex flex-col overscroll-none">
       <Standard
-        typebot="NOME-DO-SEU-BOT-AQUI" 
+        typebot="my-typebot-5ingwzy" 
         style={{ width: "100%", height: "100%" }}
       />
     </div>

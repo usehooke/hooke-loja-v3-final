@@ -1,4 +1,4 @@
-import { products } from "@/data/products"; 
+import { PRODUTOS } from "@/data/catalogo"; // IMPORTAÇÃO DO NOVO CÉREBRO
 
 import BentoHero from "@/components/home/BentoHero"; 
 import BrandMarquee from "@/components/ui/BrandMarquee";
@@ -6,18 +6,20 @@ import ProductCard from "@/components/shop/ProductCard";
 import BrandBento from "@/components/home/BrandBento";
 
 export default function Home() {
-  const showcaseProducts = products.slice(0, 6);
+  // Pega os primeiros 8 produtos para a vitrine "Coleção Essencial"
+  // (Aumentei para 8 para ficar um grid mais cheio e bonito)
+  const showcaseProducts = PRODUTOS.slice(0, 8);
 
   return (
     <main className="bg-white min-h-screen">
       
-      {/* 1. HERO BENTO (Full Width) */}
+      {/* 1. HERO BENTO (Full Width - Lê do catálogo) */}
       <BentoHero />
       
-      {/* 2. BARRA */}
+      {/* 2. BARRA (Marcas/Conceitos) */}
       <BrandMarquee />
       
-      {/* 3. LISTA DE PRODUTOS (Largura maior: px-6 md:px-12) */}
+      {/* 3. LISTA DE PRODUTOS (Vitrine Principal) */}
       <section id="colecao" className="py-24 px-6 md:px-12 w-full">
         <div className="flex flex-col md:flex-row justify-between items-end mb-12">
           <div>
@@ -28,7 +30,7 @@ export default function Home() {
               Coleção Essencial
             </h2>
           </div>
-          {/* Linha decorativa mais longa */}
+          {/* Linha decorativa */}
           <div className="h-px bg-gray-200 flex-1 mx-8 hidden md:block mb-6"></div>
         </div>
         
@@ -39,7 +41,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 4. AUTORIDADE */}
+      {/* 4. AUTORIDADE (Filosofia da Marca) */}
       <div className="bg-hooke-50 border-t border-hooke-100">
         <BrandBento />
       </div>

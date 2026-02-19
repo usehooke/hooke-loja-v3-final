@@ -15,7 +15,7 @@ export default function Footer() {
           <div className="space-y-6">
             <h2 className="text-2xl font-black uppercase tracking-tighter">Hooke</h2>
             <p className="text-xs text-gray-400 leading-relaxed max-w-xs">
-              Redefinindo o básico masculino. Camisetas de algodão egípcio sustentável, modelagem precisa e durabilidade extrema.
+              Redefinindo o básico masculino. Camisetas de algodão com certificado BCA, modelagem precisa e durabilidade extrema.
             </p>
             <div className="flex gap-4">
               <Link href="#" className="text-gray-400 hover:text-white transition-colors" aria-label="Instagram">

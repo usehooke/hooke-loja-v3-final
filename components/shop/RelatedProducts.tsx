@@ -1,21 +1,26 @@
-// components/shop/RelatedProducts.tsx
 import Link from "next/link";
-import { products } from "@/data/products";
+import { PRODUTOS } from "@/data/catalogo"; // IMPORTAÇÃO CORRIGIDA
 import ProductCard from "./ProductCard";
 
 interface RelatedProductsProps {
   currentSlug: string;
+  category?: string; // Opcional: para mostrar produtos da mesma categoria
 }
 
-export default function RelatedProducts({ currentSlug }: RelatedProductsProps) {
-  // 1. Filtra os produtos: Remove o atual e embaralha/pega os 4 primeiros
-  // (Aqui pegamos os 4 primeiros diferentes do atual para simplificar)
-  const related = products
-    .filter((p) => p.slug !== currentSlug)
-    .slice(0, 4);
+export default function RelatedProducts({ currentSlug, category }: RelatedProductsProps) {
+  // Lógica inteligente: Tenta pegar da mesma categoria primeiro
+  let related = PRODUTOS.filter((p) => p.slug !== currentSlug && p.category === category);
+  
+  // Se não tiver o suficiente da mesma categoria, completa com outros
+  if (related.length < 4) {
+     const others = PRODUTOS.filter(p => p.slug !== currentSlug && p.category !== category);
+     related = [...related, ...others];
+  }
 
-  // Se não tiver outros produtos, não mostra nada
-  if (related.length === 0) return null;
+  // Pega apenas os 4 primeiros
+  const displayProducts = related.slice(0, 4);
+
+  if (displayProducts.length === 0) return null;
 
   return (
     <section className="mt-20 border-t border-hooke-100 pt-16 animate-in fade-in duration-700 delay-700">
@@ -23,21 +28,19 @@ export default function RelatedProducts({ currentSlug }: RelatedProductsProps) {
         <h2 className="text-xl md:text-2xl font-bold text-hooke-900 uppercase tracking-wider">
           Você também pode curtir
         </h2>
-        <Link href="/" className="text-sm font-medium text-hooke-500 hover:text-hooke-900 underline-offset-4 hover:underline hidden sm:block">
+        <Link href="/colecao" className="text-sm font-medium text-hooke-500 hover:text-hooke-900 underline-offset-4 hover:underline hidden sm:block">
           Ver tudo
         </Link>
       </div>
 
-      {/* Grid de Produtos Relacionados */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-8 md:gap-x-8">
-        {related.map((product) => (
+        {displayProducts.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
       </div>
       
-      {/* Botão ver tudo mobile */}
       <div className="mt-8 text-center sm:hidden">
-         <Link href="/" className="inline-block px-6 py-3 border border-hooke-200 text-sm font-bold uppercase tracking-wider text-hooke-900 hover:bg-hooke-50 transition-colors">
+         <Link href="/colecao" className="inline-block px-6 py-3 border border-hooke-200 text-sm font-bold uppercase tracking-wider text-hooke-900 hover:bg-hooke-50 transition-colors">
             Ver Coleção Completa
          </Link>
       </div>
