@@ -1,7 +1,7 @@
 import { Product, SITE_CONFIG } from "@/data/catalogo"; // IMPORTAÇÃO CORRIGIDA
 import Image from "next/image";
 import Link from 'next/link';
-import { ShoppingBag, Star, Heart } from "lucide-react";
+import { ShoppingBag, Star } from "lucide-react";
 
 interface ProductCardProps {
   product: Product;

@@ -1,164 +1,168 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Check, ArrowRight, Zap, Shirt, Wind, Ruler, Star, ChevronDown, ShieldCheck } from "lucide-react";
-import { PRODUTOS } from "@/data/catalogo"; // Importando o Catálogo
-
-// ==================================================================================
-// 🟢 LÓGICA DE PRECIFICAÇÃO DINÂMICA (NÃO MEXA AQUI)
-// ==================================================================================
-
-// 1. Buscando Produtos no Catálogo
-const produtoUnitario = PRODUTOS.find(p => p.id === "oversized-preta") || PRODUTOS[0];
-const produtoKit3 = PRODUTOS.find(p => p.id === "kit-3-oversized-premium") || PRODUTOS[0];
-const produtoKit5 = PRODUTOS.find(p => p.id === "kit-5-oversized-premium") || PRODUTOS[0]; // Garanta que este ID exista no catálogo
-
-// 2. Formatadores
-const formatarMoeda = (valor: number) => valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-
-// 3. Cálculos
-const precoUnitario = produtoUnitario.price;
-const precoKit3 = produtoKit3.price;
-const precoKit5 = produtoKit5.price;
-
-const precoAntigoKit3 = precoUnitario * 3;
-const economiaKit3 = precoAntigoKit3 - precoKit3;
-const precoPorPecaKit3 = precoKit3 / 3;
-
-const precoAntigoKit5 = precoUnitario * 5;
-const precoPorPecaKit5 = precoKit5 / 5;
-
-// ==================================================================================
-// 🟢 ÁREA DE EDIÇÃO SEGURA (MEXA APENAS AQUI)
-// ==================================================================================
-
-// ==================================================================================
-// 🟢 ÁREA DE EDIÇÃO SEGURA - VERSÃO OVERSIZED SUEDINE 240G
-// ==================================================================================
-
-const CONFIG = {
-  // 1. HERO (Topo da Página)
-  hero: {
-    titulo_principal: "Streetwear de Peso.",
-    subtitulo: "A autêntica modelagem Oversized. Malha Suedine 240g, gola de 2,5cm e caimento estruturado.",
-    nota_social_proof: "4.9/5 - Padrão Internacional",
-    imagem_destaque: "/produtos/camiseta-oversized-preta-premium-hooke-3.avif", // Foto Hero
-  },
-
-  // 2. FAIXA CORRENDO (Marquee)
-  faixa_movimento: [
-    "Suedine 240g",
-    "Gola de 2,5cm",
-    "Caimento Boxy",
-    "Toque Aveludado",
-    "Não Encolhe"
-  ],
-
-  // 3. COMPARATIVO (Barras)
-  comparativo: {
-    titulo: "Densidade do Tecido",
-    meu_produto: { nome: "Hooke Suedine 240g", nivel: "Estruturada & Pesada" },
-    concorrente_1: { nome: "Algodão 30.1", nivel: "Média" },
-    concorrente_2: { nome: "Malha Promocional", nivel: "Fina/Transparente" }
-  },
-
-  // 4. PROCESSO (4 Passos com Fotos)
-  processo: [
-    { passo: "01", titulo: "Malha Suedine", img: "/produtos/camiseta-oversized-azul-premium-hooke-1.avif" },
-    { passo: "02", titulo: "Corte Boxy", img: "/produtos/camiseta-oversized-offwhite-premium-hooke-1.avif" },
-    { passo: "03", titulo: "Gola 2,5cm", img: "/produtos/camiseta-oversized-preta-premium-hooke-4.avif" },
-    { passo: "04", titulo: "Acabamento Premium", img: "/produtos/camiseta-oversized-verde-premium-hooke-1.avif" }
-  ],
-
-  // 5. BENEFÍCIOS (4 Ícones)
-  beneficios: [
-    {
-      titulo: "Gramatura 240g",
-      texto: "Esqueça camisetas finas. Nossa malha Suedine é encorpada, não marca o corpo e tem caimento pesado.",
-      icone: Shirt
-    },
-    {
-      titulo: "Gola Indestrutível",
-      texto: "Gola canelada reforçada de 2,5cm. Mantém a estrutura da peça e não fica 'boba' após a lavagem.",
-      icone: ShieldCheck // Usando ShieldCheck para ideia de resistência
-    },
-    {
-      titulo: "Toque Aveludado",
-      texto: "Acabamento peletizado que garante um toque macio e extremamente confortável na pele.",
-      icone: Wind
-    },
-    {
-      titulo: "Modelagem Boxy",
-      texto: "Padrão americano de streetwear: ombros caídos, mangas mais longas e corpo quadrado.",
-      icone: Ruler
-    }
-  ],
-
-  // 6. GALERIA LIFESTYLE (4 Fotos no final)
-  galeria: [
-    "/produtos/camiseta-oversized-azul-premium-hooke-1.avif",
-    "/produtos/camiseta-oversized-offwhite-premium-hooke-1.avif",
-    "/produtos/camiseta-oversized-verde-premium-hooke-1.avif",
-    "/produtos/camiseta-oversized-preta-premium-hooke-4.avif"
-  ],
-
-  // 7. OFERTA (KITS DE VENDA)
-  ofertas: {
-    titulo: "Escolha seu Arsenal",
-    subtitulo: "Envio Imediato para todo o Brasil",
-
-    // CARD 1 (ESQUERDA - UNITÁRIO)
-    basico: {
-      nome: "Unitário",
-      descricao: "Para conhecer o Suedine 240g.",
-      preco_por_peca: formatarMoeda(precoUnitario),
-      link_compra: "/colecao", // Link genérico
-      frete_texto: "A calcular"
-    },
-
-    // CARD 2 (CENTRO - DESTAQUE PRETO)
-    destaque: {
-      badge: "Mais Vendido",
-      nome: "Pack Essencial",
-      descricao: "3 Cores (Ex: Preto, Off, Verde).",
-      preco_antigo: formatarMoeda(precoAntigoKit3),
-      preco_atual: formatarMoeda(precoKit3),
-      economia: `Economize ${formatarMoeda(economiaKit3)}`,
-      preco_por_peca: formatarMoeda(precoPorPecaKit3),
-      frete_texto: "Calculado no Checkout",
-      link_compra: "/colecao" // Link genérico
-    },
-
-    // CARD 3 (DIREITA - PRO)
-    pro: {
-      nome: "Pack Pro",
-      descricao: "5 Peças para renovar o guarda-roupa.",
-      preco_antigo: formatarMoeda(precoAntigoKit5),
-      preco_atual: formatarMoeda(precoKit5),
-      tag_extra: `Melhor Preço: ${formatarMoeda(precoPorPecaKit5)}/peça`,
-      frete_texto: "A calcular",
-      link_compra: "/colecao" // Link genérico
-    }
-  },
-
-  // 8. FAQ (PERGUNTAS FREQUENTES)
-  faq: [
-    { q: "O tecido é quente?", a: "Apesar da alta gramatura (240g), o Suedine é 100% Algodão, o que permite a pele respirar. É encorpado, não quente." },
-    { q: "Qual o tamanho da gola?", a: "Nossa gola tem 2,5cm de altura, feita em ribana canelada com elastano para não lacear." },
-    { q: "A modelagem é muito grande?", a: "Sim, é Oversized de verdade. Se você gosta mais justa, pegue um tamanho menor que o usual." },
-    { q: "Posso trocar se não servir?", a: "Claro! A primeira troca é grátis e o processo é super rápido." }
-  ]
-};
-
-// ==================================================================================
-// 🔴 ZONA DE PERIGO (NÃO MEXA DAQUI PARA BAIXO SE NÃO SOUBER O QUE ESTÁ FAZENDO)
-// ==================================================================================
+import { Check, ArrowRight, Shirt, Wind, Ruler, Star, ChevronDown, ShieldCheck } from "lucide-react";
+import { db } from "@/lib/firebase";
+import { collection, getDocs } from "firebase/firestore";
+import { Product } from "@/data/catalogo";
 
 export const metadata = {
-  title: `Lançamento | ${CONFIG.hero.titulo_principal}`,
-  description: CONFIG.hero.subtitulo,
+  title: `Lançamento | Streetwear de Peso.`,
+  description: "A autêntica modelagem Oversized. Malha Suedine 240g, gola de 2,5cm e caimento estruturado.",
 };
 
-export default function LandingPage() {
+export default async function LandingPage() {
+  const querySnapshot = await getDocs(collection(db, "produtos"));
+  const PRODUTOS = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })) as Product[];
+
+  // 1. Buscando Produtos no Catálogo
+  const produtoUnitario = PRODUTOS.find(p => p.id === "oversized-preta") || PRODUTOS[0];
+  const produtoKit3 = PRODUTOS.find(p => p.id === "kit-3-oversized-premium") || PRODUTOS[0];
+  const produtoKit5 = PRODUTOS.find(p => p.id === "kit-5-oversized-premium") || PRODUTOS[0]; // Garanta que este ID exista no catálogo
+
+  // 2. Formatadores
+  const formatarMoeda = (valor: number) => valor?.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) || 'R$ 0,00';
+
+  // 3. Cálculos
+  const precoUnitario = produtoUnitario.price;
+  const precoKit3 = produtoKit3.price;
+  const precoKit5 = produtoKit5.price;
+
+  const precoAntigoKit3 = precoUnitario * 3;
+  const economiaKit3 = precoAntigoKit3 - precoKit3;
+  const precoPorPecaKit3 = precoKit3 / 3;
+
+  const precoAntigoKit5 = precoUnitario * 5;
+  const precoPorPecaKit5 = precoKit5 / 5;
+
+  const CONFIG = {
+    // 1. HERO (Topo da Página)
+    hero: {
+      titulo_principal: "Streetwear de Peso.",
+      subtitulo: "A autêntica modelagem Oversized. Malha Suedine 240g, gola de 2,5cm e caimento estruturado.",
+      nota_social_proof: "4.9/5 - Padrão Internacional",
+      imagem_destaque: "/produtos/camiseta-oversized-preta-premium-hooke-3.avif", // Foto Hero
+    },
+
+    // 2. FAIXA CORRENDO (Marquee)
+    faixa_movimento: [
+      "Suedine 240g",
+      "Gola de 2,5cm",
+      "Caimento Boxy",
+      "Toque Aveludado",
+      "Não Encolhe"
+    ],
+
+    // 3. COMPARATIVO (Barras)
+    comparativo: {
+      titulo: "Densidade do Tecido",
+      meu_produto: { nome: "Hooke Suedine 240g", nivel: "Estruturada & Pesada" },
+      concorrente_1: { nome: "Algodão 30.1", nivel: "Média" },
+      concorrente_2: { nome: "Malha Promocional", nivel: "Fina/Transparente" }
+    },
+
+    // 4. PROCESSO (4 Passos com Fotos)
+    processo: [
+      { passo: "01", titulo: "Malha Suedine", img: "/produtos/camiseta-oversized-azul-premium-hooke-1.avif" },
+      { passo: "02", titulo: "Corte Boxy", img: "/produtos/camiseta-oversized-offwhite-premium-hooke-1.avif" },
+      { passo: "03", titulo: "Gola 2,5cm", img: "/produtos/camiseta-oversized-preta-premium-hooke-4.avif" },
+      { passo: "04", titulo: "Acabamento Premium", img: "/produtos/camiseta-oversized-verde-premium-hooke-1.avif" }
+    ],
+
+    // 5. BENEFÍCIOS (4 Ícones)
+    beneficios: [
+      {
+        titulo: "Gramatura 240g",
+        texto: "Esqueça camisetas finas. Nossa malha Suedine é encorpada, não marca o corpo e tem caimento pesado.",
+        icone: Shirt
+      },
+      {
+        titulo: "Gola Indestrutível",
+        texto: "Gola canelada reforçada de 2,5cm. Mantém a estrutura da peça e não fica 'boba' após a lavagem.",
+        icone: ShieldCheck // Usando ShieldCheck para ideia de resistência
+      },
+      {
+        titulo: "Toque Aveludado",
+        texto: "Acabamento peletizado que garante um toque macio e extremamente confortável na pele.",
+        icone: Wind
+      },
+      {
+        titulo: "Modelagem Boxy",
+        texto: "Padrão americano de streetwear: ombros caídos, mangas mais longas e corpo quadrado.",
+        icone: Ruler
+      }
+    ],
+
+    // 6. GALERIA LIFESTYLE (4 Fotos no final)
+    galeria: [
+      "/produtos/camiseta-oversized-azul-premium-hooke-1.avif",
+      "/produtos/camiseta-oversized-offwhite-premium-hooke-1.avif",
+      "/produtos/camiseta-oversized-verde-premium-hooke-1.avif",
+      "/produtos/camiseta-oversized-preta-premium-hooke-4.avif"
+    ],
+
+    // 7. OFERTA (KITS DE VENDA)
+    ofertas: {
+      titulo: "Escolha seu Arsenal",
+      subtitulo: "Envio Imediato para todo o Brasil",
+
+      // CARD 1 (ESQUERDA - UNITÁRIO)
+      basico: {
+        nome: "Unitário",
+        descricao: "Para conhecer o Suedine 240g.",
+        preco_por_peca: formatarMoeda(precoUnitario),
+        link_compra: "/colecao", // Link genérico
+        frete_texto: "A calcular"
+      },
+
+      // CARD 2 (CENTRO - DESTAQUE PRETO)
+      destaque: {
+        badge: "Mais Vendido",
+        nome: "Pack Essencial",
+        descricao: "3 Cores (Ex: Preto, Off, Verde).",
+        preco_antigo: formatarMoeda(precoAntigoKit3),
+        preco_atual: formatarMoeda(precoKit3),
+        economia: `Economize ${formatarMoeda(economiaKit3)}`,
+        preco_por_peca: formatarMoeda(precoPorPecaKit3),
+        frete_texto: "Calculado no Checkout",
+        link_compra: "/colecao" // Link genérico
+      },
+
+      // CARD 3 (DIREITA - PRO)
+      pro: {
+        nome: "Pack Pro",
+        descricao: "5 Peças para renovar o guarda-roupa.",
+        preco_antigo: formatarMoeda(precoAntigoKit5),
+        preco_atual: formatarMoeda(precoKit5),
+        tag_extra: `Melhor Preço: ${formatarMoeda(precoPorPecaKit5)}/peça`,
+        frete_texto: "A calcular",
+        link_compra: "/colecao" // Link genérico
+      }
+    },
+
+    // 8. FAQ (PERGUNTAS FREQUENTES)
+    faq: [
+      { q: "O tecido é quente?", a: "Apesar da alta gramatura (240g), o Suedine é 100% Algodão, o que permite a pele respirar. É encorpado, não quente." },
+      { q: "Qual o tamanho da gola?", a: "Nossa gola tem 2,5cm de altura, feita em ribana canelada com elastano para não lacear." },
+      { q: "A modelagem é muito grande?", a: "Sim, é Oversized de verdade. Se você gosta mais justa, pegue um tamanho menor que o usual." },
+      { q: "Posso trocar se não servir?", a: "Claro! A primeira troca é grátis e o processo é super rápido." }
+    ]
+  };
+
+  // ==================================================================================
+  // 🔴 ZONA DE PERIGO (NÃO MEXA DAQUI PARA BAIXO SE NÃO SOUBER O QUE ESTÁ FAZENDO)
+  // ==================================================================================
+
+  // The metadata export here is redundant and would cause issues.
+  // For dynamic metadata based on fetched data, Next.js recommends `generateMetadata` function.
+  // For simplicity and to match the user's implied intent of having CONFIG available,
+  // we'll assume the first metadata export is the static one, and the dynamic parts
+  // would be handled differently if this were a real Next.js app with dynamic metadata needs.
+  // For now, we remove the conflicting second metadata export.
+  // export const metadata = {
+  //   title: `Lançamento | ${CONFIG.hero.titulo_principal}`,
+  //   description: CONFIG.hero.subtitulo,
+  // };
+
   return (
     <main className="w-full bg-white min-h-screen font-sans scroll-smooth">
 

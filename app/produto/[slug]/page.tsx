@@ -1,11 +1,10 @@
 import { PRODUTOS } from "@/data/catalogo"; // IMPORTAÇÃO DO NOVO CÉREBRO
 import { notFound } from "next/navigation";
-import Image from "next/image"; 
 
 // Componentes da Loja (Certifique-se que eles existem e não usam tipos antigos)
 // Se der erro de tipo neles, me avise que ajustamos os componentes também.
 import AddToCartSection from "@/components/shop/AddToCartSection";
-import ProductGallery from "@/components/shop/ProductGallery"; 
+import ProductGallery from "@/components/shop/ProductGallery";
 import ProductFeatures from "@/components/shop/ProductFeatures";
 import RelatedProducts from "@/components/shop/RelatedProducts"; // Este precisará de ajuste leve
 import ProductDetailsBento from "@/components/shop/ProductDetailsBento"; // Este também
@@ -18,7 +17,7 @@ interface ProductPageProps {
 
 export default async function ProductPage({ params }: ProductPageProps) {
   const { slug } = await params;
-  
+
   // BUSCA NO NOVO CÉREBRO (PRODUTOS)
   const product = PRODUTOS.find((p) => p.slug === slug);
 
@@ -31,18 +30,18 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
   return (
     <main className="w-full px-6 md:px-12 py-12 md:py-16 mb-20 animate-in fade-in duration-500">
-      
+
       {/* Grid Assimétrico: 60% Foto (Esq) / 40% Texto (Dir) */}
       <div className="grid grid-cols-1 md:grid-cols-5 gap-12 lg:gap-24 items-start">
-        
+
         {/* Lado Esquerdo: Galeria (Maior destaque visual) */}
         <div className="w-full md:col-span-3">
-           <ProductGallery product={product} />
+          <ProductGallery product={product} />
         </div>
 
         {/* Lado Direito: Informações e Compra (Sticky - Fixo na rolagem) */}
         <div className="w-full md:col-span-2 flex flex-col gap-8 sticky top-24">
-          
+
           {/* Cabeçalho do Produto */}
           <div className="border-b border-gray-100 pb-6">
             {/* Tag de Novo (se houver) */}
@@ -51,7 +50,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
                 Novo Lançamento
               </span>
             )}
-            
+
             <h1 className="text-2xl md:text-3xl font-bold text-hooke-900 uppercase tracking-tight mb-3 leading-tight">
               {product.name}
             </h1>
@@ -68,7 +67,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
                 {product.description}
               </p>
             </div>
-            
+
             {/* Grid de Especificações Técnicas (Bento) */}
             {/* Passando os detalhes do produto novo */}
             <ProductDetailsBento details={product.details} />
@@ -79,21 +78,21 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
           {/* Card Promocional de Kit (Aparece se for elegível) */}
           <div className="animate-in slide-in-from-bottom-2 duration-700 delay-300">
-             <KitPromoCard product={product} />
+            <KitPromoCard product={product} />
           </div>
 
           {/* Ícones de Diferenciais (Frete, Troca, etc) */}
           <ProductFeatures />
-          
+
         </div>
       </div>
 
       {/* Seção Inferior: Produtos Relacionados */}
       <div className="mt-24 border-t border-gray-100 pt-16">
-         <h2 className="text-2xl font-bold uppercase tracking-tight mb-12 text-center md:text-left">
-           Você também pode gostar
-         </h2>
-         <RelatedProducts currentSlug={product.slug} category={product.category} />
+        <h2 className="text-2xl font-bold uppercase tracking-tight mb-12 text-center md:text-left">
+          Você também pode gostar
+        </h2>
+        <RelatedProducts currentSlug={product.slug} category={product.category} />
       </div>
 
     </main>
@@ -106,15 +105,15 @@ export async function generateMetadata({ params }: ProductPageProps) {
   const product = PRODUTOS.find((p) => p.slug === slug);
 
   if (!product) return { title: 'Produto não encontrado' };
-  
+
   return {
     title: `${product.name} | Hooke Moda Masculina`,
     description: `Compre ${product.name} online. ${product.description}. Frete para todo o Brasil.`,
     openGraph: {
-        images: [product.imageUrl],
-        title: product.name,
-        description: product.description,
-        type: 'website',
+      images: [product.imageUrl],
+      title: product.name,
+      description: product.description,
+      type: 'website',
     }
   };
 }
