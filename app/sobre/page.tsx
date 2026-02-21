@@ -20,7 +20,7 @@ export default function AboutPage() {
             src="/produtos/sobre-image.jpg" // Corrigido provisoriamente
             alt="Bastidores da Hooke"
             fill
-            className="object-cover grayscale hover:grayscale-0 transition-all duration-[2s]"
+            className="object-cover grayscale hover:grayscale-0 transition-all duration-1000"
             priority
           />
           {/* Overlay sutil para dar profundidade */}

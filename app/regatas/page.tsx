@@ -185,7 +185,7 @@ export default async function LandingPage() {
                                     src={img}
                                     alt={`Hero Image ${i + 1}`}
                                     fill
-                                    className="object-cover hover:scale-105 transition-transform duration-[3s] ease-out"
+                                    className="object-cover hover:scale-105 transition-transform duration-1000 ease-out"
                                     priority={i === 0}
                                 />
                                 <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-white via-white/50 to-transparent md:bg-none" />
@@ -286,7 +286,7 @@ export default async function LandingPage() {
                 <div className="grid grid-cols-2 md:grid-cols-4 h-[50vh] md:h-[60vh]">
                     {CONFIG.galeria.map((src, idx) => (
                         <div key={idx} className="relative border-r border-white/20 overflow-hidden group">
-                            <Image src={src} alt="Lifestyle" fill className="object-cover transition-transform duration-[2s] group-hover:scale-105" />
+                            <Image src={src} alt="Lifestyle" fill className="object-cover transition-transform duration-1000 group-hover:scale-105" />
                             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors" />
                         </div>
                     ))}
