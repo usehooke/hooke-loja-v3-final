@@ -214,7 +214,7 @@ export default function CartSheet() {
 
   return (
     <div className="flex flex-col h-full bg-white relative">
-      <SheetHeader className="px-6 py-4 border-b border-hooke-100 flex flex-row items-center justify-between">
+      <SheetHeader className="border-b border-hooke-100 flex-shrink-0 px-6 py-6 pb-4 flex flex-row items-center justify-between">
         <SheetTitle className="text-xl font-bold text-hooke-900">Seu Carrinho</SheetTitle>
         <SheetClose className="rounded-sm opacity-70 ring-offset-white transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-hooke-950 focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-hooke-100 data-[state=open]:text-hooke-500">
           <X className="h-6 w-6" />
