@@ -7,12 +7,18 @@ import { onAuthStateChanged, signOut, User } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import { UploadButton } from "@/utils/uploadthing";
 import Image from "next/image";
+import Link from "next/link";
+
+import { Trash2, Eye, EyeOff } from "lucide-react";
+import { Toaster, toast } from "sonner";
 
 interface AdminProduct {
     id: string;
     name: string;
     price: number;
     imagem?: string;
+    isActive?: boolean;
+    sizes?: string[];
 }
 
 export default function AdminPage() {
@@ -32,7 +38,11 @@ export default function AdminPage() {
         description: "",
         featured: false,
         imagem: "",
+        isActive: true,
+        sizes: ["P", "M", "G", "GG"], // Default checkeds
     });
+
+    const AVAILABLE_SIZES = ["P", "M", "G", "GG", "XG"];
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -58,6 +68,8 @@ export default function AdminPage() {
                     name: data.name,
                     price: data.price,
                     imagem: data.imagem,
+                    isActive: data.isActive !== false, // se não existir, assume true
+                    sizes: data.sizes || ["P", "M", "G", "GG"], // fallback
                 });
             });
             setProducts(productsData);
@@ -68,7 +80,7 @@ export default function AdminPage() {
         }
     }
 
-    const handleUpdate = async (id: string, newName: string, newPrice: number, newImagem?: string) => {
+    const handleUpdate = async (id: string, newName: string, newPrice: number, newImagem?: string, newIsActive?: boolean, newSizes?: string[]) => {
         setSavingId(id);
         try {
             const productRef = doc(db, "produtos", id);
@@ -76,17 +88,55 @@ export default function AdminPage() {
                 name: newName,
                 price: Number(newPrice),
                 ...(newImagem && { imagem: newImagem }),
+                isActive: newIsActive !== undefined ? newIsActive : true,
+                sizes: newSizes || [],
             });
-            alert("Produto atualizado com sucesso!");
+            toast.success(`Alterações salvas!`);
         } catch (error) {
             console.error("Erro ao atualizar produto:", error);
-            alert("Erro ao atualizar produto.");
+            toast.error("Erro ao atualizar produto.");
         } finally {
             setSavingId(null);
         }
     };
 
-    const handleChange = (id: string, field: "name" | "price" | "imagem", value: string | number) => {
+    const handleDelete = async (id: string, name: string) => {
+        if (!window.confirm(`Tem certeza que deseja EXCLUIR DEFINITIVAMENTE o produto "${name}"? Essa ação não pode ser desfeita.`)) {
+            return;
+        }
+
+        try {
+            const productRef = doc(db, "produtos", id);
+            // import { deleteDoc } from "firebase/firestore"; <-- vou garantir isso no top
+            // Usando abordagem segura de exclusão real
+            const { deleteDoc } = await import("firebase/firestore");
+            await deleteDoc(productRef);
+            toast.success(`Produto "${name}" excluído.`);
+            fetchProducts();
+        } catch (error) {
+            console.error("Erro ao excluir:", error);
+            toast.error("Erro ao excluir produto.");
+        }
+    };
+
+    const toggleSize = (id: string, sizeToToggle: string, currentSizes: string[]) => {
+        const newSizes = currentSizes.includes(sizeToToggle)
+            ? currentSizes.filter(s => s !== sizeToToggle)
+            : [...currentSizes, sizeToToggle];
+
+        handleChange(id, "sizes", newSizes);
+    };
+
+    const toggleNewProductSize = (sizeToToggle: string) => {
+        setNewProduct(prev => ({
+            ...prev,
+            sizes: prev.sizes.includes(sizeToToggle)
+                ? prev.sizes.filter(s => s !== sizeToToggle)
+                : [...prev.sizes, sizeToToggle]
+        }));
+    };
+
+    const handleChange = (id: string, field: "name" | "price" | "imagem" | "isActive" | "sizes", value: string | number | boolean | string[]) => {
         setProducts((prev) =>
             prev.map((p) => (p.id === id ? { ...p, [field]: value } : p))
         );
@@ -108,7 +158,7 @@ export default function AdminPage() {
     const handleCreateProduct = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!newProduct.name || !newProduct.price || !newProduct.imagem) {
-            alert("Preencha todos os campos obrigatórios e adicione uma imagem.");
+            toast.error("Preencha todos os campos obrigatórios e adicione uma imagem.");
             return;
         }
 
@@ -130,7 +180,8 @@ export default function AdminPage() {
                 imagem: newProduct.imagem,       // Campo de imagem retornado pelo UploadThing
                 imageUrl: newProduct.imagem,     // Mantendo pro design atual
                 images: [newProduct.imagem],     // Galeria passa a ter pelo menos 1 imagem
-                sizes: ["P", "M", "G", "GG"], // Tamanhos padrão
+                sizes: newProduct.sizes,         // Tamanhos controlados pelo usuário
+                isActive: newProduct.isActive,   // Status na vitrine
                 category: newProduct.category,
                 details: { // Informações Padrão / Mockadas para facilitar
                     fabric: "Algodão Premium",
@@ -141,16 +192,16 @@ export default function AdminPage() {
 
             // 4. Salvar no Firestore
             await setDoc(doc(db, "produtos", id), finalProduct);
-            alert("Produto cadastrado com sucesso!");
+            toast.success("Produto cadastrado com sucesso!");
 
             // 5. Reset do Formulário e Fetch Reativo
             setShowForm(false);
-            setNewProduct({ name: "", category: "Oversized", price: 0, description: "", featured: false, imagem: "" });
+            setNewProduct({ name: "", category: "Oversized", price: 0, description: "", featured: false, imagem: "", isActive: true, sizes: ["P", "M", "G", "GG"] });
             fetchProducts();
 
         } catch (err) {
             console.error("Erro ao salvar o novo produto:", err);
-            alert("Erro ao cadastrar novo produto. Veja o console.");
+            toast.error("Erro ao cadastrar novo produto. Veja o console.");
         } finally {
             setIsSavingNew(false);
         }
@@ -166,7 +217,8 @@ export default function AdminPage() {
 
     return (
         <div className="min-h-screen bg-white p-8 font-sans pb-24">
-            <div className="max-w-4xl mx-auto">
+            <Toaster position="top-right" richColors />
+            <div className="max-w-6xl mx-auto">
 
                 {/* Cabeçalho */}
                 <div className="flex items-center justify-between mb-10 border-b border-hooke-900 pb-6">
@@ -174,13 +226,19 @@ export default function AdminPage() {
                         <h1 className="text-3xl font-black uppercase tracking-tighter text-hooke-900">Painel Admin</h1>
                         <p className="text-xs uppercase tracking-widest text-gray-400 mt-2">Logado como: {user.email}</p>
                     </div>
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-4 flex-wrap">
                         <button
                             onClick={() => setShowForm(!showForm)}
                             className="text-xs font-bold uppercase tracking-widest text-white bg-hooke-900 border border-hooke-900 px-6 py-3 hover:bg-black rounded-none transition-colors"
                         >
                             {showForm ? "CANCELAR" : "+ NOVO PRODUTO"}
                         </button>
+                        <Link
+                            href="/admin/pedidos"
+                            className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-hooke-900 bg-gray-100 border border-transparent px-6 py-3 hover:bg-gray-200 rounded-none transition-colors"
+                        >
+                            Ver Pedidos
+                        </Link>
                         <button
                             onClick={handleLogout}
                             className="text-xs font-bold uppercase tracking-widest text-hooke-900 hover:text-white transition-colors border border-hooke-900 px-6 py-3 hover:bg-hooke-900 rounded-none bg-white"
@@ -283,18 +341,55 @@ export default function AdminPage() {
                                 />
                             </div>
 
+                            {/* Tamanhos Disponíveis */}
+                            <div className="space-y-2 border-t border-gray-200 pt-4">
+                                <label className="text-xs font-bold uppercase tracking-widest text-hooke-900 block mb-3">Tamanhos Disponíveis</label>
+                                <div className="flex flex-wrap gap-2">
+                                    {AVAILABLE_SIZES.map(size => {
+                                        const isSelected = newProduct.sizes.includes(size);
+                                        return (
+                                            <button
+                                                key={size}
+                                                type="button"
+                                                onClick={() => toggleNewProductSize(size)}
+                                                className={`w-10 h-10 flex items-center justify-center font-bold text-sm transition-all border-2
+                                                ${isSelected ? 'bg-hooke-900 text-white border-hooke-900' : 'bg-transparent text-gray-400 border-gray-200 hover:border-gray-400'}
+                                              `}
+                                            >
+                                                {size}
+                                            </button>
+                                        );
+                                    })}
+                                </div>
+                                <p className="text-[10px] text-gray-400 uppercase mt-2">Dica: Desmarque os tamanhos que estão esgotados neste produto.</p>
+                            </div>
+
                             {/* Options */}
-                            <div className="flex items-center gap-3">
-                                <input
-                                    type="checkbox"
-                                    id="featuredCheckbox"
-                                    checked={newProduct.featured}
-                                    onChange={(e) => setNewProduct({ ...newProduct, featured: e.target.checked })}
-                                    className="w-4 h-4 border-hooke-900 text-hooke-900 focus:ring-hooke-900 rounded-none accent-hooke-900"
-                                />
-                                <label htmlFor="featuredCheckbox" className="text-xs font-bold uppercase tracking-widest text-hooke-900 cursor-pointer">
-                                    Destacar na Página Inicial?
-                                </label>
+                            <div className="flex items-center gap-6 border-t border-gray-200 pt-4">
+                                <div className="flex items-center gap-2">
+                                    <input
+                                        type="checkbox"
+                                        id="featuredCheckbox"
+                                        checked={newProduct.featured}
+                                        onChange={(e) => setNewProduct({ ...newProduct, featured: e.target.checked })}
+                                        className="w-4 h-4 border-hooke-900 text-hooke-900 focus:ring-hooke-900 rounded-none accent-hooke-900"
+                                    />
+                                    <label htmlFor="featuredCheckbox" className="text-xs font-bold uppercase tracking-widest text-hooke-900 cursor-pointer">
+                                        Destacar na Home
+                                    </label>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    <input
+                                        type="checkbox"
+                                        id="activeCheckbox"
+                                        checked={newProduct.isActive}
+                                        onChange={(e) => setNewProduct({ ...newProduct, isActive: e.target.checked })}
+                                        className="w-4 h-4 border-hooke-900 text-hooke-900 focus:ring-hooke-900 rounded-none accent-hooke-900"
+                                    />
+                                    <label htmlFor="activeCheckbox" className="text-xs font-bold uppercase tracking-widest text-hooke-900 cursor-pointer">
+                                        Ativo na Loja (Visível)
+                                    </label>
+                                </div>
                             </div>
 
                             <button
@@ -315,16 +410,29 @@ export default function AdminPage() {
                         <thead>
                             <tr className="border-b border-hooke-900 bg-gray-50">
                                 <th className="p-4 text-xs font-bold uppercase tracking-widest text-hooke-900 hidden md:table-cell">ID</th>
+                                <th className="p-4 text-xs font-bold uppercase tracking-widest text-hooke-900">Visível</th>
                                 <th className="p-4 text-xs font-bold uppercase tracking-widest text-hooke-900">Imagem</th>
-                                <th className="p-4 text-xs font-bold uppercase tracking-widest text-hooke-900">Nome do Produto</th>
+                                <th className="p-4 text-xs font-bold uppercase tracking-widest text-hooke-900 w-[20%]">Nome do Produto</th>
                                 <th className="p-4 text-xs font-bold uppercase tracking-widest text-hooke-900">Preço (R$)</th>
-                                <th className="p-4 text-xs font-bold uppercase tracking-widest text-hooke-900 text-right">Ação</th>
+                                <th className="p-4 text-xs font-bold uppercase tracking-widest text-hooke-900 min-w-[200px]">Estoque (Tamanhos)</th>
+                                <th className="p-4 text-xs font-bold uppercase tracking-widest text-hooke-900 text-right">Ações</th>
                             </tr>
                         </thead>
                         <tbody>
                             {products.map((product) => (
-                                <tr key={product.id} className="border-b border-gray-200 last:border-0 hover:bg-gray-50 transition-colors">
-                                    <td className="p-4 text-xs font-mono text-gray-500 truncate max-w-[120px] hidden md:table-cell" title={product.id}>{product.id}</td>
+                                <tr key={product.id} className={`border-b border-gray-200 last:border-0 hover:bg-gray-50 transition-colors ${!product.isActive ? 'opacity-50 grayscale' : ''}`}>
+                                    <td className="p-4 text-xs font-mono text-gray-500 truncate max-w-[100px] hidden md:table-cell" title={product.id}>{product.id}</td>
+
+                                    {/* Toggle Visibility */}
+                                    <td className="p-4 text-center">
+                                        <button
+                                            onClick={() => handleChange(product.id, "isActive", !product.isActive)}
+                                            className="text-hooke-900 hover:scale-110 transition-transform flex justify-center w-full"
+                                            title={product.isActive ? "Visível na vitrine" : "Oculto na vitrine"}
+                                        >
+                                            {product.isActive ? <Eye size={20} /> : <EyeOff size={20} className="text-gray-400" />}
+                                        </button>
+                                    </td>
                                     <td className="p-4">
                                         {product.imagem ? (
                                             <div className="flex flex-col gap-2 items-start">
@@ -362,22 +470,41 @@ export default function AdminPage() {
                                         />
                                     </td>
                                     <td className="p-4">
-                                        <input
-                                            type="number"
-                                            step="0.01"
-                                            value={product.price}
-                                            onChange={(e) => handleChange(product.id, "price", parseFloat(e.target.value) || 0)}
-                                            className="w-20 md:w-28 bg-white border border-gray-300 rounded-none px-2 md:px-3 py-2 text-sm focus:ring-1 focus:ring-hooke-900 focus:border-hooke-900 outline-none transition-all text-hooke-900"
-                                        />
+                                        <div className="flex gap-1 flex-wrap">
+                                            {AVAILABLE_SIZES.map(size => {
+                                                const isStocked = (product.sizes || []).includes(size);
+                                                return (
+                                                    <button
+                                                        key={size}
+                                                        onClick={() => toggleSize(product.id, size, product.sizes || [])}
+                                                        className={`w-7 h-7 text-[10px] font-bold border flex items-center justify-center transition-colors
+                                                            ${isStocked ? 'bg-hooke-900 text-white border-hooke-900' : 'bg-transparent text-gray-300 border-gray-200'}    
+                                                        `}
+                                                    >
+                                                        {size}
+                                                    </button>
+                                                )
+                                            })}
+                                        </div>
                                     </td>
                                     <td className="p-4 text-right">
-                                        <button
-                                            onClick={() => handleUpdate(product.id, product.name, product.price, product.imagem)}
-                                            disabled={savingId === product.id}
-                                            className="bg-hooke-900 hover:bg-black text-white px-3 md:px-5 py-2 rounded-none text-[10px] md:text-xs font-bold uppercase tracking-widest transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                                        >
-                                            {savingId === product.id ? "Salvando" : "Salvar"}
-                                        </button>
+                                        <div className="flex justify-end gap-2 items-center">
+                                            <button
+                                                onClick={() => handleUpdate(product.id, product.name, product.price, product.imagem, product.isActive, product.sizes)}
+                                                disabled={savingId === product.id}
+                                                className="bg-hooke-900 hover:bg-black text-white px-4 py-2 rounded-none text-[10px] font-bold uppercase tracking-widest transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                            >
+                                                {savingId === product.id ? "Salvando" : "Salvar"}
+                                            </button>
+
+                                            <button
+                                                onClick={() => handleDelete(product.id, product.name)}
+                                                className="text-red-300 hover:text-red-600 transition-colors p-2"
+                                                title="Excluir Produto"
+                                            >
+                                                <Trash2 size={16} />
+                                            </button>
+                                        </div>
                                     </td>
                                 </tr>
                             ))}

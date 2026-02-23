@@ -1,9 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Check, ArrowRight, Shirt, Wind, Ruler, Star, ChevronDown, ShieldCheck } from "lucide-react";
-import { db } from "@/lib/firebase";
-import { collection, getDocs } from "firebase/firestore";
-import { Product } from "@/data/catalogo";
+import { getProducts } from "@/lib/productService";
 
 export const metadata = {
   title: `Lançamento | Streetwear de Peso.`,
@@ -11,21 +9,29 @@ export const metadata = {
 };
 
 export default async function LandingPage() {
-  const querySnapshot = await getDocs(collection(db, "produtos"));
-  const PRODUTOS = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })) as Product[];
+  const PRODUTOS = await getProducts();
+
+  // Null safety se a request falhar durante o build ou banco estiver vazio
+  if (!PRODUTOS || PRODUTOS.length === 0) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-white">
+        <p className="text-gray-500 font-bold uppercase tracking-widest text-xs">Carregando catálogo...</p>
+      </div>
+    );
+  }
 
   // 1. Buscando Produtos no Catálogo
-  const produtoUnitario = PRODUTOS.find(p => p.id === "oversized-preta") || PRODUTOS[0];
-  const produtoKit3 = PRODUTOS.find(p => p.id === "kit-3-oversized-premium") || PRODUTOS[0];
-  const produtoKit5 = PRODUTOS.find(p => p.id === "kit-5-oversized-premium") || PRODUTOS[0]; // Garanta que este ID exista no catálogo
+  const produtoUnitario = PRODUTOS.find(p => p.slug === "oversized-preta" || p.id === "oversized-preta") || PRODUTOS[0];
+  const produtoKit3 = PRODUTOS.find(p => p.slug === "kit-3-oversized-premium" || p.id === "kit-3-oversized-premium") || PRODUTOS[0];
+  const produtoKit5 = PRODUTOS.find(p => p.slug === "kit-5-oversized-premium" || p.id === "kit-5-oversized-premium") || PRODUTOS[0]; // Garanta que este ID exista no catálogo
 
   // 2. Formatadores
   const formatarMoeda = (valor: number) => valor?.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) || 'R$ 0,00';
 
   // 3. Cálculos
-  const precoUnitario = produtoUnitario.price;
-  const precoKit3 = produtoKit3.price;
-  const precoKit5 = produtoKit5.price;
+  const precoUnitario = produtoUnitario?.price || 0;
+  const precoKit3 = produtoKit3?.price || 0;
+  const precoKit5 = produtoKit5?.price || 0;
 
   const precoAntigoKit3 = precoUnitario * 3;
   const economiaKit3 = precoAntigoKit3 - precoKit3;

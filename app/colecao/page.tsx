@@ -1,6 +1,4 @@
-import { db } from "@/lib/firebase";
-import { collection, getDocs } from "firebase/firestore";
-import { Product } from "@/data/catalogo";
+import { getProducts } from "@/lib/productService";
 import ProductCard from "@/components/shop/ProductCard";
 import Link from "next/link";
 import { ChevronRight, SlidersHorizontal } from "lucide-react";
@@ -12,12 +10,8 @@ export const metadata: Metadata = {
 };
 
 export default async function CollectionPage() {
-  // Pega os dados do Firestore
-  const querySnapshot = await getDocs(collection(db, "produtos"));
-  const collectionProducts = querySnapshot.docs.map(doc => ({
-    id: doc.id,
-    ...doc.data()
-  })) as Product[];
+  // Pega os dados do Firestore através do Serviço Centralizado
+  const collectionProducts = await getProducts();
 
   return (
     <div className="bg-white min-h-screen pb-20">

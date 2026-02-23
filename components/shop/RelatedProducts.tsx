@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { PRODUTOS } from "@/data/catalogo"; // IMPORTAÇÃO CORRIGIDA
+import { getProducts } from "@/lib/productService";
 import ProductCard from "./ProductCard";
 
 interface RelatedProductsProps {
@@ -7,14 +7,16 @@ interface RelatedProductsProps {
   category?: string; // Opcional: para mostrar produtos da mesma categoria
 }
 
-export default function RelatedProducts({ currentSlug, category }: RelatedProductsProps) {
+export default async function RelatedProducts({ currentSlug, category }: RelatedProductsProps) {
+  const PRODUTOS = await getProducts();
+
   // Lógica inteligente: Tenta pegar da mesma categoria primeiro
   let related = PRODUTOS.filter((p) => p.slug !== currentSlug && p.category === category);
-  
+
   // Se não tiver o suficiente da mesma categoria, completa com outros
   if (related.length < 4) {
-     const others = PRODUTOS.filter(p => p.slug !== currentSlug && p.category !== category);
-     related = [...related, ...others];
+    const others = PRODUTOS.filter(p => p.slug !== currentSlug && p.category !== category);
+    related = [...related, ...others];
   }
 
   // Pega apenas os 4 primeiros
@@ -38,11 +40,11 @@ export default function RelatedProducts({ currentSlug, category }: RelatedProduc
           <ProductCard key={product.id} product={product} />
         ))}
       </div>
-      
+
       <div className="mt-8 text-center sm:hidden">
-         <Link href="/colecao" className="inline-block px-6 py-3 border border-hooke-200 text-sm font-bold uppercase tracking-wider text-hooke-900 hover:bg-hooke-50 transition-colors">
-            Ver Coleção Completa
-         </Link>
+        <Link href="/colecao" className="inline-block px-6 py-3 border border-hooke-200 text-sm font-bold uppercase tracking-wider text-hooke-900 hover:bg-hooke-50 transition-colors">
+          Ver Coleção Completa
+        </Link>
       </div>
     </section>
   );

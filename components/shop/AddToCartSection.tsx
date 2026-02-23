@@ -15,7 +15,7 @@ interface AddToCartSectionProps {
 export default function AddToCartSection({ product }: AddToCartSectionProps) {
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [isAdded, setIsAdded] = useState(false);
-  
+
   // Pegamos a função de adicionar da store
   const addItem = useCartStore((state) => state.addItem);
 
@@ -42,7 +42,7 @@ export default function AddToCartSection({ product }: AddToCartSectionProps) {
 
     // 3. Feedback Visual e Notificação
     setIsAdded(true);
-    
+
     toast.success(
       (t) => (
         <div className="flex flex-col items-center gap-2 text-center">
@@ -68,7 +68,7 @@ export default function AddToCartSection({ product }: AddToCartSectionProps) {
 
     // Reseta o estado do botão depois de 2 segundos
     setTimeout(() => {
-        setIsAdded(false);
+      setIsAdded(false);
     }, 2000);
   };
 
@@ -77,26 +77,31 @@ export default function AddToCartSection({ product }: AddToCartSectionProps) {
       {/* SELEÇÃO DE TAMANHOS */}
       <div>
         <div className="flex justify-between items-end mb-4">
-            <h3 className="text-sm font-bold uppercase tracking-wider text-hooke-900">
+          <h3 className="text-sm font-bold uppercase tracking-wider text-hooke-900">
             Tamanhos
-            </h3>
-            <SizeGuideModal />
+          </h3>
+          <SizeGuideModal />
         </div>
 
         <div className="flex flex-wrap gap-3">
-          {product.sizes.map((size) => {
+          {["P", "M", "G", "GG", "XG"].map((size) => {
+            const hasStock = product.sizes.includes(size);
             const isSelected = selectedSize === size;
+
             return (
               <button
                 key={size}
-                onClick={() => setSelectedSize(size)}
+                onClick={() => hasStock && setSelectedSize(size)}
+                disabled={!hasStock}
                 className={`
                   w-12 h-12 flex items-center justify-center rounded-sm font-bold transition-all duration-200
-                  ${isSelected
-                    ? "bg-hooke-900 text-white border-2 border-hooke-900 scale-105 shadow-md"
-                    : "bg-white text-hooke-600 border-2 border-hooke-200 hover:border-hooke-400 hover:text-hooke-900"
+                  ${!hasStock ? "opacity-30 cursor-not-allowed bg-gray-100 text-gray-400 border-2 border-gray-200" :
+                    isSelected
+                      ? "bg-hooke-900 text-white border-2 border-hooke-900 scale-105 shadow-md"
+                      : "bg-white text-hooke-600 border-2 border-hooke-200 hover:border-hooke-400 hover:text-hooke-900"
                   }
                 `}
+                title={!hasStock ? "Esgotado" : ""}
               >
                 {size}
               </button>
@@ -112,11 +117,11 @@ export default function AddToCartSection({ product }: AddToCartSectionProps) {
         className={`
           w-full flex items-center justify-center gap-3 px-6 py-5 rounded-sm text-base font-bold uppercase tracking-widest transition-all duration-300
           ${isAdded
-             ? "bg-green-600 text-white cursor-default"
-             : !selectedSize
-                 ? "bg-hooke-100 text-hooke-400 cursor-not-allowed" // Desabilitado (Cinza Claro)
-                 : "bg-hooke-900 text-white hover:bg-hooke-800 hover:shadow-lg active:scale-[0.98]" // Habilitado (Preto)
-           }
+            ? "bg-green-600 text-white cursor-default"
+            : !selectedSize
+              ? "bg-hooke-100 text-hooke-400 cursor-not-allowed" // Desabilitado (Cinza Claro)
+              : "bg-hooke-900 text-white hover:bg-hooke-800 hover:shadow-lg active:scale-[0.98]" // Habilitado (Preto)
+          }
         `}
       >
         {isAdded ? (

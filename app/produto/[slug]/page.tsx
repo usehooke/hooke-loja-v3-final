@@ -1,4 +1,4 @@
-import { PRODUTOS } from "@/data/catalogo"; // IMPORTAÇÃO DO NOVO CÉREBRO
+import { getProductBySlug, getProducts } from "@/lib/productService";
 import { notFound } from "next/navigation";
 
 // Componentes da Loja (Certifique-se que eles existem e não usam tipos antigos)
@@ -18,8 +18,8 @@ interface ProductPageProps {
 export default async function ProductPage({ params }: ProductPageProps) {
   const { slug } = await params;
 
-  // BUSCA NO NOVO CÉREBRO (PRODUTOS)
-  const product = PRODUTOS.find((p) => p.slug === slug);
+  // BUSCA NO NOVO CÉREBRO (FIREBASE)
+  const product = await getProductBySlug(slug);
 
   if (!product) notFound();
 
@@ -102,7 +102,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
 // --- GERAÇÃO DE METADADOS (SEO) ---
 export async function generateMetadata({ params }: ProductPageProps) {
   const { slug } = await params;
-  const product = PRODUTOS.find((p) => p.slug === slug);
+  const product = await getProductBySlug(slug);
 
   if (!product) return { title: 'Produto não encontrado' };
 
@@ -120,7 +120,8 @@ export async function generateMetadata({ params }: ProductPageProps) {
 
 // --- GERAÇÃO ESTÁTICA (Performance) ---
 export async function generateStaticParams() {
-  return PRODUTOS.map((product) => ({
+  const produtos = await getProducts();
+  return produtos.map((product) => ({
     slug: product.slug,
   }));
 }

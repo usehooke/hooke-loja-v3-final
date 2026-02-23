@@ -12,7 +12,7 @@ export interface CartItem extends Product {
 interface CartState {
   items: CartItem[];
   isOpen: boolean;
-  
+
   // Ações
   addItem: (product: Product, size: string) => void;
   removeItem: (cartItemId: string) => void;
@@ -20,7 +20,14 @@ interface CartState {
   clearCart: () => void;
   openCart: () => void;
   closeCart: () => void;
-  
+
+  // Shipping
+  shippingZipCode: string | null;
+  shippingCost: number | null;
+  shippingMethod: string | null;
+  setShipping: (zip: string | null, cost: number | null, method: string | null) => void;
+  clearShipping: () => void;
+
   // Getters (Removi do store para evitar complexidade, usamos seletores diretos)
 }
 
@@ -29,9 +36,17 @@ export const useCartStore = create<CartState>()(
     (set, get) => ({
       items: [],
       isOpen: false,
+      shippingZipCode: null,
+      shippingCost: null,
+      shippingMethod: null,
 
       openCart: () => set({ isOpen: true }),
       closeCart: () => set({ isOpen: false }),
+
+      setShipping: (zip: string | null, cost: number | null, method: string | null) =>
+        set({ shippingZipCode: zip, shippingCost: cost, shippingMethod: method }),
+      clearShipping: () =>
+        set({ shippingZipCode: null, shippingCost: null, shippingMethod: null }),
 
       addItem: (product: Product, size: string) => {
         const currentItems = get().items;
@@ -73,29 +88,40 @@ export const useCartStore = create<CartState>()(
         set({ items: newItems });
       },
 
-      clearCart: () => set({ items: [], isOpen: false }),
+      clearCart: () => set({
+        items: [],
+        isOpen: false,
+        shippingZipCode: null,
+        shippingCost: null,
+        shippingMethod: null
+      }),
     }),
     {
       name: 'hooke-cart-storage',
-      
+
       // Configuração segura para Next.js (evita erro no servidor)
       storage: createJSONStorage(() => {
         if (typeof window !== 'undefined') {
-            return localStorage;
+          return localStorage;
         }
         return {
-            getItem: () => null,
-            setItem: () => {},
-            removeItem: () => {},
+          getItem: () => null,
+          setItem: () => { },
+          removeItem: () => { },
         };
       }),
-      
+
       skipHydration: true, // IMPORTANTE: Evita conflito inicial de hidratação
 
       // A MÁGICA ESTÁ AQUI:
-      // Dizemos ao Zustand para salvar APENAS a lista de 'items'.
+      // Dizemos ao Zustand para salvar APENAS a lista de 'items' e 'frete'.
       // Ignoramos 'isOpen' para que o carrinho sempre comece fechado.
-      partialize: (state) => ({ items: state.items }),
+      partialize: (state) => ({
+        items: state.items,
+        shippingZipCode: state.shippingZipCode,
+        shippingCost: state.shippingCost,
+        shippingMethod: state.shippingMethod
+      }),
     }
   )
 );

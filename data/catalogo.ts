@@ -26,6 +26,7 @@ export interface Product {
   price: number;
   featured: boolean; // Se aparece com destaque na Home
   isNew?: boolean;   // Se tem a tag "Lançamento" ou "Novo"
+  isActive?: boolean; // Se está visível na loja
   description: string;
   imageUrl: string;  // Foto principal (Capa)
   images: string[];  // Galeria de fotos
