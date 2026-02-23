@@ -9,6 +9,7 @@ import { Minus, Plus, ShoppingBag, Trash2, X, CreditCard, Loader2 } from "lucide
 import {
   SheetHeader,
   SheetTitle,
+  SheetDescription,
   SheetClose,
   SheetFooter,
 } from "@/components/ui/sheet";
@@ -216,6 +217,7 @@ export default function CartSheet() {
     <div className="flex flex-col h-full bg-white relative">
       <SheetHeader className="border-b border-hooke-100 flex-shrink-0 px-6 py-6 pb-4 flex flex-row items-center justify-between">
         <SheetTitle className="text-xl font-bold text-hooke-900">Seu Carrinho</SheetTitle>
+        <SheetDescription className="sr-only">Sacola de compras com os seus itens selecionados.</SheetDescription>
         <SheetClose className="rounded-sm opacity-70 ring-offset-white transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-hooke-950 focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-hooke-100 data-[state=open]:text-hooke-500">
           <X className="h-6 w-6" />
           <span className="sr-only">Fechar</span>
