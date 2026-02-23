@@ -18,23 +18,13 @@ import { useCartStore } from "@/store/cart-store";
 
 export default function CartSheet() {
   // Estado e ações reativas da store
-  const {
-    items,
-    removeItem,
-    updateQuantity,
-    shippingCost,
-    shippingMethod,
-    shippingZipCode,
-    setShipping,
-  } = useCartStore(state => ({
-    items: state.items,
-    removeItem: state.removeItem,
-    updateQuantity: state.updateQuantity,
-    shippingCost: state.shippingCost,
-    shippingMethod: state.shippingMethod,
-    shippingZipCode: state.shippingZipCode,
-    setShipping: state.setShipping,
-  }));
+  const items = useCartStore(state => state.items);
+  const removeItem = useCartStore(state => state.removeItem);
+  const updateQuantity = useCartStore(state => state.updateQuantity);
+  const shippingCost = useCartStore(state => state.shippingCost);
+  const shippingMethod = useCartStore(state => state.shippingMethod);
+  const shippingZipCode = useCartStore(state => state.shippingZipCode);
+  const setShipping = useCartStore(state => state.setShipping);
 
   const formatter = new Intl.NumberFormat('pt-BR', {
     style: 'currency',
