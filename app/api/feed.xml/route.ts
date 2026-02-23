@@ -3,11 +3,13 @@ import { db } from "@/lib/firebase";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { Product } from "@/types";
 
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
     try {
-        const productsRef = collection(db, "products");
+        const productsRef = collection(db, "produtos");
         // Buscamos apenas os que não estão ocultos
-        const q = query(productsRef, where("visibility", "!=", "hidden"));
+        const q = query(productsRef, where("isActive", "==", true));
         const querySnapshot = await getDocs(q);
 
         const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://hooke-store.vercel.app";
