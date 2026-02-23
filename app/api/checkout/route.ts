@@ -22,9 +22,12 @@ export async function POST(req: Request) {
             return NextResponse.json({ message: "Carrinho está vazio." }, { status: 400 });
         }
 
-        if (!customer || !customer.email || !customer.name || !customer.phone) {
-            return NextResponse.json({ message: "Dados do cliente incompletos (telefone é obrigatório)." }, { status: 400 });
+        if (!customer || !customer.name || !customer.phone) {
+            return NextResponse.json({ message: "Dados do cliente incompletos (nome e telefone são obrigatórios)." }, { status: 400 });
         }
+
+        // Fallback para quem não preencheu o e-mail opcional
+        const safeEmail = customer.email || "cliente@usehooke.com.br";
 
         // 1. Gera o ID temporário (Reference do Pedido na Hooke)
         // Uma abordagem segura e leve para gerar IDs parecidos com chaves (ex: hooke-1708940...)
@@ -85,7 +88,7 @@ export async function POST(req: Request) {
                 items: mpItems,
                 payer: {
                     name: customer.name,
-                    email: customer.email,
+                    email: safeEmail,
                     phone: {
                         area_code: customer.phone.substring(0, 2),
                         number: customer.phone.substring(2)
@@ -94,9 +97,9 @@ export async function POST(req: Request) {
                 external_reference: orderId, // Crucial: amarra o Webhook ao nosso Doc no FB
                 auto_return: "approved",
                 back_urls: {
-                    success: `${appUrl}/meus-pedidos?email=${customer.email}&id=${orderId}&status=success`,
+                    success: `${appUrl}/meus-pedidos?email=${safeEmail}&id=${orderId}&status=success`,
                     failure: `${appUrl}/checkout?error=payment_failed`,
-                    pending: `${appUrl}/meus-pedidos?email=${customer.email}&id=${orderId}&status=pending`,
+                    pending: `${appUrl}/meus-pedidos?email=${safeEmail}&id=${orderId}&status=pending`,
                 },
                 // Caso a loja tenha frete, o shipements entra aqui.
                 // No momento assumiremos setup básico (ou grátis/fora do sistema MP) como acordado.
