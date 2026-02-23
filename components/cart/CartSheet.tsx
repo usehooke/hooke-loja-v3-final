@@ -183,7 +183,7 @@ export default function CartSheet() {
           unit_price: item.price,
           quantity: item.quantity,
           size: item.selectedSize,
-          imageUrl: item.imageUrl
+          imageUrl: item.imageUrl || (item.images && item.images.length > 0 ? item.images[0] : "")
         }))
       };
 
@@ -244,7 +244,7 @@ export default function CartSheet() {
               <li key={item.cartItemId} className="flex gap-4">
                 <div className="relative aspect-[4/5] w-24 flex-shrink-0 overflow-hidden rounded-sm bg-hooke-100 border border-hooke-200">
                   <Image
-                    src={item.imageUrl}
+                    src={item.imageUrl || (item.images && item.images.length > 0 ? item.images[0] : "/placeholder-produto.avif")}
                     alt={item.name}
                     fill
                     className="object-cover object-center"
@@ -255,7 +255,7 @@ export default function CartSheet() {
                   <div className="flex justify-between">
                     <div>
                       <h3 className="text-base font-bold text-hooke-900">
-                        <Link href={`/produto/${item.slug}`} className="hover:underline">{item.name}</Link>
+                        <Link href={`/produto/${item.id}`} className="hover:underline">{item.name}</Link>
                       </h3>
                       <p className="mt-1 text-sm text-hooke-500">Tamanho: {item.selectedSize}</p>
                     </div>
