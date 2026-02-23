@@ -228,6 +228,17 @@ export default function AdminPage() {
                     </div>
                     <div className="flex items-center gap-4 flex-wrap">
                         <button
+                            onClick={() => {
+                                navigator.clipboard.writeText(`${window.location.origin}/api/feed.xml`);
+                                toast.success("URL do Catálogo Copiada! Cole no Gerenciador do Meta.");
+                            }}
+                            className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-pink-600 bg-pink-50 border border-pink-200 px-6 py-3 hover:bg-pink-100 hover:text-pink-700 rounded-none transition-colors"
+                            title="Copiar Link XML para Instagram Shopping"
+                        >
+                            Catálogo Instagram
+                        </button>
+
+                        <button
                             onClick={() => setShowForm(!showForm)}
                             className="text-xs font-bold uppercase tracking-widest text-white bg-hooke-900 border border-hooke-900 px-6 py-3 hover:bg-black rounded-none transition-colors"
                         >
