@@ -144,8 +144,8 @@ export default function CartSheet() {
 
   const handleMercadoPagoCheckout = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!customer.name || !customer.email || customer.phone.length < 14) {
-      setCheckoutError("Preencha todos os dados corretamente (WhatsApp é obrigatório).");
+    if (!customer.name || customer.phone.length < 14) {
+      setCheckoutError("Preencha seu Nome e WhatsApp corretamente para prosseguir.");
       return;
     }
     if (!shippingMethod || !shippingCost) {
@@ -315,10 +315,9 @@ export default function CartSheet() {
                 />
               </div>
               <div className="space-y-1">
-                <label className="text-[10px] font-bold uppercase tracking-widest text-hooke-900">Seu E-mail Principal</label>
+                <label className="text-[10px] font-bold uppercase tracking-widest text-hooke-900">Seu E-mail <span className="text-gray-400 font-normal lowercase tracking-normal">(opcional)</span></label>
                 <input
                   type="email"
-                  required
                   value={customer.email}
                   onChange={(e) => setCustomer({ ...customer, email: e.target.value })}
                   className="w-full border-b-2 border-hooke-900 px-0 py-2 text-sm focus:outline-none focus:border-hooke-500 transition-colors bg-transparent rounded-none"
