@@ -8,8 +8,6 @@ export async function getProducts(category?: string): Promise<Product[]> {
     try {
         const productsRef = collection(db, COLLECTION_NAME);
         const conditions: QueryConstraint[] = [];
-        // Filtra por ativos (ou que não tenham a flag, para retrocompatibilidade local)
-        conditions.push(where("isActive", "!=", false));
 
         if (category) {
             conditions.push(where("category", "==", category));
@@ -20,7 +18,11 @@ export async function getProducts(category?: string): Promise<Product[]> {
         const snapshot = await getDocs(q);
         const products: Product[] = [];
         snapshot.forEach((doc) => {
-            products.push({ id: doc.id, ...doc.data() } as Product);
+            const data = doc.data();
+            // Filtra por ativos localmente (ou que não tenham a flag, para retrocompatibilidade)
+            if (data.isActive !== false) {
+                products.push({ id: doc.id, ...data } as Product);
+            }
         });
 
         return products;
@@ -59,19 +61,8 @@ export async function getProductBySlug(slug: string): Promise<Product | null> {
 export async function getFeaturedProducts(limitCount: number = 8): Promise<Product[]> {
     try {
         const productsRef = collection(db, COLLECTION_NAME);
-        const q = query(productsRef, where("featured", "==", true), where("isActive", "!=", false));
-        // O Firebase exige índice composto para isso com limite, então pra simplificar a query principal sem criar indíces novos agora:
-        // Podes carregar os featured locais e filtrar no cliente se necessário, mas para este demo focaremos no básico.
-        // const q = query(productsRef, where("featured", "==", true), limit(limitCount)); // old
-
-        let snapshot;
-        try {
-            snapshot = await getDocs(q);
-        } catch {
-            // Fallback se faltar index no firebase localmente
-            const dumpQ = query(productsRef, where("featured", "==", true));
-            snapshot = await getDocs(dumpQ);
-        }
+        const q = query(productsRef, where("featured", "==", true));
+        const snapshot = await getDocs(q);
 
         const products: Product[] = [];
         snapshot.forEach((doc) => {
